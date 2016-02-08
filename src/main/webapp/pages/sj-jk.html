@@ -1,0 +1,70 @@
+<style type="text/css">
+.table{width:910px;}
+</style>
+
+<div class="nr pa">
+		<form id="form3" method='post' action="/driver/performance/down">
+			<input type="text" id="jk-cx4"  name="modelId" style="display:none"></input>
+			<input type="text" id="jk-dw4"  name="shipperId" style="display:none"></input>
+			<input type="text" id="city4"  name="cityId" style="display:none"></input>
+			<input type="text" class="jk-state4"  name="status" style="display:none"></input>
+			<input type="text" class="text-pc4"  name="driverName" style="display:none"></input>
+			<input type="text" class="time14"  name="startTime" style="display:none"></input>
+			<input type="text" class="time24"  name="endTime" style="display:none"></input>
+			
+			
+        	<div class="fff">
+			<div class="terms">
+				<div class="fl">
+                	<label>车&nbsp;&nbsp;型：</label><select id="jk-cx" class="driverxb"><option value="">全部</option></select>
+                </div>
+            	<div class="fl">
+                	<label>单&nbsp;&nbsp;位：</label><select id="jk-dw" class="driverxb"><option value="">全部</option></select>
+                </div>
+				<div class="fl">
+                	<label>服务城市：</label><select id="city" class="driverxb"><option value="">全部</option></select>
+                </div>
+				<br />
+				<div class="fl mt5">
+                	<label>司机状态：</label><select class="jk-state"><option value="">全部</option><option value="Normal">正常</option><option value="Freeze">冻结</option><option value="Finish">停用</option></select>
+                </div>
+                
+                <div class="fl mt5">
+                	<label>司机姓名：</label><input class="text-pc" type="text" value="" id="driverNameInput">
+                </div>
+				<br />
+				
+                <div class="mt5">
+                	<label>派车单创建日期：</label><input id="datepicker-example1" class="time1 text" type="text">至&nbsp;<input id="datepicker-example12" class="time2 text" type="text">
+                </div>
+                <br />
+				<div class="fl mt05">
+                <a class="query-button2 jk-query-button">查询</a>
+            	</div>
+            </div>
+            </div>
+			
+            <div class="table pc-cx">
+        	<div class="list list-title">
+        	<div class="border w100 h60">序号</div><div class="border w100 h60">司机编号</div><div class="border w100 h60">司机姓名</div><div class="border w100 h60">当前状态</div><div class="border w100 h60">常配送街道</div><div class="border w100 h60">累计已接商户数<br />(按天数累计)</div><div class="border w100 h60">已分配派车单数量</div><div class="border w100 h60">已返回派车单数量</div><div class="border w100 h60">已送达订单数量</div>
+        </div>
+        <div class="table-list-jk">
+				<!-- <div class="rest">
+				<div class="w100 h60 border" ><a href="#">10002000</a></div>
+					<div class="border w100 h60">重庆麻辣烫<br />...</div><div class="border w100 h60">浦东仓</div><div class="border w100 h60">浦东区</div><div class="border w100 h60">**街道</div><div class="border w100 h60">5</div><div class="border w100 h60">5</div><div class="border w100 h60">700.00</div>
+					<div class="border w100 h60"><span>陈鸣明</span><br /><span class="color-hs">司机已装车</span></div><div class="border w100 h60">2015/07/21<br />06:40</div>
+					<div class="border w100 h60">2015/07/21<br />06:40</div>
+				</div> -->
+		
+		</div>
+		
+		
+		<div class="fy list-title"></div>
+        
+        </div>
+		<div class="m20"><input type="button" class="sj-dc" value="导出" /></div>
+		</form>
+        </div>
+<script src="js/sj-jk.js" type="text/javascript"></script>
+<script src="js/zebra_datepicker.js" type="text/javascript"></script>
+<script src="js/core.js" type="text/javascript"></script>

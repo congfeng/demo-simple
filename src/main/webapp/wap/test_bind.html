@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>test_bind</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="resources/jquery/jquery-1.8.1.min.js"></script>
+	<style>
+	*{margin:0;padding:0;}
+	body{font-size:1rem;line-height:1.4rem;}
+	.fl{float:left;}
+	 .dl{width:80%;margin:20% auto 0;}
+	 input[type="text"]{width:35%;height:1rem;}
+	 .hq{width:15%;height:1.2rem;line-height:1.2rem;margin-left:1%;}
+	 .clear{clear:both;}
+	 .wz{width:40%;text-align:right;}
+	 .qd{margin-left:40%;}
+	</style>
+    <script>
+	var src = window.location.href;
+    	var openId = src.substr(src.indexOf("?openId=")+8); 
+    	var binduserfn = function(){
+    		$.ajax({
+	    		url:'/profile/driver/bind',
+	    		data:{
+	    			'openId':openId,
+	    			'driverMobile':$('#driverMobile').val(),
+	    			'checkNo':$('#checkNo').val()
+	    		},
+	    		success:function(data){
+	    			if(data.s==0){
+	    				return ;
+	    			}
+	    			if(window.localStorage){
+	    				window.localStorage.openId = openId;
+	    				window.localStorage.driverId = data.driverId;
+	    			}
+	    			alert('登陆成功');
+	    			WeixinJSBridge.call('closeWindow');
+	    		}
+	    	});
+    	}
+    	$(function(){
+    		$('#openId').html(openId);
+			$(".hq").click(function(){
+			    var _this = $(this);
+				$.get("/profile/driver/sendcheckno?driverMobile="+$("#driverMobile").val()+"",function(data){
+					if(data.s == 0){
+						alert("请求验证码失败："+data.m)
+						return;
+					}else{
+						_this.attr("disabled");
+					}
+				});
+			});
+    	})
+	
+    </script>  
+  </head>  
+  <body><section class="dl">
+			<div id='openId' hidden></div>
+			<div class="clear"><div class="wz fl">司机手机号：</div><input type="text" class="fl" id='driverMobile'/></div>
+			<div class="clear">
+			<div class="wz fl">验证码：</div><input type="text" class="fl" id='checkNo'/><button  class="fl hq">获取</button></div>
+			<div class="clear">
+			<input type='button' value='登陆' class="qd" onclick='binduserfn();'/>
+			</div>
+		</section>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>库房设置</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/kf-sz.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+	<div class="header">
+    	<div class="logo fl"><img src="images/logo.png" width="70%" /></div>
+    	<div class="crumb fl"><a href="#">系统参数</a>><a href="#">库房与城市设置</a></div>
+        <div class="welcome fr"><p>下午好！欢迎您</p><p class="time"></p></div>
+    </div>
+	<div class="content pr">
+    	<div class="leftmenu pa">
+        	<ul>
+            	<li class="parentMenu"><span class="menuspan1">调度管理</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="pc-sc.html">生成派车单</a></li>
+                        <li><a href="pc-fp.html">派车单分配</a></li>
+                        <li><a href="pc-cx.html">派车单查询</a></li>
+                    </ul>
+            	</li> 
+                
+                <li class="parentMenu"><span class="menuspan2">司机管理</span>
+                	<ul class="second" style="display:none">
+                        <li><a href="adddriver.html">新建司机</a></li>
+                        <li><a href="#">司机监控</a></li>
+                	</ul>
+                </li>
+                
+                <li class="parentMenu"><span class="menuspan3">结算管理</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="pc-sk.html">派车单收款</a></li>
+                    </ul>
+                </li>
+                
+                <li class="parentMenu"><span class="menuspan4">系统参数</span>
+                    <ul class="second">
+                        <li><a href="cx-sz.html">车型设置</a></li>
+                        <li><a href="qycs.html">启用城市</a></li>
+                        <li class="active"><a href="kf-sz.html">库房与城市设置</a></li>
+						<li><a href="thsj.html">提货时间设置</a></li>
+						<li><a href="cys.html">承运商</a></li>
+                    </ul>
+                </li>
+                
+                <li class="parentMenu"><span class="menuspan5">权限设置</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="qx-sz.html">用户权限设置</a></li>
+                    </ul>
+                </li>
+               
+            </ul>
+        </div>
+        <div class="nr pa nr-kf">
+			<div class="kf-ts m10">本页用于设置库房与城市街道的对应覆盖关系</div>
+        	<div class="fff m10">
+        	<div class="terms">
+				<h4 class="border-bottom">选择库房</h4>
+            	<form>
+				<div class="fl m10">
+                	<label class="f14">库房</label><br /><select class="xzkf"></select>
+                </div>
+            	</form>
+            </div>
+			</div>
+			
+			<div class="fff m10">
+        	<div class="terms">
+				<h4 class="border-bottom">设置库房覆盖区域</h4>
+				<div class="fl m10">
+					<label class="f14">城市</label><br />
+					<select class="sheng"></select>
+				</div>
+				<div class="fl m10">
+					<label class="f14"></label><br /><select class="city"></select>
+				</div>
+				<div class="kf-qy clear m10" hidden><span class="f14">区域</span>
+					
+					<div class="qy-all">
+					<!--	<div class="item-all pr" > 
+							<a href="javascript:void(0);" class="item-button pa" style="background:url(images/item-button1.jpg)"></a>
+							<div class="item">
+									<input type="checkbox" />浦东新区
+							</div>
+							<div class="kf-item">
+								<ul> 
+									<li><input type="checkbox" value="浦东某某街道" />浦东某某街道</li>
+									<li><input type="checkbox" ids="123" checked="checked" data="checked" value="浦东某某街道" />浦东某某街道</li>
+									<li><input type="checkbox" ids="456" checked="checked" value="浦东某某街道" />浦东某某街道</li>
+									<li><input type="checkbox" value="浦东某某街道" />浦东某某街道</li>
+								</ul>
+							</div>
+						</div> -->
+					</div>
+					<div class="m10"><input type="button" value="保存" class="query-button kf-query-button m0"></div>
+				
+				</div>
+			
+			
+			
+			</div>
+			</div>
+
+			
+		</div>
+        
+    </div>
+    
+
+    
+
+
+
+</body>
+</html>

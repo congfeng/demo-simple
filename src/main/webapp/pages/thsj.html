@@ -1,0 +1,57 @@
+<link rel="stylesheet" type="text/css" href="css/DateTimePicker.css" />
+<style type="text/css">
+.table{width:860px;}
+</style>
+<div class="nr pa">
+        	<div class="fff">
+        	<div class="terms" style="width:900px;">
+				
+                <div class="fl">
+                	<label>&nbsp;&nbsp;提货库房：</label><select class="thkf"></select>
+                </div>
+                
+                <div class="fl add">
+                	<label>&nbsp;&nbsp;送货地址：</label>
+					<select class="sheng"><option value=""></option></select>
+					<select class="city"><option value=""></option></select>
+                    <select class="district"><option value=""></option></select>
+                </div>
+                <button class="query-button thsj-query-button">查询</button>
+            </div>
+            </div>
+			<div class="table-head"><span>操作说明</span>提货时间为派车单要求司机去库房的提货时间，用户只能修改这个时间点</div>
+            <div class="table">
+        	<div class="list list-title">
+				<div class="border w100 h60">序号</div><div class="border w100 h60">发货仓库</div><div class="border w100 h60">收货省</div><div class="border w100 h60">收货市</div><div class="border w100 h60">收货区</div><div class="border w100 h60">截单时间</div><div class="border w100 h60">提货日期</div><div class="border w150 h60">要求来库房提货时间</div>
+			</div>
+			<div class="table-list">
+				<!-- <div class="cxsz-list">
+					<div class="border w100 h60">1</div><div class="border w100 h60">发货仓库</div><div class="border w100 h60">收货省</div><div class="border w100 h60">收货市</div><div class="border w100 h60">收货区</div>	<div class="border w100 h60">23:59:59</div><div class="border w100 h60">次日</div><div class="border w150 h60"><input type="text" data-field="time" class="thsj-input" value="20:20" readonly></div>
+				</div>  -->
+				
+			
+			</div>
+		</div>
+        </div>
+		<div id="dtBox"></div>
+		<div class="sk tjcx">
+			<div class="sk-head">新增车型<a href="#" class="cx-close">X</a></div>
+			<div class="sk-div">
+				<p>请输入司机交款金额</p>
+				<p><input type="text" class="sk-text" />元</p>
+				<p><span class="redd">注</span>：司机交款金额与应付款金额相符才能收款</p>
+				<p><a href="#" class="sk-qd">确定</a><a href="#" class="sk-close">取消</a></p>
+			</div>
+		</div>
+<script src="js/thsj.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/DateTimePicker.js"></script>
+<script type="text/javascript">
+		
+	$(document).ready(function()
+	{
+		$("#dtBox").DateTimePicker(
+		{
+			dateFormat: "dd-MMM-yyyy"
+		});
+	});
+</script>

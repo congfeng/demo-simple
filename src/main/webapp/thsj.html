@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>提货时间设置</title>
+<link rel="stylesheet" type="text/css" href="css/DateTimePicker.css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+.table{width:860px;}
+</style>
+</head>
+
+<body>
+	<div class="header">
+    	<div class="logo fl"><img src="images/logo.png" width="70%" /></div>
+    	<div class="crumb fl"><a href="#">参数设置</a>><a href="#">提货时间设置</a></div>
+        <div class="welcome fr"><p>下午好！欢迎您</p><p class="time"></p></div>
+    </div>
+	<div class="content pr">
+    	<div class="leftmenu pa">
+        	<ul>
+            	<li class="parentMenu"><span class="menuspan1">调度管理</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="index.html">生成派车单</a></li>
+                        <li><a href="pc-fp.html">派车单分配</a></li>
+                        <li><a href="pc-cx.html">派车单查询</a></li>
+                    </ul>
+            	</li>
+                <li class="parentMenu"><span class="menuspan2">司机管理</span>
+                	<ul class="second" style="display:none">
+                        <li><a href="adddriver.html">新建司机</a></li>
+                        <li><a href="#">司机监控</a></li>
+                	</ul>
+                </li>
+                <li class="parentMenu"><span class="menuspan3">结算管理</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="pc-sk.html">派车单收款</a></li>
+                    </ul>
+                </li>
+                <li class="parentMenu"><span class="menuspan4">系统参数</span>
+                    <ul class="second">
+                        <li><a href="cx-sz.html">车型设置</a></li>
+                        <li><a href="qycs.html">启用城市</a></li>
+                        <li><a href="kf-sz.html">库房与城市设置</a></li>
+						<li class="active"><a href="thsj.html">提货时间设置</a></li>
+						<li><a href="cys.html">承运商</a></li>
+                    </ul>
+                </li>
+                <li class="parentMenu"><span class="menuspan5">权限设置</span>
+                    <ul class="second" style="display:none">
+                        <li><a href="qx-sz.html">用户权限设置</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="nr pa">
+        	<div class="fff">
+        	<div class="terms" style="width:900px;">
+				
+                <div class="fl">
+                	<label>&nbsp;&nbsp;提货库房：</label><select class="thkf"></select>
+                </div>
+                
+                <div class="fl add">
+                	<label>&nbsp;&nbsp;送货地址：</label>
+					<select class="sheng"><option value=""></option></select>
+					<select class="city"><option value=""></option></select>
+                    <select class="district"><option value=""></option></select>
+                </div>
+                <button class="query-button thsj-query-button">查询</button>
+            </div>
+            </div>
+			<div class="table-head"><span>操作说明</span>提货时间为派车单要求司机去库房的提货时间，用户只能修改这个时间点</div>
+            <div class="table">
+        	<div class="list list-title">
+				<div class="border w100 h60">序号</div><div class="border w100 h60">发货仓库</div><div class="border w100 h60">收货省</div><div class="border w100 h60">收货市</div><div class="border w100 h60">收货区</div><div class="border w100 h60">截单时间</div><div class="border w100 h60">提货日期</div><div class="border w150 h60">要求来库房提货时间</div>
+			</div>
+			<div class="table-list">
+				<!-- <div class="cxsz-list">
+					<div class="border w100 h60">1</div><div class="border w100 h60">发货仓库</div><div class="border w100 h60">收货省</div><div class="border w100 h60">收货市</div><div class="border w100 h60">收货区</div>	<div class="border w100 h60">23:59:59</div><div class="border w100 h60">次日</div><div class="border w150 h60"><input type="text" data-field="time" class="thsj-input" value="20:20" readonly></div>
+				</div>  -->
+				
+			
+			</div>
+		</div>
+        </div>
+		<div id="dtBox"></div>
+		
+        </div>
+		
+		<div class="sk tjcx">
+			<div class="sk-head">新增车型<a href="#" class="cx-close">X</a></div>
+			<div class="sk-div">
+				<p>请输入司机交款金额</p>
+				<p><input type="text" class="sk-text" />元</p>
+				<p><span class="redd">注</span>：司机交款金额与应付款金额相符才能收款</p>
+				<p><a href="#" class="sk-qd">确定</a><a href="#" class="sk-close">取消</a></p>
+			</div>
+		</div>
+		
+   
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/thsj.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/DateTimePicker.js"></script>
+<script type="text/javascript">
+		
+	$(document).ready(function()
+	{
+		$("#dtBox").DateTimePicker(
+		{
+			dateFormat: "dd-MMM-yyyy"
+		});
+	});
+</script>
+
+
+</body>
+</html>

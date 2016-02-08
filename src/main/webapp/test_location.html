@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" http-equiv="Content-Type" content="text/html; charset=UTF-8; width=device-width">
+<title>定位测试</title>
+<script src="resources/jquery/jquery-1.8.1.min.js"></script>
+<script>
+	
+	var submitLBS = function(dCartId,driverId,latitude,longitude){
+		$.ajax({
+    		url:'/dcart/driverapp/lbs',
+    		data:{
+    			'dCartId':dCartId,'driverId':driverId,
+    			'latitude':latitude,'longitude':longitude
+    		},
+    		success:function(data){
+    			if(data.s==0){
+    				return ;
+    			}
+    			alert('成功提交定位信息');
+    		}
+    	});
+	}
+	
+	var fetchLBS = function(){
+ 		if (navigator.geolocation){
+ 			navigator.geolocation.watchPosition(
+ 				function(position){
+ 					var content = '';
+ 					for(var i in position.coords){
+ 						content += position.coords[i]+'<br>';
+ 					}
+ 					$('#content').html('lat:'+position.coords.latitude+',lon:'+position.coords.longitude);
+ 					$('#content').html(content);
+ 					submitLBS(100001,10,position.coords.latitude,position.coords.longitude);
+ 				},
+ 				function(error){
+ 					switch(error.code){
+						case error.PERMISSION_DENIED:
+							$('#content').html('用户不允许地理定位');break;
+						case error.POSITION_UNAVAILABLE:
+							$('#content').html('无法获取当前位置');break;
+						case error.TIMEOUT:
+							$('#content').html('操作超时');break;
+						case error.UNKNOWN_ERROR:
+							$('#content').html('未知错误');break;					
+ 					}
+ 				},
+ 				{
+ 					enableHighAcuracy: true,
+ 					timeout: 5000,
+ 					maximumAge: 3000
+ 				}
+ 			);
+ 		}else{
+ 			$('#content').html('浏览器不支持定位');
+ 		}
+ 	}
+ 	
+	$(function(){
+			
+	})
+</script>  
+</head>
+<body>
+ 	<br>
+ 	<button onclick="fetchLBS();">定位</button>
+ 	<br>
+	<div id="content"></div>
+</body>
+</html>

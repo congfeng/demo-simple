@@ -1,0 +1,97 @@
+<style type="text/css">
+.table{width:1010px;}
+</style>
+ <div class="nr pa">
+	<form id="form2" method='post' action="/dcart/receivables/export">
+			
+			<input class="thkf3" name="storageId" style="display:none;"></input>
+			<input class="district3" name="districtId" style="display:none;"></input>
+			<input class="stree3" name="streetId" style="display:none;"></input>
+			<input class="city2" name="cityId" style="display:none;"></input>
+			<input type="text" class="text-pc pcNo3" name="dCartId" value="" placeholder="派车单编号"  style="display:none;"/>
+			<input type="text" class="text-pc ddId3" name="orderNo" value="" placeholder="订单编号" style="display:none;"/>
+			<input class="pc-state3" name="dCartStateText" style="display:none;"></input>
+			<input name="createDateStratText" class="time13 text" type="text"  style="display:none;">
+			<input name="createDateEndText" class="time23 text" type="text"  style="display:none;">
+			<input type="text" class="text-pc driverName3" name="driverName" value="" placeholder="已分配司机" style="display:none;"/>
+			<input class="driver-dw3" name="shipperId" style="display:none;"></input>
+			<input class="pc-Receivables3" name="dCartReceivablesText" style="display:none;"></input>
+			
+        	<div class="fff">
+        	<div class="terms border-b">
+            	
+
+				<div class="fl">
+                	<label>提货库房：</label><select class="thkf"></select>
+                </div>
+				<div class="fl add">
+                	<label>&nbsp;&nbsp;送货地址：</label>
+					<select class="sheng"><option value=""></option></select>
+					<select class="city"><option value=""></option></select>
+                    <select class="district"><option value=""></option></select>
+					<select class="stree"><option value=""></option></select>
+                </div>            	
+            </div>
+			<div class="terms">
+				<div class="fl">
+                	<label></label><input type="text" class="text-pc pcNo" value="" placeholder="派车单编号" />
+                </div>
+            	<div class="fl">
+                	<label></label><input type="text" class="text-pc ddId" value="" placeholder="订单编号" />
+                </div>
+            	<div class="fl">
+                	<label>派车单状态：</label><select class="pc-state" ><option value="">全部</option><option value="AssignedDriver">已分配</option><option value="Pickuped">已提货</option><option value="Delivered">已送达</option><option value="Finish">已返回</option></select>
+                </div>
+				<div class="fl">
+                	<label>收款状态：</label><select class="pc-Receivables"><option value="">全部</option><option value="UnReceivables">未收款</option><option value="Receivablesed">已收款</option></select>
+                </div>
+				
+				<br />
+                <div class="fl mt5">
+                	<label>创建日期：</label><input id="datepicker-example1" class="time1 text" type="text">至&nbsp;<input id="datepicker-example12"  class="time2 text" type="text">
+                </div>
+                <div class="fl mt5">
+                	<label></label><input type="text" class="text-pc driverName" value="" placeholder="已分配司机" />
+                </div>
+				<div class="fl mt5">
+                	<select class="driver-dw" ></select>
+                </div><br /><br />
+				<div class="fl mt05">
+                <a class="query-button2 sk-query-button">查询</a>
+            	</div>
+            </div>
+            </div>
+			
+			
+            <div class="table">
+        	<div class="list list-title">
+				<div class="border w100 h60">派车单编号</div><div class="border w100 h60">创建日期</div><div class="border w100 h60">提货库房</div><div class="border w100 h60">派车单状态</div><div class="border w100 h60">司机信息</div><div class="border w100 h60">完成配送时间</div><div class="border w100 h60">应交款</div><div class="border w100 h60">已交款</div><div class="border w100 h60">财务收款</div><div class="border w100 h60">收款人</div>
+			</div>
+			<div class="table-list-sk">
+				<!-- <div class="list red">
+					<div class="w100 h60 border"><a href="#">10002000</a></div>
+					<div class="border w100 h60">2015/07/07</div><div class="border w100 h60">浦东仓</div><div class="border w100 h60">已送达</div><div class="border w100 h60">王树</div><div class="border w100 h60">2015/07/07<br/>11:20</div><div class="border w100 h60 yjk">210.00</div><div class="border w100 h60">100.00</div><div class="border w100 h60"><a href="#" ids="10002000" class="sk-an">收款</a></div>
+					<div class="border w100 h60"><span>陈鸣明</span></div>
+				</div> -->
+				
+			</div>
+			
+		</div>
+		<div class="fy list-title"></div>
+		<div class="m20"><input type="button" class="sk-dc" value="导出" /></div>
+		</form>
+        </div>
+		
+		<!-- <div class="sk">
+			<div class="sk-head">财务收款<a href="javascript:void(0)" class="sk-close">X</a></div>
+			<div class="sk-div">
+				<p>请输入司机交款金额</p>
+				<p><input type="text" class="sk-text" />元</p>
+				<p><span class="redd">注</span>：司机交款金额与应付款金额相符才能收款</p>
+				<p><a href="javascript:void(0)" class="sk-qd pcSk-qd">确定</a><a href="javascript:void(0)" class="sk-close">取消</a></p>
+			</div>
+		</div> -->
+		
+<script src="js/pc-sk.js" type="text/javascript"></script>
+<script src="js/zebra_datepicker.js" type="text/javascript"></script>
+<script src="js/core.js" type="text/javascript"></script>
