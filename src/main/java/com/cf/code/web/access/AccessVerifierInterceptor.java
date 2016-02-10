@@ -15,7 +15,7 @@ import com.cf.code.service.SessionService;
 
 public class AccessVerifierInterceptor implements MethodBeforeAdvice{
 
-	@Resource(name = "SessionService")
+	@Resource(name = "sessionService")
 	SessionService sessionService;
 	
 	@Override

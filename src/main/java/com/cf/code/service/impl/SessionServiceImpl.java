@@ -6,6 +6,8 @@ package com.cf.code.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.cf.code.entity.Profile;
 import com.cf.code.service.SessionService;
 
@@ -14,6 +16,7 @@ import com.cf.code.service.SessionService;
  * @Author: 丛峰
  * @Email: 3024992@qq.com
  */
+@Service("sessionService")
 public class SessionServiceImpl implements SessionService{
 
 	Map<String,Profile> profileMap = new HashMap<String,Profile>();

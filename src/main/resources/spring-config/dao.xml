@@ -11,14 +11,19 @@
 	default-autowire="no">
 	
 	<bean id="dictionaryDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.cf.code.core.dictionary.DictionaryDao" />
+		<property name="mapperInterface" value="com.cf.code.dao.DictionaryDao" />
 		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
 	</bean>
 	
-	<bean class="com.cf.code.core.dictionary.DictionaryManager" init-method="init">
-		<property name="dictionaryDao" ref="dictionaryDao"/>
+	<bean id="demoDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.DemoDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
 	</bean>
 	
+	<bean id="demoDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.DemoDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryWriteSqlSessionFactory" />
+	</bean>	
 	
 		
 </beans>

@@ -3,8 +3,32 @@
  */
 package com.cf.code.web;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cf.code.common.Constant;
+import com.cf.code.common.DateUtil;
+import com.cf.code.common.StringUtil;
+import com.cf.code.core.exception.BusinessException;
+import com.cf.code.entity.Demo;
+import com.cf.code.entity.Profile;
+import com.cf.code.entity.enums.DemoType;
+import com.cf.code.service.DemoService;
+import com.cf.code.service.SessionService;
+import com.cf.code.web.access.AccessVerifier;
 
 /**
  *
@@ -16,5 +40,81 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/demo")
 public class DemoController {
+	
+	private static Logger log = LogManager.getLogger(DemoController.class);
+	
+	@Resource(name = "demoService")
+	DemoService demoService;
+	
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+	
+	@RequestMapping(value = {""}, method = { RequestMethod.GET})
+	@ResponseBody
+    public List<Demo> list(@RequestParam(required = false) String timeStr) {
+		Date time = null;
+		if(StringUtil.isNullOrEmpty(timeStr)){
+			time = DateUtil.toParse(timeStr);
+		}
+        return demoService.query(time);
+    }
+	
+	@RequestMapping(value = {""}, method = { RequestMethod.POST})
+	@ResponseBody
+    public Model create(@RequestParam(required = true) String name,Model model) {
+		Integer id = this.demoService.insert(name);
+        model.addAttribute("create-id", id);  
+        return model;
+    }
+
+	@RequestMapping(value = {"/{id}"}, method = { RequestMethod.GET})
+	@ResponseBody
+    public Demo get(@PathVariable Integer id) {
+		log.info("DemoController["+id+"]-"+this);
+		Demo demo1 = this.demoService.find(id);
+        return demo1;
+    }
+	
+	@RequestMapping(value = {"/{id}"}, method = { RequestMethod.DELETE})
+	@ResponseBody
+    public Model delete(@PathVariable Integer id,Model model) {
+		boolean b = this.demoService.delete(id);
+        model.addAttribute("del-id", b+"");  
+        return model;
+    }
+	
+	@RequestMapping(value = {"/{id}"}, method = { RequestMethod.PUT})
+	@ResponseBody
+    public Model update(@PathVariable Integer id,@RequestParam(required = true) String name,Model model) {
+		try {
+			this.demoService.update(id, name);
+			 model.addAttribute("update-id", id+"");  
+		} catch (BusinessException e) {
+			 model.addAttribute("update-id-error", e.getMessage());
+		}
+        return model;
+    }
+	
+	@RequestMapping(value = {"/txUpdate"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Model txUpdate(@RequestParam(required = true) Integer sign,Model model) {
+		try {
+			this.demoService.txUpdate(sign,DemoType.TypeOne,null);
+			 model.addAttribute("txUpdate-sign", sign+"");  
+		} catch (Exception e) {
+			 model.addAttribute("txUpdate-sign-error", e.getMessage());
+		}
+        return model;
+    }
+	
+	@AccessVerifier
+	@RequestMapping(value = {"/testProfile"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Model testProfile(HttpServletRequest request,@RequestParam(required = false)Profile profile,
+    		Model model){
+		model.addAttribute("empty","测试");
+		model.addAttribute("PeopleName",profile.getUsername());
+        return model;
+    }
 	
 }

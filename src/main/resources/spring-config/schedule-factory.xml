@@ -7,45 +7,6 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<bean id="jobDetail_Demo4Tx" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
- 		<property name="jobClass" value="com.jisheng.peisong.scheduler.job.Demo4Tx" />
-		<property name="durability" value="true"/>
-		<property name="requestsRecovery" value="true"/>
-	</bean>
-	
-	<bean id="cronTrigger_jobDetail_Demo4Tx" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="jobDetail_Demo4Tx" />
-		<property name="cronExpression" value="0 0/5 * * * ? *" />
-	</bean>
-	
-	<bean id="Demo4RAM4X" class="com.jisheng.peisong.scheduler.job.Demo4RAM">
-		<constructor-arg value="X"/>
-	</bean>
-	<bean id="Demo4RAM4Y" class="com.jisheng.peisong.scheduler.job.Demo4RAM">
-		<constructor-arg value="Y"/>
-	</bean>
-		
-	<bean id="jobDetail_Demo4RAM4X2A" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 		<property name="targetObject" ref="Demo4RAM4X" />
- 		<property name="targetMethod" value="doitA" />
- 		<property name="concurrent" value="false"/>
-	</bean>
-	<bean id="jobDetail_Demo4RAM4X2B" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 		<property name="targetObject" ref="Demo4RAM4X" />
- 		<property name="targetMethod" value="doitB" />
- 		<property name="concurrent" value="false"/>
-	</bean>
-	<bean id="jobDetail_Demo4RAM4Y2A" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 		<property name="targetObject" ref="Demo4RAM4Y" />
- 		<property name="targetMethod" value="doitA" />
- 		<property name="concurrent" value="false"/>
-	</bean>
-	<bean id="jobDetail_Demo4RAM4Y2B" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 		<property name="targetObject" ref="Demo4RAM4Y" />
- 		<property name="targetMethod" value="doitB" />
- 		<property name="concurrent" value="false"/>
-	</bean> 
-    
     <!-- ============ 定时设置 ============ 
     	每10秒：*/10 * * * * ?
     	每10分钟：0 */10 * * * ?
@@ -54,32 +15,26 @@
 		每1个小时执行一次    0 0 * * * ?  
 		每5分钟： 0 0/5 * * * ? *
     -->
-	<bean id="cronTrigger_jobDetail_Demo4RAM4X2A" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="jobDetail_Demo4RAM4X2A" />
-		<property name="cronExpression" value="0 0/5 * * * ? *" />
-	</bean>
-	<bean id="cronTrigger_jobDetail_Demo4RAM4X2B" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="jobDetail_Demo4RAM4X2B" />
-		<property name="cronExpression" value="0 0/5 * * * ? *" />
-	</bean>
-	<bean id="cronTrigger_jobDetail_Demo4RAM4Y2A" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="jobDetail_Demo4RAM4Y2A" />
-		<property name="cronExpression" value="0 0/5 * * * ? *" />
-	</bean>
-	<bean id="cronTrigger_jobDetail_Demo4RAM4Y2B" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="jobDetail_Demo4RAM4Y2B" />
-		<property name="cronExpression" value="0 0/5 * * * ? *" />
+	
+	<bean id="jobDetail_Demo4Tx" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+ 		<property name="jobClass" value="com.cf.code.job.Demo4Tx" />
+		<property name="durability" value="true"/>
+		<property name="requestsRecovery" value="true"/>
 	</bean>
 	
+	<bean id="cronTrigger_jobDetail_Demo4Tx" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail_Demo4Tx" />
+		<property name="cronExpression" value="0 0/1 * * * ? *" />
+	</bean>
 	
 	<!-- 定时任务主配置 -->
-	<bean id="deliveryScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" scope="singleton" lazy-init="false"> 
+	<bean id="nsScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" scope="singleton" lazy-init="false"> 
 		<property name="applicationContextSchedulerContextKey" value="ApplicationContextKey" />
 		<property name="dataSource" ref="Quartz-DataSource" />
 		<property name="overwriteExistingJobs" value="true" />
 		<property name="quartzProperties"> 
 			<props>
-				<prop key="org.quartz.scheduler.instanceName">deliveryScheduler</prop> 
+				<prop key="org.quartz.scheduler.instanceName">nsScheduler</prop> 
 				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
 				<prop key="org.quartz.scheduler.rmi.export">false</prop>
 				<prop key="org.quartz.scheduler.rmi.proxy">false</prop>
@@ -103,10 +58,7 @@
 		<property name="autoStartup" value="true"/>
 		<property name="triggers">
 			<list>
-				<ref local="cronTrigger_jobDetail_Demo4RAM4X2A" />
-				<ref local="cronTrigger_jobDetail_Demo4RAM4X2B" />
-				<ref local="cronTrigger_jobDetail_Demo4RAM4Y2A" />
-				<ref local="cronTrigger_jobDetail_Demo4RAM4Y2B" />
+				<ref local="cronTrigger_jobDetail_Demo4Tx" />
 			</list>
 		</property>
 	</bean>

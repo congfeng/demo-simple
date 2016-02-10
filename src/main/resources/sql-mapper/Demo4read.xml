@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jisheng.peisong.dao.DemoDao">
+<mapper namespace="com.cf.code.dao.DemoDao">
     
-    <resultMap id="DemoResult" type="com.jisheng.peisong.entity.Demo">
+    <resultMap id="DemoResult" type="com.cf.code.entity.Demo">
 		<result property="id" column="id" />
 		<result property="createTime" column="create_time" />
 		<result property="createTimeFormat" column="create_time_format" />

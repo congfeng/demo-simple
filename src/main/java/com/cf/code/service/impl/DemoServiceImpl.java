@@ -6,12 +6,16 @@ package com.cf.code.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import com.cf.code.core.db.DataSourceEnum;
 import com.cf.code.core.exception.BusinessException;
+import com.cf.code.dao.DemoDao;
 import com.cf.code.entity.Demo;
 import com.cf.code.entity.enums.DemoType;
 import com.cf.code.service.DemoService;
@@ -23,30 +27,24 @@ import com.cf.code.service.DemoService;
  * @Email: 3024992@qq.com
  *
  */
+@Service("demoService")
 public class DemoServiceImpl implements DemoService {
 	
 	private static Logger log = LogManager.getLogger(DemoServiceImpl.class);
  
+	@Resource(name = "demoDao")
 	DemoDao demoDao;
 	
+	@Resource(name = "demoDaoRead")
 	DemoDao demoDaoRead;
 	
-	public void setDemoDao(DemoDao demoDao) {
-		this.demoDao = demoDao;
-	}
-
-	public void setDemoDaoRead(DemoDao demoDaoRead) {
-		this.demoDaoRead = demoDaoRead;
-	}
-
 	@Override
 	public Integer insert(String name) {
 		Demo demo = new Demo();
 		demo.setName(name);
-		if(this.demoDao.insert(demo,null)){
+		if(this.demoDao.insert(demo)){
 			return demo.getId();
 		}
-		
 		return 0;
 	}
 
@@ -90,7 +88,7 @@ public class DemoServiceImpl implements DemoService {
 		}
 		Demo demo = new Demo();
 		demo.setName("事务操作插入"+sign);
-		this.demoDao.insert(demo,DataSourceEnum.DefaultCategory);
+		this.demoDao.insert(demo);
 	}
 
 	@Override
@@ -117,13 +115,13 @@ public class DemoServiceImpl implements DemoService {
 	private void txUpdate(){
 		Demo demo = new Demo();
 		demo.setName("事务操作插入2");
-		this.demoDao.insert(demo,null);
+		this.demoDao.insert(demo);
 		if(true){
 			throw new RuntimeException("事务跑出运行期异常");
 		}
 		Demo demo1 = new Demo();
 		demo1.setName("事务操作插入3");
-		this.demoDao.insert(demo1,null);
+		this.demoDao.insert(demo1);
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public class DemoServiceImpl implements DemoService {
 		}
 		Demo demo1 = new Demo();
 		demo1.setName("事务操作插入3");
-		this.demoDao.insert(demo1,null);
+		this.demoDao.insert(demo1);
 	}
 	
 }

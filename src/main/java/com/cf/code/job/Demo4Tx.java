@@ -6,7 +6,7 @@ package com.cf.code.job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.jisheng.peisong.service.DemoService;
+import com.cf.code.service.DemoService;
 
 /**
  * @Version: 1.0
@@ -20,13 +20,12 @@ public class Demo4Tx extends AbstractJob{
 		DemoService demoService = super.getBean(context, "demoService", DemoService.class);
 		log.info("---------Demo4Tx----"
 				+ demoService
-				+ this);
+				+ this+"---");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		log.info(this+"---------DemoTest1----end");
 	}
 		
 }
