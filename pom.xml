@@ -13,6 +13,12 @@
 	<packaging>war</packaging>
 	
   	<dependencies>
+  		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -43,6 +49,10 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
         </dependency>
@@ -58,6 +68,10 @@
             <groupId>org.codehaus.jackson</groupId>  
             <artifactId>jackson-core-asl</artifactId>  
         </dependency> 
+        <dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -71,28 +85,62 @@
             <artifactId>poi</artifactId>
             <version>3.8</version>
         </dependency>	
-        <dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.netty</groupId>
-  					<artifactId>netty</artifactId>
-				</exclusion>
-			</exclusions>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.zookeeper</groupId>
-			<artifactId>zookeeper</artifactId>
+ 			<groupId>javax.mail</groupId>
+ 			<artifactId>mail</artifactId>
+ 			<version>1.4.1</version>
+ 		</dependency>
+ 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.3.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.sgroschupf</groupId>
-			<artifactId>zkclient</artifactId>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+		 	<groupId>org.quartz-scheduler</groupId>
+		 	<artifactId>quartz</artifactId>
+		</dependency>
+		<!-- database -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
 		</dependency>
   	</dependencies>
   	
   	<build>
 		<finalName>ROOT</finalName>
+		<filters>
+            <filter>envs/${env}.properties</filter>
+        </filters>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -129,58 +177,19 @@
   	
   	<profiles>
 		<profile>
-			<id>prd</id>
-			<properties>
-				<pom.jdbc.peisong.write.url>jdbc:mysql://218.244.141.46:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.write.url>
-				<pom.jdbc.peisong.write.username>root</pom.jdbc.peisong.write.username>
-				<pom.jdbc.peisong.write.password>19911006</pom.jdbc.peisong.write.password>
-				<pom.jdbc.peisong.read.url>jdbc:mysql://218.244.141.46:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.read.url>
-				<pom.jdbc.peisong.read.username>root</pom.jdbc.peisong.read.username>
-				<pom.jdbc.peisong.read.password>19911006</pom.jdbc.peisong.read.password>
-				<pom.cache.peisong.host1>218.244.141.46</pom.cache.peisong.host1>
-				<pom.cache.peisong.host2>218.244.141.46</pom.cache.peisong.host2>
-				<pom.cache.peisong.host3>218.244.141.46</pom.cache.peisong.host3>
-				<pom.dubbo.registry.address>218.244.141.46:2181</pom.dubbo.registry.address>
-				<pom.log.file>/storage/local/logs/peisong-web-test.log</pom.log.file>
-				<pom.log.level>info</pom.log.level>
-			</properties>
-		</profile>
-		<profile>
-			<id>prd165</id>
-			<properties>
-				<pom.jdbc.peisong.write.url>jdbc:mysql://rds7tl83863j92fuqimv.mysql.rds.aliyuncs.com:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.write.url>
-				<pom.jdbc.peisong.write.username>nongye</pom.jdbc.peisong.write.username>
-				<pom.jdbc.peisong.write.password>nongye</pom.jdbc.peisong.write.password>
-				<pom.jdbc.peisong.read.url>jdbc:mysql://rds7tl83863j92fuqimv.mysql.rds.aliyuncs.com:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.read.url>
-				<pom.jdbc.peisong.read.username>nongye</pom.jdbc.peisong.read.username>
-				<pom.jdbc.peisong.read.password>nongye</pom.jdbc.peisong.read.password>
-				<pom.cache.peisong.host1>91nongye_redis1</pom.cache.peisong.host1>
-				<pom.cache.peisong.host2>91nongye_redis2</pom.cache.peisong.host2>
-				<pom.cache.peisong.host3>91nongye_redis3</pom.cache.peisong.host3>
-				<pom.dubbo.registry.address>91nongye_zookeeper:2181</pom.dubbo.registry.address>
-				<pom.log.file>/storage/local/logs/peisong-web-test.log</pom.log.file>
-				<pom.log.level>info</pom.log.level>
-			</properties>
+			<id>local</id>
+			<properties><env>local</env></properties>
+			<activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
 		</profile>
 		<profile>
 			<id>test</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<pom.jdbc.peisong.write.url>jdbc:mysql://218.244.133.108:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.write.url>
-				<pom.jdbc.peisong.write.username>peisong</pom.jdbc.peisong.write.username>
-				<pom.jdbc.peisong.write.password>peisong123457</pom.jdbc.peisong.write.password>
-				<pom.jdbc.peisong.read.url>jdbc:mysql://218.244.133.108:3306/peisong?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.peisong.read.url>
-				<pom.jdbc.peisong.read.username>peisong</pom.jdbc.peisong.read.username>
-				<pom.jdbc.peisong.read.password>peisong123457</pom.jdbc.peisong.read.password>
-				<pom.cache.peisong.host1>218.244.141.46</pom.cache.peisong.host1>
-				<pom.cache.peisong.host2>218.244.141.46</pom.cache.peisong.host2>
-				<pom.cache.peisong.host3>218.244.141.46</pom.cache.peisong.host3>
-				<pom.dubbo.registry.address>218.244.141.46:2181</pom.dubbo.registry.address>
-				<pom.log.file>/storage/local/logs/peisong-web-test.log</pom.log.file>
-				<pom.log.level>info</pom.log.level>
-			</properties>
+			<properties><env>test</env></properties>
+		</profile>
+		<profile>
+			<id>prd</id>
+			<properties><env>prd</env></properties>
 		</profile>
 	</profiles>
 	
