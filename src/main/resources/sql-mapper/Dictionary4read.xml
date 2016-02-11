@@ -5,7 +5,7 @@
 	<select id="get" parameterType="java.lang.String" resultType="java.lang.String">
 		SELECT value
 		  FROM dictionary
-		 WHERE status = 1 AND code = #{code}
+		 WHERE code = #{code}
 	</select>
 	
 </mapper>

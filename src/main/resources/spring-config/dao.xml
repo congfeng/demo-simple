@@ -10,11 +10,6 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="no">
 	
-	<bean id="dictionaryDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.cf.code.dao.DictionaryDao" />
-		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
-	</bean>
-	
 	<bean id="demoDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.cf.code.dao.DemoDao" />
 		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
@@ -25,5 +20,24 @@
 		<property name="sqlSessionFactory" ref="NearbyStoryWriteSqlSessionFactory" />
 	</bean>	
 	
+	<bean id="dictionaryDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.DictionaryDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
+	</bean>
+	
+	<bean id="userDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.UserDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
+	</bean>
+	
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.UserDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryWriteSqlSessionFactory" />
+	</bean>
+	
+	<bean id="menuDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.MenuDao" />
+		<property name="sqlSessionFactory" ref="NearbyStoryReadSqlSessionFactory" />
+	</bean>
 		
 </beans>
