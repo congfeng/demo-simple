@@ -3,8 +3,8 @@
 <mapper namespace="com.cf.code.dao.UserDao">
 	
 	<insert id="insert" parameterType="com.cf.code.entity.User">
-		INSERT INTO user(username,password)
-		VALUES (#{username},#{password})
+		INSERT INTO user(username,password,create_time)
+		VALUES (#{username},#{password},now())
 		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
 			select last_insert_id()
 		</selectKey>

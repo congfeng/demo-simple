@@ -3,6 +3,9 @@
  */
 package com.cf.code.dao;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.cf.code.entity.User;
@@ -19,5 +22,12 @@ public interface UserDao {
 	public void insert(User user);
 	
 	public void updatePassword(@Param("id") Integer id,@Param("password") String password);
+	
+	public List<User> query(@Param("username") String username,
+			@Param("createTimeStart") Date createTimeStart,@Param("createTimeEnd") Date createTimeEnd,
+			@Param("start") Integer start,@Param("size") Integer size);
+
+	public int queryCount(@Param("username") String username,
+			@Param("createTimeStart") Date createTimeStart,@Param("createTimeEnd") Date createTimeEnd);
 
 }

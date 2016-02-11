@@ -3,6 +3,8 @@
  */
 package com.cf.code.entity;
 
+import java.util.Date;
+
 /**
  * @Version: 1.0
  * @Author: 丛峰
@@ -15,6 +17,10 @@ public class User {
     private String username;
     
     private String password;
+    
+    private Date createTime;
+    
+    private String createTimeFormat;
 
 	public Integer getId() {
 		return id;
@@ -38,6 +44,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCreateTimeFormat() {
+		return createTimeFormat;
+	}
+
+	public void setCreateTimeFormat(String createTimeFormat) {
+		this.createTimeFormat = createTimeFormat;
 	}
 		
 }
