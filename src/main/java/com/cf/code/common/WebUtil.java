@@ -47,24 +47,20 @@ public class WebUtil {
         return null;
     }
     
-    public static void writeCookie(HttpServletResponse response,String value , String name){
-   	 	Cookie tokenCookie = new Cookie(name,value); 
-   	 	tokenCookie.setMaxAge(2*60*60);
-   	 	tokenCookie.setPath("/");
-//   	tokenCookie.setDomain("/");
-   	 	response.addCookie(tokenCookie);
+    public static void writeCookie(HttpServletResponse response,String name,String value){
+   	 	Cookie cookie = new Cookie(name,value); 
+   	 	cookie.setMaxAge(2*60*60);
+   	 	cookie.setPath("/");
+//   	cookie.setDomain("/");
+   	 	response.addCookie(cookie);
     }
     
     public static void deleteCookie(HttpServletRequest request,HttpServletResponse response,String name){
-   	 	Cookie[] cookies = request.getCookies();
-   	 	if(cookies != null){
-   	 		for(Cookie cookie : cookies){
-   	 			if(name.equals(cookie.getName())) {
-   	 				cookie.setMaxAge(0);
-   	 				response.addCookie(cookie);
-   	 			}
-   	 		}
-   	 	}
+    	Cookie cookie = new Cookie(name,null); 
+    	cookie.setMaxAge(0);
+    	cookie.setPath("/");
+//   	cookie.setDomain("/");
+   	 	response.addCookie(cookie);
     }
 
     public static String getCurrentHttpResponseText(){

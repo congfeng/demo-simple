@@ -15,10 +15,12 @@ import com.cf.code.service.SessionService;
  * @Version: 1.0
  * @Author: 丛峰
  * @Email: 3024992@qq.com
+ * 
  */
 @Service("sessionService")
 public class SessionServiceImpl implements SessionService{
 
+	//TODO 使用缓存代替
 	Map<String,Profile> profileMap = new HashMap<String,Profile>();
 	
 	Map<String,String> idMap = new HashMap<String,String>();
@@ -32,18 +34,19 @@ public class SessionServiceImpl implements SessionService{
 		if(profile == null){
 			return ;
 		}
-		String oldToken = idMap.get(""+profile.getId());
+		String oldToken = idMap.get(""+profile.getRelatedId());
 		if(oldToken != null){
 			profileMap.remove(oldToken);
+			profile.setToken(token);
 		}
-		idMap.put(""+profile.getId(), token);
+		idMap.put(""+profile.getRelatedId(), token);
 		profileMap.put(token, profile);
 	}
 
 	public void delProfile(String token){
 		Profile profile = profileMap.get(token);
 		if(profile != null){
-			idMap.remove(""+profile.getId());
+			idMap.remove(""+profile.getRelatedId());
 		}
 		profileMap.remove(token);
 	}

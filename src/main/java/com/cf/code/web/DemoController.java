@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cf.code.common.Constant;
 import com.cf.code.common.DateUtil;
 import com.cf.code.common.StringUtil;
 import com.cf.code.core.exception.BusinessException;
@@ -110,11 +109,8 @@ public class DemoController {
 	@AccessVerifier
 	@RequestMapping(value = {"/testProfile"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Model testProfile(HttpServletRequest request,@RequestParam(required = false)Profile profile,
-    		Model model){
-		model.addAttribute("empty","测试");
-		model.addAttribute("PeopleName",profile.getUsername());
-        return model;
+    public Profile testProfile(HttpServletRequest request,@RequestParam(required = false)Profile profile){
+        return profile;
     }
 	
 }
