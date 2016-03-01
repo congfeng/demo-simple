@@ -25,14 +25,13 @@ public class Pager {
 	private int nextPage;    	//下一页数
 	private int maxPageNo; 		//最大页数
 	public Pager() {
+		this("", 1, 10);
 	}
 
 	public Pager(String requestUrl, int pageNo, int pageSize) {
-		setRequestUrl(requestUrl);
-		pageSize = pageSize <= 0 ? 10 : pageSize;
-		pageNo = (pageNo < 1) ? 1 : pageNo;
-		setPageNo(pageNo);
-		setPageSize(pageSize);
+		this.requestUrl = requestUrl;
+		this.pageNo = (pageNo < 1) ? 1 : pageNo;
+		this.pageSize = pageSize <= 0 ? 10 : pageSize;
 	}
 
 	

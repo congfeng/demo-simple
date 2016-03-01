@@ -79,7 +79,7 @@ public class UserController {
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) String createTimeStartText,
     		@RequestParam(required = false) String createTimeEndText
-			) throws BusinessException{
+			){
 		if(StringUtil.isNullOrEmpty(username)){
 			username = null;
 		}
@@ -98,9 +98,7 @@ public class UserController {
 		pager.setPageNo(pageNo);
 		List<User> users = this.userDaoRead.query(username,createTimeStart,createTimeEnd,pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("users", users);   
-		model.addAttribute("pageIndex", pager.getPageIndexs());
-		model.addAttribute("pageNo", pager.getPageNo());
-		model.addAttribute("pageMaxNo", pager.getMaxPageNo());
+		model.addAttribute("pager", pager);
         return model;
     }
 	

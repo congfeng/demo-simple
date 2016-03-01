@@ -38,7 +38,7 @@ public class BaseExceptionHandler implements HandlerExceptionResolver{
         	errorType = 1;
         	errorInfo = factException.getMessage();
         	log.warn(errorInfo);
-            return new ModelAndView("redirect:/login.html");
+//            return new ModelAndView("redirect:/login.html");
         }else if(factException instanceof BaseException){
         	errorType = 2;
         	errorInfo = factException.getMessage();

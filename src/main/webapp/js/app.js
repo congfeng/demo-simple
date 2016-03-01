@@ -26,4 +26,22 @@ nsApp.config(['$routeProvider',function ($routeProvider) {
 nsApp.controller('DefaultController',function($scope,$routeParams) {  
 	//$scope.id = $routeParams.id;
 });  
+
+
+$(function(){
+	$(document).ajaxSuccess(function(e,xhr,c){
+		if(xhr.responseJSON.s == 0){
+			if(xhr.responseJSON.t == 1){
+				window.location.href = "login.html";
+			}else{
+				layer.open({
+					content : xhr.responseJSON.m,
+					btn : [ '确定' ]
+				});
+			}
+		}
+	}).ajaxError(function(){
+		
+	});
+});
   

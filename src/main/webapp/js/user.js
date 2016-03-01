@@ -1,20 +1,20 @@
+var user_query;
 $(function(){
-	
-	function user_query(pageNo){
+	user_query = function(pageNo){
 		$.ajax({
 			url:'/user/list',
 			data:{'pageNo':pageNo},
 			dataType:'json',
 			success:function(data){
 				if(data&&data.s == 0){
-					layer.open({
-						content : data.m,
-						btn : [ '确定' ]
-					});
 					return;
 				}
 				$(".table_info").html("");
 				$(".table_datas").html("");
+				$(".page_count").html("");
+				$(".page_no").remove();
+				$(".page_up").removeClass("disabled");
+				$(".page_down").removeClass("disabled");
 				if(data.users ==""){
 					$(".table_info").html("<div>此条件下没有数据</div>");
 					return;
@@ -28,6 +28,24 @@ $(function(){
 				        +"</tr>";
 				});
 				$(".table_datas").html(table_datas);
+				$(".page_count").html('共有'+data.pager.count+'个用户');
+				if(data.pager.firstPage){
+					$(".page_up").addClass("disabled");
+				}else{
+					$(".page_up").attr("onclick","user_query("+data.pager.prePage+")");
+				}
+				if(data.pager.lastPage){
+					$(".page_down").addClass("disabled");
+				}else{
+					$(".page_down").attr("onclick","user_query("+data.pager.nextPage+")");
+				}
+				$.each(data.pager.pageIndexs,function(q,w){
+					if(w == data.pager.pageNo){
+						$(".page_down").before("<li class='page_no active'><a href='javascript:void(0)'>"+w+"</a></li>");
+					}else{
+						$(".page_down").before("<li class='page_no'><a onclick='user_query("+w+");' href='javascript:void(0)'>"+w+"</a></li>");
+					}
+				});
 			}
 		});
 	}
