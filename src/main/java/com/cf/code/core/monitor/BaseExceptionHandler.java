@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.cf.code.common.Constant;
 import com.cf.code.common.StringUtil;
+import com.cf.code.common.WebUtil;
 import com.cf.code.core.exception.AccessException;
 import com.cf.code.core.exception.BaseException;
 
@@ -38,7 +39,9 @@ public class BaseExceptionHandler implements HandlerExceptionResolver{
         	errorType = 1;
         	errorInfo = factException.getMessage();
         	log.warn(errorInfo);
-//            return new ModelAndView("redirect:/login.html");
+        	if(!WebUtil.isAjax(request)){
+        		return new ModelAndView("redirect:/login.html");
+        	}
         }else if(factException instanceof BaseException){
         	errorType = 2;
         	errorInfo = factException.getMessage();

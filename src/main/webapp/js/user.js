@@ -1,6 +1,6 @@
-var user_query;
+var page;
 $(function(){
-	user_query = function(pageNo){
+	var user_query = function(pageNo){
 		$.ajax({
 			url:'/user/list',
 			data:{'pageNo':pageNo},
@@ -11,10 +11,8 @@ $(function(){
 				}
 				$(".table_info").html("");
 				$(".table_datas").html("");
-				$(".page_count").html("");
-				$(".page_no").remove();
-				$(".page_up").removeClass("disabled");
-				$(".page_down").removeClass("disabled");
+				$(".user_count").html("");
+				page.clear();
 				if(data.users ==""){
 					$(".table_info").html("<div>此条件下没有数据</div>");
 					return;
@@ -28,31 +26,21 @@ $(function(){
 				        +"</tr>";
 				});
 				$(".table_datas").html(table_datas);
-				$(".page_count").html('共有'+data.pager.count+'个用户');
-				if(data.pager.firstPage){
-					$(".page_up").addClass("disabled");
-				}else{
-					$(".page_up").attr("onclick","user_query("+data.pager.prePage+")");
-				}
-				if(data.pager.lastPage){
-					$(".page_down").addClass("disabled");
-				}else{
-					$(".page_down").attr("onclick","user_query("+data.pager.nextPage+")");
-				}
-				$.each(data.pager.pageIndexs,function(q,w){
-					if(w == data.pager.pageNo){
-						$(".page_down").before("<li class='page_no active'><a href='javascript:void(0)'>"+w+"</a></li>");
-					}else{
-						$(".page_down").before("<li class='page_no'><a onclick='user_query("+w+");' href='javascript:void(0)'>"+w+"</a></li>");
-					}
-				});
+				$(".user_count").html('共有'+data.pager.count+'个用户');
+				page.refresh(data.pager);
 			}
 		});
 	}
+	page = new Pagination(user_query);
 	user_query(1);
 	//$("#user-query-button").click(function(){
 		//user_query(1);
 	//})
 	
 	//$("#user-query-button").click();
+	
+	$(".user_export").click(function(){
+		$("#user_form").submit();
+	});
+	
 })

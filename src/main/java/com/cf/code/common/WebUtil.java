@@ -234,4 +234,12 @@ public class WebUtil {
         return false;
     }
     
+    public static boolean isAjax(HttpServletRequest request) { 
+        String header = request.getHeader("X-Requested-With"); 
+        if (header != null && "XMLHttpRequest".equals(header)) {
+        	return true;
+        }
+        return false; 
+    }
+    
 }

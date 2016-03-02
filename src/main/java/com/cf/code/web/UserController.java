@@ -123,7 +123,7 @@ public class UserController {
 			createTimeEnd = DateUtil.toParse(createTimeEndText);
 		}
 		List<User> users = this.userDaoRead.query(username,createTimeStart,createTimeEnd,0, 100000); 
-		String filename = "user_list.csv";
+		String filename = "user_list.xls";
     	Workbook wb = new HSSFWorkbook();
         Sheet s = wb.createSheet();
         s.setColumnWidth(0, 4800);
