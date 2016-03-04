@@ -33,10 +33,6 @@ $(function(){
 					});
 					return;
 				}
-				window.localStorage.token = data.token;
-				window.localStorage.relatedId = data.relatedId;
-				window.localStorage.name = data.name;
-				window.localStorage.menus = data.menus;
 				window.localStorage.remember = $("#remember").attr("checked");
 				if(window.localStorage.remember == 'checked'){
 					window.localStorage.username = $("#username").val();

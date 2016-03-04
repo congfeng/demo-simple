@@ -90,27 +90,6 @@ public class DemoServiceImpl implements DemoService {
 		demo.setName("事务操作插入"+sign);
 		this.demoDao.insert(demo);
 	}
-
-	@Override
-	public void ddddd() {
-		this.asyncFn();
-		log.info("ddddd...............");
-		this.txUpdate();
-	}
-	
-	@Async
-	private void asyncFn(){
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		this.query(null);
-		log.info("asyncFn...............");
-	}
 	
 	private void txUpdate(){
 		Demo demo = new Demo();
@@ -135,6 +114,18 @@ public class DemoServiceImpl implements DemoService {
 		Demo demo1 = new Demo();
 		demo1.setName("事务操作插入3");
 		this.demoDao.insert(demo1);
+	}
+
+	@Override
+	public void it4Async() {
+		System.out.println("------it4Async---------start");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("------it4Async---------end");
 	}
 	
 }

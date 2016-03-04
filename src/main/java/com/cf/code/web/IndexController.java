@@ -3,7 +3,7 @@
  */
 package com.cf.code.web;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class IndexController {
 
 	@AccessVerifier
 	@RequestMapping(value={"/"})
-    public String index(HttpServletRequest request,@RequestParam(required = false)Profile profile){
+    public String index(HttpSession session,@RequestParam(required = false)Profile profile){
         return "index.html";
     }
 

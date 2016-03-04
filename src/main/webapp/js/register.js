@@ -33,10 +33,6 @@ $(function(){
 					});
 					return;
 				}
-				window.localStorage.removeItem('token');
-				window.localStorage.removeItem('relatedId');
-				window.localStorage.removeItem('name');
-				window.localStorage.removeItem('menus');
 				window.localStorage.removeItem('remember');
 				window.localStorage.removeItem('password');
 				window.localStorage.username = $("#username").val();

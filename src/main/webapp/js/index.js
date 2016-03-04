@@ -1,28 +1,75 @@
 $(function(){
 
-	if(window.localStorage.token == null||window.localStorage.token == undefined||window.localStorage.token == ''){
-		window.location.href = "login.html";
-		return ;
-	}else{
-		$('body').show();
-	}
-		
-	$("#username-text").text(window.localStorage.name);
-	
+	$.ajax({
+		url:'/profile',
+		dataType:'json',
+		success:function(data){
+			if(data&&data.s == 0){
+				return;
+			}
+			$("#username-text").text(data.name);
+			var menus = data.menus;
+			if($.inArray("dashboard-menu",menus) == -1){
+				$("#dashboard-menu-header").hide();
+				$("#dashboard-menu").hide();
+			}else{
+				if($.inArray("home",menus) == -1){
+					$("#home").hide();
+				}
+				if($.inArray("users",menus) == -1){
+					$("#users").hide();
+				}
+				if($.inArray("user",menus) == -1){
+					$("#user").hide();
+				}
+				if($.inArray("gallery",menus) == -1){
+					$("#gallery").hide();
+				}
+				if($.inArray("calendar",menus) == -1){
+					$("#calendar").hide();
+				}
+				if($.inArray("faq",menus) == -1){
+					$("#faq").hide();
+				}
+				if($.inArray("help",menus) == -1){
+					$("#help").hide();
+				}
+			}
+			if($.inArray("accounts-menu",menus) == -1){
+				$("#accounts-menu-header").hide();
+				$("#accounts-menu").hide();
+			}else{
+				if($.inArray("sign-in",menus) == -1){
+					$("#sign-in").hide();
+				}
+				if($.inArray("sign-up",menus) == -1){
+					$("#sign-up").hide();
+				}
+				if($.inArray("reset-password",menus) == -1){
+					$("#reset-password").hide();
+				}
+			}
+			if($.inArray("settings-menu",menus) == -1){
+				$("#settings-menu-header").hide();
+				$("#settings-menu").hide();
+			}else{
+				
+			}
+			if($.inArray("legal-menu",menus) == -1){
+				$("#legal-menu-header").hide();
+				$("#legal-menu").hide();
+			}else{
+				
+			}
+			$('body').show();
+		}
+	});
+
 	$("#logout-button").click(function(){
 		$.ajax({
 			url:'/profile/logout',
-			data:{'token':window.localStorage.token},
 			dataType:'json',
 			success:function(data){
-				window.localStorage.removeItem('token');
-				window.localStorage.removeItem('relatedId');
-				window.localStorage.removeItem('name');
-				window.localStorage.removeItem('menus');
-				if(window.localStorage.remember !== 'checked'){
-					window.localStorage.removeItem('username');
-					window.localStorage.removeItem('password');
-				}
 				window.location.href = "login.html";
 			}
 		})
@@ -63,58 +110,4 @@ $(function(){
 			}
 		})
 	});
-	
-	var menus = window.localStorage.menus.split(',');
-	if($.inArray("dashboard-menu",menus) == -1){
-		$("#dashboard-menu-header").hide();
-		$("#dashboard-menu").hide();
-	}else{
-		if($.inArray("home",menus) == -1){
-			$("#home").hide();
-		}
-		if($.inArray("users",menus) == -1){
-			$("#users").hide();
-		}
-		if($.inArray("user",menus) == -1){
-			$("#user").hide();
-		}
-		if($.inArray("gallery",menus) == -1){
-			$("#gallery").hide();
-		}
-		if($.inArray("calendar",menus) == -1){
-			$("#calendar").hide();
-		}
-		if($.inArray("faq",menus) == -1){
-			$("#faq").hide();
-		}
-		if($.inArray("help",menus) == -1){
-			$("#help").hide();
-		}
-	}
-	if($.inArray("accounts-menu",menus) == -1){
-		$("#accounts-menu-header").hide();
-		$("#accounts-menu").hide();
-	}else{
-		if($.inArray("sign-in",menus) == -1){
-			$("#sign-in").hide();
-		}
-		if($.inArray("sign-up",menus) == -1){
-			$("#sign-up").hide();
-		}
-		if($.inArray("reset-password",menus) == -1){
-			$("#reset-password").hide();
-		}
-	}
-	if($.inArray("settings-menu",menus) == -1){
-		$("#settings-menu-header").hide();
-		$("#settings-menu").hide();
-	}else{
-		
-	}
-	if($.inArray("legal-menu",menus) == -1){
-		$("#legal-menu-header").hide();
-		$("#legal-menu").hide();
-	}else{
-		
-	}
 })

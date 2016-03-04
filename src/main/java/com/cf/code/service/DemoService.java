@@ -6,6 +6,8 @@ package com.cf.code.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.scheduling.annotation.Async;
+
 import com.cf.code.core.db.DataSourceEnum;
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.entity.Demo;
@@ -34,5 +36,7 @@ public interface DemoService {
 	
 	public void tpTxUpdate(DemoType dt)throws BusinessException;
 	
-	public void ddddd();
+	@Async
+	public void it4Async();
+	
 }

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @Author: 丛峰
  * @Email: 3024992@qq.com
  * 
- * 标签session验证功能生效条件：方法中第一个参数必须是HttpServletRequest,且不为null
+ * 标签session验证功能生效条件：方法中第一个参数必须是HttpSession,且不为null
  * 标签session注入功能生效条件：方法中第二个参数必须是@RequestParam(required = false) Profile
  * 
  * 限制参数位置，是为了提高检索效率
@@ -21,9 +21,9 @@ import java.lang.annotation.Target;
 public @interface AccessVerifier {
 
 	/**
-	 * 是否在cookie里读取token信息
+	 * check表示，在未登陆情况下，是否跑出异常
 	 * @return
 	 */
-	boolean token2Cookie() default true;
+	boolean check() default true;
 	
 }

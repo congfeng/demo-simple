@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -65,21 +65,20 @@ public class UserController {
 	@AccessVerifier
 	@RequestMapping(value = {"resetpassword"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void resetpassword(HttpServletRequest request,@RequestParam(required = false)Profile profile,
-    		@RequestParam(required = true) String newpassword) throws BusinessException{
+	public void resetpassword(HttpSession session,@RequestParam(required = false)Profile profile,
+    		@RequestParam(required = true) String newpassword){
 		this.userDao.updatePassword(profile.getRelatedId(), newpassword);
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public Model list(HttpServletRequest request,@RequestParam(required = false)Profile profile,
+	public Model list(HttpSession session,@RequestParam(required = false)Profile profile,
 			Model model,
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) String createTimeStartText,
-    		@RequestParam(required = false) String createTimeEndText
-			){
+    		@RequestParam(required = false) String createTimeEndText){
 		if(StringUtil.isNullOrEmpty(username)){
 			username = null;
 		}
@@ -105,7 +104,7 @@ public class UserController {
 	@AccessVerifier
 	@RequestMapping(value = {"export"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void export(HttpServletRequest request,@RequestParam(required = false)Profile profile,
+	public void export(HttpSession session,@RequestParam(required = false)Profile profile,
 			Model model,HttpServletResponse response,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) String createTimeStartText,

@@ -50,4 +50,3 @@ Pagination.prototype.clear = function clear(){
 	this.pageDown.unbind('click');
 	this.isClear = true;
 }
-

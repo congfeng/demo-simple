@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,7 +26,6 @@ import com.cf.code.entity.Demo;
 import com.cf.code.entity.Profile;
 import com.cf.code.entity.enums.DemoType;
 import com.cf.code.service.DemoService;
-import com.cf.code.service.SessionService;
 import com.cf.code.web.access.AccessVerifier;
 
 /**
@@ -44,9 +43,6 @@ public class DemoController {
 	
 	@Resource(name = "demoService")
 	DemoService demoService;
-	
-	@Resource(name = "sessionService")
-	SessionService sessionService;
 	
 	@RequestMapping(value = {""}, method = { RequestMethod.GET})
 	@ResponseBody
@@ -109,8 +105,23 @@ public class DemoController {
 	@AccessVerifier
 	@RequestMapping(value = {"/testProfile"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Profile testProfile(HttpServletRequest request,@RequestParam(required = false)Profile profile){
-        return profile;
+    public Profile testProfile(HttpSession session,@RequestParam(required = false)Profile profile){
+		return profile;
+    }
+	
+	@AccessVerifier(check=false)
+	@RequestMapping(value = {"/testProfile2"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Profile testProfile2(HttpSession session,@RequestParam(required = false)Profile profile){
+		return profile;
+    }
+	
+	@RequestMapping(value = {"/testAsync"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Model testAsync(Model model) {
+		this.demoService.it4Async();
+		System.out.println("--------testAsync-------");
+        return model;
     }
 	
 }
