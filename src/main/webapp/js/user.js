@@ -21,8 +21,8 @@ $(function(){
 				$.each(data.users,function(i,user){
 					table_datas += "<tr><td>"+(i+1)+"</td><td>"+user.id+"</td><td>"+user.password+"</td>"
 						+"<td>"+user.createTimeFormat+"</td>"
-						+"<td><a href='user.html'><i class='icon-pencil'></i></a>"
-						+"<a href='#myModal' role='button' data-toggle='modal'><i class='icon-remove'></i></a></td>"
+						+"<td><a tabindex='-1' data-toggle='modal' data-target='#update-user-modal'><i class='icon-pencil'></i></a>"
+						+"&nbsp;&nbsp;<a tabindex='-1' data-toggle='modal' data-target='#remove-user-modal'><i class='icon-remove'></i></a></td>"
 				        +"</tr>";
 				});
 				$(".table_datas").html(table_datas);

@@ -34,10 +34,7 @@ $(function(){
 			if(xhr.responseJSON.t == 1){
 				window.location.href = "login.html";
 			}else{
-				layer.open({
-					content : xhr.responseJSON.m,
-					btn : [ '确定' ]
-				});
+				showAlert(xhr.responseJSON.m);
 			}
 		}
 	}).ajaxError(function(){
