@@ -10,7 +10,7 @@
 
 
 	<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
-		<property name="maxInactiveIntervalInSeconds" value="36000"/>		
+		<property name="maxInactiveIntervalInSeconds" value="10"/>		
 	</bean>
 
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"

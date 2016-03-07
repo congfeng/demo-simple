@@ -67,7 +67,7 @@ public class ProfileController {
 	@AccessVerifier
 	@RequestMapping(value = {""}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Profile init(HttpSession session,@RequestParam(required = false)Profile profile) {
+    public Profile init(@RequestParam(required = false)Profile profile,HttpSession session) {
         return profile;
     }
 	

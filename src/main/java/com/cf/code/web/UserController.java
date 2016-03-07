@@ -65,7 +65,7 @@ public class UserController {
 	@AccessVerifier
 	@RequestMapping(value = {"resetpassword"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void resetpassword(HttpSession session,@RequestParam(required = false)Profile profile,
+	public void resetpassword(@RequestParam(required = false)Profile profile,HttpSession session,
     		@RequestParam(required = true) String newpassword){
 		this.userDao.updatePassword(profile.getRelatedId(), newpassword);
     }
@@ -73,7 +73,7 @@ public class UserController {
 	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public Model list(HttpSession session,@RequestParam(required = false)Profile profile,
+	public Model list(@RequestParam(required = false)Profile profile,HttpSession session,
 			Model model,
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) String username,
@@ -104,7 +104,7 @@ public class UserController {
 	@AccessVerifier
 	@RequestMapping(value = {"export"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void export(HttpSession session,@RequestParam(required = false)Profile profile,
+	public void export(@RequestParam(required = false)Profile profile,HttpSession session,
 			Model model,HttpServletResponse response,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) String createTimeStartText,

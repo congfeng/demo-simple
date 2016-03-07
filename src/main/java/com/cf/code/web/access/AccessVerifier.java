@@ -10,10 +10,11 @@ import java.lang.annotation.Target;
  * @Author: 丛峰
  * @Email: 3024992@qq.com
  * 
- * 标签session验证功能生效条件：方法中第一个参数必须是HttpSession,且不为null
- * 标签session注入功能生效条件：方法中第二个参数必须是@RequestParam(required = false) Profile
  * 
- * 限制参数位置，是为了提高检索效率
+ * 标签profile注入功能生效条件：方法中第一个参数必须是@RequestParam(required = false) Profile
+ * HttpSession注入方式选择：1.以参数形式传入 2.以成员变量传入 3.使用springmvc的RequestContextHolder方法
+ * 
+ * 为了提高效率，尽量将HttpSession以参数形式传入
  * 
  */
 @Target(ElementType.METHOD)

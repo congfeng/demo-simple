@@ -23,7 +23,7 @@ public class IndexController {
 
 	@AccessVerifier
 	@RequestMapping(value={"/"})
-    public String index(HttpSession session,@RequestParam(required = false)Profile profile){
+    public String index(@RequestParam(required = false)Profile profile,HttpSession session){
         return "index.html";
     }
 
