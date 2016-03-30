@@ -7,9 +7,6 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.cf.code.service.DemoService;
 
@@ -21,16 +18,21 @@ import com.cf.code.service.DemoService;
  * @Email: congfeng@91nongye.com
  *
  */
-public class DemoJob extends QuartzJobBean{
-
-	private static final Logger log = LogManager.getLogger(Demo4RAM.class);
+public class DemoJob{
+	
+	private static final Logger log = LogManager.getLogger(DemoJob.class);
 
 	@Resource(name = "demoService")
 	DemoService demoService;
+
+	public DemoJob(){
+		
+	}
 	
-	@Override
-	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		log.info("job-"+demoService+"-----");
+	public String doit(){
+		log.info("-------------DemoJob-------------");
+		this.demoService.insert("doit"+"-----"+this+"--------");
+		return "doit"+"-----";
 	}
 	
 }
