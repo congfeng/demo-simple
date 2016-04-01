@@ -9,5 +9,9 @@
 
 	<!-- 扫描文件（自动将service层注入） -->
 	<context:component-scan base-package="com.cf.code.service.**" />
-	 
+	
+	<bean id="pom.image.folder" class="java.lang.String">
+		<constructor-arg value="${pom.image.folder}"/>
+	</bean>
+	
 </beans>

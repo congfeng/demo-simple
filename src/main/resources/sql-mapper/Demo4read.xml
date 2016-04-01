@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="find" resultMap="DemoResult">
-		SELECT id,name,type,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') as 'create_time_format'
+		SELECT id,name,type
 		  FROM demo
 		 WHERE id = #{id}
 	</select>

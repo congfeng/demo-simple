@@ -10,10 +10,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.cf.code.core.db.DataSourceEnum;
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.dao.DemoDao;
 import com.cf.code.entity.Demo;
@@ -72,25 +70,6 @@ public class DemoServiceImpl implements DemoService {
 		return this.demoDaoRead.query(time,null);
 	}
 
-	@Override
-	public void txUpdate(Integer sign,DemoType dt,DataSourceEnum ds) throws BusinessException {
-		log.info("d");
-		boolean b = this.demoDao.update(8,"事务操作修改"+sign,dt);
-		log.info("dd");
-		if(!b){
-			throw new BusinessException("事务抛出业务异常");
-		}
-		if(sign == 1){
-			throw new BusinessException("事务抛出业务异常");
-		}
-		if(sign == 2){
-			throw new RuntimeException("事务抛出运行期异常");
-		}
-		Demo demo = new Demo();
-		demo.setName("事务操作插入"+sign);
-		this.demoDao.insert(demo);
-	}
-	
 	private void txUpdate(){
 		Demo demo = new Demo();
 		demo.setName("事务操作插入2");

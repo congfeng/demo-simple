@@ -3,6 +3,8 @@
  */
 package com.cf.code.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cf.code.common.DateUtil;
 import com.cf.code.common.StringUtil;
@@ -93,18 +96,6 @@ public class DemoController {
         return model;
     }
 	
-	@RequestMapping(value = {"/txUpdate"}, method = { RequestMethod.GET,RequestMethod.POST})
-	@ResponseBody
-    public Model txUpdate(@RequestParam(required = true) Integer sign,Model model) {
-		try {
-			this.demoService.txUpdate(sign,DemoType.TypeOne,null);
-			 model.addAttribute("txUpdate-sign", sign+"");  
-		} catch (Exception e) {
-			 model.addAttribute("txUpdate-sign-error", e.getMessage());
-		}
-        return model;
-    }
-	
 	@AccessVerifier
 	@RequestMapping(value = {"/testProfile"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
@@ -133,6 +124,21 @@ public class DemoController {
 		System.out.println(session1.getAttribute("profile"));
 		System.out.println(session2.getAttribute("profile"));
 		return model;
+    }
+	
+	@RequestMapping(value = {"/upload"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Model upload(Model model,
+    		@RequestParam(value = "file", required = false) Object fileObj,
+    		@RequestParam(required = false) Integer sign) throws IllegalStateException, IOException {
+		MultipartFile file = null;
+		if(fileObj instanceof MultipartFile){
+			file = (MultipartFile)fileObj;
+			file.transferTo(new File("E:\\apache-tomcat-7.0.53-windows-x64\\image\\"+file.getOriginalFilename()));
+		}
+		log.info(file);
+		log.info(sign);
+        return model;
     }
 	
 }

@@ -29,9 +29,6 @@
 	
 	<task:annotation-driven />
 	
-	<!-- 数据源切换 -->
-	<bean id="DynamicDataSourceInterceptor" class="com.cf.code.core.db.DynamicDataSourceInterceptor" />
-	
 	<!-- 访问凭证 -->
 	<bean id="AccessVerifierInterceptor" class="com.cf.code.web.access.AccessVerifierInterceptor" />
 	
@@ -39,16 +36,9 @@
 	
 	<bean id="WebExecuteInterceptor" class="com.cf.code.core.monitor.ExecuteInterceptor4Web"/>
 	
-	<bean id="ServiceExecuteInterceptor" class="com.cf.code.core.monitor.ExecuteInterceptor4Service"/>
-	
-	<bean id="JobExecuteInterceptor" class="com.cf.code.core.monitor.ExecuteInterceptor4Job"/>
-	
 	<aop:config>
 	    <aop:advisor order="1" advice-ref="AccessVerifierInterceptor" pointcut="execution(* com.cf.code.web..*.*(..))"/>
 	    <aop:advisor order="2" advice-ref="WebExecuteInterceptor" pointcut="execution(* com.cf.code.web..*.*(..))" />
-		<aop:advisor order="3" advice-ref="DynamicDataSourceInterceptor" pointcut="execution(* com.cf.code.dao..*.*(..))" />
-		<aop:advisor order="4" advice-ref="ServiceExecuteInterceptor" pointcut="execution(* com.cf.code.service..*.*(..))" />
-		<aop:advisor order="5" advice-ref="JobExecuteInterceptor" pointcut="execution(* com.cf.code.job..*.*(..))" />
 	</aop:config>
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> 
@@ -61,6 +51,12 @@
 		 		</bean>
 		 	</list>   
 		 </property>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760000" />
+		<property name="maxInMemorySize" value="40960" />
 	</bean>
 	
 </beans>

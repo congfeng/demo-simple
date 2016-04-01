@@ -9,57 +9,36 @@ $(function(){
 			}
 			$("#username-text").text(data.name);
 			var menus = data.menus;
-			if($.inArray("dashboard-menu",menus) == -1){
-				$("#dashboard-menu-header").hide();
-				$("#dashboard-menu").hide();
+			if($.inArray("product-menu",menus) == -1){
+				$("#product-menu-header").hide();
+				$("#product-menu").hide();
 			}else{
-				if($.inArray("home",menus) == -1){
-					$("#home").hide();
+				if($.inArray("product-type1",menus) == -1){
+					$("#product-type1").hide();
 				}
-				if($.inArray("users",menus) == -1){
-					$("#users").hide();
+				if($.inArray("product-type2",menus) == -1){
+					$("#product-type2").hide();
 				}
-				if($.inArray("user",menus) == -1){
-					$("#user").hide();
+				if($.inArray("product-type3",menus) == -1){
+					$("#product-type3").hide();
 				}
-				if($.inArray("gallery",menus) == -1){
-					$("#gallery").hide();
-				}
-				if($.inArray("calendar",menus) == -1){
-					$("#calendar").hide();
-				}
-				if($.inArray("faq",menus) == -1){
-					$("#faq").hide();
-				}
-				if($.inArray("help",menus) == -1){
-					$("#help").hide();
+				if($.inArray("product-type4",menus) == -1){
+					$("#product-type4").hide();
 				}
 			}
-			if($.inArray("accounts-menu",menus) == -1){
-				$("#accounts-menu-header").hide();
-				$("#accounts-menu").hide();
+			if($.inArray("notice-menu",menus) == -1){
+				$("#notice-menu-header").hide();
+				$("#notice-menu").hide();
 			}else{
-				if($.inArray("sign-in",menus) == -1){
-					$("#sign-in").hide();
+				if($.inArray("notice-type1",menus) == -1){
+					$("#notice-type1").hide();
 				}
-				if($.inArray("sign-up",menus) == -1){
-					$("#sign-up").hide();
+				if($.inArray("notice-type2",menus) == -1){
+					$("#notice-type2").hide();
 				}
-				if($.inArray("reset-password",menus) == -1){
-					$("#reset-password").hide();
+				if($.inArray("notice-type3",menus) == -1){
+					$("#notice-type3").hide();
 				}
-			}
-			if($.inArray("settings-menu",menus) == -1){
-				$("#settings-menu-header").hide();
-				$("#settings-menu").hide();
-			}else{
-				
-			}
-			if($.inArray("legal-menu",menus) == -1){
-				$("#legal-menu-header").hide();
-				$("#legal-menu").hide();
-			}else{
-				
 			}
 			$('body').show();
 		}

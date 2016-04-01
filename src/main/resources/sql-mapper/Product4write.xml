@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cf.code.dao.ProductDao">
+	
+	<insert id="insert" parameterType="com.cf.code.entity.Product">
+		INSERT INTO product(product_type,name,sku,image,create_time)
+		VALUES (#{productType},#{name},#{sku},#{image},now())
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+	    UPDATE product SET update_time = now()
+		<if test="name != null">,name = #{name,jdbcType=VARCHAR}</if> 	
+	    <if test="sku != null">,sku = #{sku,jdbcType=VARCHAR}</if>
+	    <if test="image != null">,image = #{image,jdbcType=VARCHAR}</if>
+	    WHERE id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM product WHERE id = #{id}
+	</delete>
+	
+</mapper>

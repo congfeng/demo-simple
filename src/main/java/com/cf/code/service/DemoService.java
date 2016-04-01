@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.scheduling.annotation.Async;
 
-import com.cf.code.core.db.DataSourceEnum;
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.entity.Demo;
 import com.cf.code.entity.enums.DemoType;
@@ -31,8 +30,6 @@ public interface DemoService {
 	public Demo find(Integer id);
 	
 	public List<Demo> query(Date time);
-	
-	public void txUpdate(Integer sign,DemoType dt,DataSourceEnum ds)throws BusinessException;
 	
 	public void tpTxUpdate(DemoType dt)throws BusinessException;
 	

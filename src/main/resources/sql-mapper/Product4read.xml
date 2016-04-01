@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cf.code.dao.ProductDao">
+	
+	<resultMap id="ProductResult" type="com.cf.code.entity.Product">
+		<result property="id" column="id" />
+		<result property="productType" column="product_type" />
+		<result property="name" column="name" />
+		<result property="sku" column="sku" />
+		<result property="image" column="image" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTimeFormat" column="create_time_format" />
+	</resultMap>
+	
+	<select id="find" resultMap="ProductResult">
+		SELECT id,product_type,name,sku,image,create_time,update_time
+		  FROM product
+		 WHERE id = #{id}
+	</select>
+	
+	<select id="query" resultMap="ProductResult" >
+       SELECT id,product_type,name,sku,image,create_time,update_time
+	     FROM product  
+		<include refid="query_where" />
+	    ORDER BY id ASC
+	    LIMIT #{start},#{size}
+  </select>
+  
+  <select id="queryCount" resultType="int">
+	   SELECT COUNT(1)
+	     FROM product  
+	    <include refid="query_where" /> 
+  </select>
+	
+	<sql id="query_where">
+		WHERE 1=1
+	    <if test="productType != null">AND product_type = #{productType}</if>
+	    <if test="name != null">AND name = #{name}</if>
+	    <if test="sku != null">AND sku = #{sku}</if>
+      	<if test="createTimeStart != null">AND create_time >= #{createTimeStart}</if>
+      	<if test="createTimeEnd != null">AND create_time &lt;= #{createTimeEnd}</if>
+  </sql>
+	
+</mapper>
