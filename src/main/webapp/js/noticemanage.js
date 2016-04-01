@@ -1,5 +1,6 @@
 var page;
-$(function(){
+
+nsApp.controller('NoticeManageController',function($scope,$routeParams) {  
 	var type = window.location.href.substr(window.location.href.indexOf("?type=")+6); 
 	var user_query = function(pageNo){
 		$.ajax({
@@ -43,5 +44,4 @@ $(function(){
 	$(".user_export").click(function(){
 		$("#user_form").submit();
 	});
-	
-})
+}); 

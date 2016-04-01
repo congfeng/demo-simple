@@ -10,5 +10,4 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 			$('#ptype').text(data.productType);
 		}
 	});
-	
 }); 

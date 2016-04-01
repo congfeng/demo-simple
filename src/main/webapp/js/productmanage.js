@@ -1,6 +1,8 @@
 var page;
-$(function(){
-	var type = window.location.href.substr(window.location.href.indexOf("?type=")+6); 
+
+nsApp.controller('ProductManageController',function($scope,$routeParams) {  
+	var type = $routeParams.type;
+	$scope.type = $routeParams.type;
 	var product_query = function(pageNo){
 		$.ajax({
 			url:'/product/list',
@@ -53,5 +55,4 @@ $(function(){
 	}
 	page = new Pagination(product_query);
 	product_query(1);
-	
-})
+}); 

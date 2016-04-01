@@ -1,5 +1,6 @@
-$(function(){
-	var type = window.location.href.substr(window.location.href.indexOf("?type=")+6);
+nsApp.controller('ProductAddController',function($scope,$routeParams) {  
+	var type = $routeParams.type;
+	$scope.type = $routeParams.type;
 	$(".productadd-btn").click(function(){
 		if(_.isEmpty($("#name").val())){
 			layer.open({
@@ -20,4 +21,4 @@ $(function(){
             }
 		});
 	});
-})
+});
