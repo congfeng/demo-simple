@@ -12,8 +12,8 @@
 	
 	<update id="update">
 	    UPDATE notice SET update_time = now()
-		<if test="title != null">,title = #{title,jdbcType=VARCHAR}</if> 	
-	    <if test="content != null">,content = #{content,jdbcType=VARCHAR}</if>
+		,title = #{title,jdbcType=VARCHAR}
+	    ,content = #{content,jdbcType=VARCHAR}
 	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	

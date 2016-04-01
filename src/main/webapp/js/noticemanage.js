@@ -1,11 +1,11 @@
-var page;
-
 nsApp.controller('NoticeManageController',function($scope,$routeParams) {  
-	var type = window.location.href.substr(window.location.href.indexOf("?type=")+6); 
-	var user_query = function(pageNo){
+	var page;
+	var type = $routeParams.type;
+	$scope.type = $routeParams.type;
+	var notice_query = function(pageNo){
 		$.ajax({
-			url:'/user/list',
-			data:{'pageNo':pageNo},
+			url:'/notice/list',
+			data:{'pageNo':pageNo,'ntype':type},
 			dataType:'json',
 			success:function(data){
 				if(data&&data.s == 0){
@@ -13,35 +13,47 @@ nsApp.controller('NoticeManageController',function($scope,$routeParams) {
 				}
 				$(".table_info").html("");
 				$(".table_datas").html("");
-				$(".user_count").html("");
+				$(".notice_count").html("");
 				page.clear();
-				if(data.users ==""){
+				if(data.notices ==""){
 					$(".table_info").html("<div>此条件下没有数据</div>");
 					return;
 				}
 				var table_datas = "";
-				$.each(data.users,function(i,user){
-					table_datas += "<tr><td>"+(i+1)+"</td><td>"+user.id+"</td><td>"+user.password+"</td>"
-						+"<td>"+user.createTimeFormat+"</td>"
-						+"<td><a tabindex='-1' data-toggle='modal' data-target='#update-user-modal'><i class='icon-pencil'></i></a>"
-						+"&nbsp;&nbsp;<a tabindex='-1' data-toggle='modal' data-target='#remove-user-modal'><i class='icon-remove'></i></a></td>"
+				$.each(data.notices,function(i,notice){
+					table_datas += "<tr><td>"+(i+1)+"</td>"
+						+"<td>"+notice.title+"</td>"
+						+"<td>"+notice.createTime+"</td>"
+						+"<td><a class='noticeupdate-btn' data-noticeid='"+notice.id+"'><i style='font-size:30px;' class='iconfont'>&#xe641;</i></a></td>"
+						+"<td><a class='noticedelete-btn' data-noticeid='"+notice.id+"'><i style='font-size:30px;' class='iconfont'>&#xe642;</i></a></td>"
 				        +"</tr>";
 				});
 				$(".table_datas").html(table_datas);
-				$(".user_count").html('共有'+data.pager.count+'个用户');
+				$(".notice_count").html('共有'+data.pager.count+'个商品');
 				page.refresh(data.pager);
+				$('.noticeupdate-btn').click(function(){
+					window.location.href = "#/noticeupdate?id="+$(this).data('noticeid');
+				});
+				$('.noticedelete-btn').click(function(){
+					var nid = $(this).data('noticeid');
+					toIF("确定需要删除么？",function(){
+						$.ajax({
+							url:'/notice/delete',
+							data:{'id':nid},
+							dataType:'json',
+							success:function(data){
+								if(data&&data.s == 0){
+									return;
+								}
+								showAlert('删除成功');
+								notice_query(1);
+							}
+						});	
+					});
+				});
 			}
 		});
 	}
-	page = new Pagination(user_query);
-	user_query(1);
-	//$("#user-query-button").click(function(){
-		//user_query(1);
-	//})
-	
-	//$("#user-query-button").click();
-	
-	$(".user_export").click(function(){
-		$("#user_form").submit();
-	});
+	page = new Pagination(notice_query);
+	notice_query(1);
 }); 

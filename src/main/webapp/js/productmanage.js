@@ -1,6 +1,5 @@
-var page;
-
 nsApp.controller('ProductManageController',function($scope,$routeParams) {  
+	var page;
 	var type = $routeParams.type;
 	$scope.type = $routeParams.type;
 	var product_query = function(pageNo){
@@ -14,7 +13,7 @@ nsApp.controller('ProductManageController',function($scope,$routeParams) {
 				}
 				$(".table_info").html("");
 				$(".table_datas").html("");
-				$(".user_count").html("");
+				$(".product_count").html("");
 				page.clear();
 				if(data.products ==""){
 					$(".table_info").html("<div>此条件下没有数据</div>");
@@ -37,18 +36,21 @@ nsApp.controller('ProductManageController',function($scope,$routeParams) {
 					window.location.href = "#/productupdate?id="+$(this).data('productid');
 				});
 				$('.productdelete-btn').click(function(){
-					$.ajax({
-						url:'/product/delete',
-						data:{'id':$(this).data('productid')},
-						dataType:'json',
-						success:function(data){
-							if(data&&data.s == 0){
-								return;
+					var pid = $(this).data('productid');
+					toIF("确定需要删除么？",function(){
+						$.ajax({
+							url:'/product/delete',
+							data:{'id':pid},
+							dataType:'json',
+							success:function(data){
+								if(data&&data.s == 0){
+									return;
+								}
+								showAlert('删除成功');
+								product_query(1);
 							}
-							showAlert('删除成功');
-							product_query(1);
-						}
-					});	
+						});	
+					});
 				});
 			}
 		});

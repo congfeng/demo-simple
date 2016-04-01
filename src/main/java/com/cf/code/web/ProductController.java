@@ -150,7 +150,7 @@ public class ProductController {
 			imageFile.transferTo(new File(ImageFolder+image));
 		}
 		boolean b = this.productDao.update(id, name, sku, image);
-		if(b&&image != null){
+		if(b){
 			FileUtils.forceDelete(new File(ImageFolder+imageold));
 		}
     }

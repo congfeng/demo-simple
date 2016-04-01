@@ -11,10 +11,11 @@
 	</insert>
 	
 	<update id="update">
-	    UPDATE product SET update_time = now()
-		<if test="name != null">,name = #{name,jdbcType=VARCHAR}</if> 	
-	    <if test="sku != null">,sku = #{sku,jdbcType=VARCHAR}</if>
-	    <if test="image != null">,image = #{image,jdbcType=VARCHAR}</if>
+	    UPDATE product 
+	    	SET update_time = now()
+				,name = #{name,jdbcType=VARCHAR}
+	    		,sku = #{sku,jdbcType=VARCHAR}
+	    		,image = #{image,jdbcType=VARCHAR}
 	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	

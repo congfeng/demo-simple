@@ -15,8 +15,8 @@ nsApp.config(['$routeProvider',function ($routeProvider) {
         .when('/notice-type3', {templateUrl: 'pages/noticemanage.html',controller: 'NoticeManageController'})
         .when('/notice-type1', {templateUrl: 'pages/noticemanage.html',controller: 'NoticeManageController'})
         .when('/notice-type1', {templateUrl: 'pages/noticemanage.html',controller: 'NoticeManageController'}) 
-        .when('/noticeadd', {templateUrl: 'pages/noticeadd.html',controller: 'DefaultController'})
-        .when('/noticeupdate', {templateUrl: 'pages/noticeupdate.html',controller: 'DefaultController'})
+        .when('/noticeadd', {templateUrl: 'pages/noticeadd.html',controller: 'NoticeAddController'})
+        .when('/noticeupdate', {templateUrl: 'pages/noticeupdate.html',controller: 'NoticeUpdateController'})
 		.otherwise({redirectTo: '/welcome'})
 		;  
 }]);
