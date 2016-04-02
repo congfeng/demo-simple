@@ -1,7 +1,8 @@
 nsApp.controller('ProductManageController',function($scope,$routeParams) {  
 	var page;
 	var type = $routeParams.type;
-	$scope.type = $routeParams.type;
+	$scope.type = type;
+	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
 	var product_query = function(pageNo){
 		$.ajax({
 			url:'/product/list',
@@ -11,14 +12,15 @@ nsApp.controller('ProductManageController',function($scope,$routeParams) {
 				if(data&&data.s == 0){
 					return;
 				}
-				$(".table_info").html("");
-				$(".table_datas").html("");
 				$(".product_count").html("");
+				$(".table_datas").html("");
 				page.clear();
 				if(data.products ==""){
-					$(".table_info").html("<div>此条件下没有数据</div>");
+					$(".product_count").html("此条件下没有数据");
+					$(".pagination").hide();
 					return;
 				}
+				$(".pagination").show();
 				var table_datas = "";
 				$.each(data.products,function(i,product){
 					table_datas += "<tr><td>"+(i+1)+"</td>"
@@ -33,7 +35,7 @@ nsApp.controller('ProductManageController',function($scope,$routeParams) {
 				$(".product_count").html('共有'+data.pager.count+'个商品');
 				page.refresh(data.pager);
 				$('.productupdate-btn').click(function(){
-					window.location.href = "#/productupdate?id="+$(this).data('productid');
+					window.location.href = "#/productupdate?type="+type+"&id="+$(this).data('productid');
 				});
 				$('.productdelete-btn').click(function(){
 					var pid = $(this).data('productid');

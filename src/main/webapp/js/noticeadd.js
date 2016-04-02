@@ -18,7 +18,7 @@ nsApp.controller('NoticeAddController',function($scope,$routeParams) {
 					return;
 				}
 				showAlert('保存成功');
-				window.location.href = "#/notice-type1?type="+type;
+				window.location.href = "#/noticemanage?type="+type;
             }
 		});
 	});

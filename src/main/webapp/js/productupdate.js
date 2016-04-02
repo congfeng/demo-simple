@@ -1,34 +1,50 @@
 nsApp.controller('ProductUpdateController',function($scope,$routeParams) {  
+	var id = $routeParams.id; 
+	var type = $routeParams.type;
+	$scope.id = id;
+	$scope.type = type;
+	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
 	$.ajax({
 		url:'/product/find',
-		data:{'id':$routeParams.id},
+		data:{'id':id},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){
 				return;
 			}
-			$('#ptypeName').text(['品类1','品类2','品类3','品类4'][data.productType-1]);
-			$('#ptype').val(data.productType);
-			$('#id').val(data.id);
 			$('#name').val(data.name);
 			$('#sku').val(data.sku);
 			$("#image").fileinput({
+				language: "zh",
+				showCaption: false,
 		        showUpload: false,
+		        showClose: false,
 		        browseClass: "btn btn-success",
         		browseLabel: "请选择图片",
         		removeClass: "btn btn-danger",
         		removeLabel: "删除",
         		maxFileCount: 1,
         		maxFileSize: 1000,
+        		minImageWidth:50,
+				minImageHeight:50,
+				maxImageWidth:250,
+				maxImageHeight:250,
+				resizePreference: 'height',
+				resizeImage:true,
         		allowedFileTypes: ["image"],
         		allowedFileExtensions: ["jpg", "gif", "png"],
         		overwriteInitial: true,
         		previewFileType: "image",
+        		initialPreviewShowDelete: false,
         		initialCaption: data.image,
 		        initialPreview: [
-		            "<img src='/picture/"+data.image+"' class='file-preview-image'"
+		            "<img src='/picture/"+data.image+"' class='file-preview-image' alt=''>"
 		        ]
-		    });
+		    }).on('change', function() {
+    			$('#imageChange').val(true);
+			}).on('fileclear', function(event, data) {
+				$('#imageChange').val(true);
+			});
 		}
 	});
 	
@@ -48,7 +64,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 					return;
 				}
 				showAlert('保存成功');
-				window.location.href = "#/product-type1?type="+$('#ptype').val();
+				window.location.href = "#/productmanage?type="+type;
             }
 		});
 	});

@@ -16,6 +16,8 @@ public class Notice {
 	
 	private Date createTime;
 	
+	private String createTimeFormat;
+	
 	private Date updateTime;
 	
 	private Integer noticeType;
@@ -70,6 +72,14 @@ public class Notice {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getCreateTimeFormat() {
+		return createTimeFormat;
+	}
+
+	public void setCreateTimeFormat(String createTimeFormat) {
+		this.createTimeFormat = createTimeFormat;
 	}
 	
 }

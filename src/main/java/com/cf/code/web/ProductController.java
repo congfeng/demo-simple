@@ -123,7 +123,7 @@ public class ProductController {
 		if(p == null){
 			return ;
 		}
-		if(this.productDao.delete(id)){
+		if(this.productDao.delete(id)&&!StringUtil.isNullOrEmpty(p.getImage())){
 			FileUtils.forceDelete(new File(ImageFolder+p.getImage()));
 		}
     }
@@ -133,26 +133,26 @@ public class ProductController {
 	@ResponseBody
 	public void update(@RequestParam(required = false)Profile profile,HttpSession session,
     		@RequestParam(required = true) Integer id,
+    		@RequestParam(required = true) Boolean imageChange,
     		@RequestParam(required = false) String name,
     		@RequestParam(required = false) String sku,
-    		@RequestParam(required = false) String imageold,
     		@RequestParam(value = "image", required = false) Object imageObj) throws IllegalStateException, IOException{
-		if(StringUtil.isNullOrEmpty(name)){
-			name = null;
+		Product p = this.productDaoRead.find(id);
+		if(imageChange){
+			String image = null;
+			if(imageObj instanceof MultipartFile){
+				MultipartFile imageFile = (MultipartFile)imageObj;
+				image = UUID.randomUUID().toString()+"."+getExtName(imageFile.getOriginalFilename());
+				imageFile.transferTo(new File(ImageFolder+image));
+			}
+			boolean b = this.productDao.update(id, name, sku, image);
+			if(b&&!StringUtil.isNullOrEmpty(p.getImage())){
+				FileUtils.forceDelete(new File(ImageFolder+p.getImage()));
+			}
+		}else{
+			this.productDao.update(id, name, sku, p.getImage());
 		}
-		if(StringUtil.isNullOrEmpty(sku)){
-			sku = null;
-		}
-		String image = null;
-		if(imageObj instanceof MultipartFile){
-			MultipartFile imageFile = (MultipartFile)imageObj;
-			image = UUID.randomUUID().toString()+"."+getExtName(imageFile.getOriginalFilename());
-			imageFile.transferTo(new File(ImageFolder+image));
-		}
-		boolean b = this.productDao.update(id, name, sku, image);
-		if(b){
-			FileUtils.forceDelete(new File(ImageFolder+imageold));
-		}
+		
     }
 	
 	private String getExtName(String fileName){

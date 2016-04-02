@@ -12,13 +12,13 @@
 	</resultMap>
 	
 	<select id="find" resultMap="NoticeResult">
-		SELECT id,notice_type,title,content,create_time,update_time
+		SELECT id,notice_type,title,content,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 		  FROM notice
 		 WHERE id = #{id}
 	</select>
 	
 	<select id="query" resultMap="NoticeResult" >
-       SELECT id,notice_type,title,content,create_time,update_time
+       SELECT id,notice_type,title,content,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 	     FROM notice  
 		<include refid="query_where" />
 	    ORDER BY id ASC

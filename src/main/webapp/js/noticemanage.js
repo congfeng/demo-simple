@@ -1,7 +1,8 @@
 nsApp.controller('NoticeManageController',function($scope,$routeParams) {  
 	var page;
 	var type = $routeParams.type;
-	$scope.type = $routeParams.type;
+	$scope.type = type;
+	$scope.typeName = ['分类1','分类2','分类3'][type-1];
 	var notice_query = function(pageNo){
 		$.ajax({
 			url:'/notice/list',
@@ -11,19 +12,20 @@ nsApp.controller('NoticeManageController',function($scope,$routeParams) {
 				if(data&&data.s == 0){
 					return;
 				}
-				$(".table_info").html("");
 				$(".table_datas").html("");
 				$(".notice_count").html("");
 				page.clear();
 				if(data.notices ==""){
-					$(".table_info").html("<div>此条件下没有数据</div>");
+					$(".notice_count").html("此条件下没有数据");
+					$(".pagination").hide();
 					return;
 				}
+				$(".pagination").show();
 				var table_datas = "";
 				$.each(data.notices,function(i,notice){
 					table_datas += "<tr><td>"+(i+1)+"</td>"
 						+"<td>"+notice.title+"</td>"
-						+"<td>"+notice.createTime+"</td>"
+						+"<td>"+notice.createTimeFormat+"</td>"
 						+"<td><a class='noticeupdate-btn' data-noticeid='"+notice.id+"'><i style='font-size:30px;' class='iconfont'>&#xe641;</i></a></td>"
 						+"<td><a class='noticedelete-btn' data-noticeid='"+notice.id+"'><i style='font-size:30px;' class='iconfont'>&#xe642;</i></a></td>"
 				        +"</tr>";
@@ -32,7 +34,7 @@ nsApp.controller('NoticeManageController',function($scope,$routeParams) {
 				$(".notice_count").html('共有'+data.pager.count+'个商品');
 				page.refresh(data.pager);
 				$('.noticeupdate-btn').click(function(){
-					window.location.href = "#/noticeupdate?id="+$(this).data('noticeid');
+					window.location.href = "#/noticeupdate?type="+type+"&id="+$(this).data('noticeid');
 				});
 				$('.noticedelete-btn').click(function(){
 					var nid = $(this).data('noticeid');

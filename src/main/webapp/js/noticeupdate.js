@@ -1,15 +1,17 @@
-nsApp.controller('NoticeUpdateController',function($scope,$routeParams) {  
+nsApp.controller('NoticeUpdateController',function($scope,$routeParams) { 
+	var id = $routeParams.id; 
+	var type = $routeParams.type;
+	$scope.id = id;
+	$scope.type = type;
+	$scope.typeName = ['分类1','分类2','分类3'][type-1];
 	$.ajax({
 		url:'/notice/find',
-		data:{'id':$routeParams.id},
+		data:{'id':id},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){
 				return;
 			}
-			$('#ntypeName').text(['分类1','分类2','分类3'][data.noticeType-1]);
-			$('#ntype').val(data.noticeType);
-			$('#id').val(data.id);
 			$('#title').val(data.title);
 			$('#content').val(data.content);
 		}
@@ -31,7 +33,7 @@ nsApp.controller('NoticeUpdateController',function($scope,$routeParams) {
 					return;
 				}
 				showAlert('保存成功');
-				window.location.href = "#/notice-type1?type="+$('#ntype').val();
+				window.location.href = "#/noticemanage?type="+type;
             }
 		});
 	});
