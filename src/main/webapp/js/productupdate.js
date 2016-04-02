@@ -37,8 +37,8 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
         		previewFileType: "image",
         		initialPreviewShowDelete: false,
         		initialCaption: data.image,
-		        initialPreview: [
-		            "<img src='/picture/"+data.image+"' class='file-preview-image' alt=''>"
+		        initialPreview: _.isEmpty(data.image)?[]:[
+		            "<img src='/picture/"+data.image+"' class='file-preview-image'>"
 		        ]
 		    }).on('change', function() {
     			$('#imageChange').val(true);
