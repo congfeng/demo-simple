@@ -49,12 +49,13 @@ public class ProductController {
 	@Resource(name = "pom.upload.path")
 	String UploadPath;
 	
-	@AccessVerifier
+//	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Model list(@RequestParam(required = false)Profile profile,HttpSession session,
 			Model model,
 			@RequestParam(required = false) Integer pageNo,
+			@RequestParam(required = false) Integer pageSize,
 			@RequestParam(required = false) Integer ptype,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String sku,
@@ -76,9 +77,12 @@ public class ProductController {
 		}
 		if(pageNo == null) pageNo = 1;
 		Pager pager = new Pager();
-		int userCount = this.productDaoRead.queryCount(ptype, name, sku, createTimeStart, createTimeEnd);
-		pager.setCount(userCount);
 		pager.setPageNo(pageNo);
+		if(pageSize != null){
+			pager.setPageSize(pageSize);
+		}
+		int count = this.productDaoRead.queryCount(ptype, name, sku, createTimeStart, createTimeEnd);
+		pager.setCount(count);
 		List<Product> products = this.productDaoRead.query(ptype, name, sku, createTimeStart, createTimeEnd,
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("products", products);   
@@ -87,7 +91,7 @@ public class ProductController {
         return model;
     }
 	
-	@AccessVerifier
+//	@AccessVerifier
 	@RequestMapping(value = {"/find"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
     public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,

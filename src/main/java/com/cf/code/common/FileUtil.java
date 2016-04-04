@@ -63,7 +63,7 @@ public class FileUtil {
 	}
 	
 	public static String uploadRichText(Object fileData,String uploadFolder,String prefix) throws IllegalStateException, IOException{
-		if(fileData == null){
+		if(fileData == null||StringUtil.isNullOrEmpty(fileData.toString())){
 			return null;
 		}
 		String fileName = UUID.randomUUID()+".html";
