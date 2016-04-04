@@ -3,12 +3,15 @@
  */
 package com.cf.code.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cf.code.common.DateUtil;
+import com.cf.code.common.FileUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
 import com.cf.code.dao.NoticeDao;
@@ -38,6 +42,12 @@ public class NoticeController {
 	
 	@Resource(name = "noticeDaoRead")
 	NoticeDao noticeDaoRead;
+	
+	@Resource(name = "pom.upload.folder")
+	String UploadFolder;
+	
+	@Resource(name = "pom.upload.path")
+	String UploadPath;
 
 	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
@@ -75,9 +85,11 @@ public class NoticeController {
 	@AccessVerifier
 	@RequestMapping(value = {"/find"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Notice find(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
-		return this.noticeDaoRead.find(id);
+		model.addAttribute("notice",this.noticeDaoRead.find(id));
+		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		return model;
     }
 	
 	@AccessVerifier
@@ -86,11 +98,14 @@ public class NoticeController {
     public void add(@RequestParam(required = false)Profile profile,HttpSession session,
     		@RequestParam(required = true) Integer ntype,
     		@RequestParam(required = true) String title,
-    		@RequestParam(required = false) String content){
+    		@RequestParam(required = false) String content,
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
 		Notice notice = new Notice();
 		notice.setNoticeType(ntype);
 		notice.setTitle(title);
 		notice.setContent(content);
+		notice.setRichText(richText);
 		this.noticeDao.insert(notice);
     }
 
@@ -98,8 +113,14 @@ public class NoticeController {
 	@RequestMapping(value = {"delete"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public void delete(@RequestParam(required = false)Profile profile,HttpSession session,
-    		@RequestParam(required = true) Integer id){
-		this.noticeDao.delete(id);
+    		@RequestParam(required = true) Integer id) throws IOException{
+		Notice n = this.noticeDaoRead.find(id);
+		if(!this.noticeDao.delete(id)){
+			return ;
+		}
+		if(!StringUtil.isNullOrEmpty(n.getRichText())){
+			FileUtils.forceDelete(new File(UploadFolder+File.separator+n.getRichText()));
+		}
     }
 	
 	@AccessVerifier
@@ -108,14 +129,14 @@ public class NoticeController {
 	public void update(@RequestParam(required = false)Profile profile,HttpSession session,
     		@RequestParam(required = true) Integer id,
     		@RequestParam(required = false) String title,
-    		@RequestParam(required = false) String content){
-		if(StringUtil.isNullOrEmpty(title)){
-			title = null;
+    		@RequestParam(required = false) String content,
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+		Notice n = this.noticeDaoRead.find(id);
+		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
+		boolean b = this.noticeDao.update(id, title, content, richText);
+		if(b&&!StringUtil.isNullOrEmpty(n.getRichText())){
+			FileUtils.forceDelete(new File(UploadFolder+File.separator+n.getRichText()));
 		}
-		if(StringUtil.isNullOrEmpty(content)){
-			content = null;
-		}
-		this.noticeDao.update(id, title, content);
     }
 	
 }

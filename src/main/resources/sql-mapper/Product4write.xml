@@ -3,8 +3,8 @@
 <mapper namespace="com.cf.code.dao.ProductDao">
 	
 	<insert id="insert" parameterType="com.cf.code.entity.Product">
-		INSERT INTO product(product_type,name,sku,image,create_time)
-		VALUES (#{productType},#{name},#{sku},#{image},now())
+		INSERT INTO product(product_type,name,sku,image,rich_text,create_time)
+		VALUES (#{productType},#{name},#{sku},#{image},#{richText},now())
 		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
 			select last_insert_id()
 		</selectKey>
@@ -16,6 +16,7 @@
 				,name = #{name,jdbcType=VARCHAR}
 	    		,sku = #{sku,jdbcType=VARCHAR}
 	    		,image = #{image,jdbcType=VARCHAR}
+	    		,rich_text = #{richText,jdbcType=VARCHAR}
 	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	

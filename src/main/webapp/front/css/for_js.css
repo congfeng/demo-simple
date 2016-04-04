@@ -1,0 +1,102 @@
+﻿
+/*■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　*/
+
+jquery等のjsファイルのCSS
+
+/*■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　*/
+
+@charset "utf-8";
+
+/*==========================================
+フィルムロールCSS
+▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼*/
+.film_roll_wrapper {
+overflow: hidden;
+}
+.film_roll_shuttle {
+position: relative;
+}
+.film_roll_child {
+display: inline-block;
+margin:0px;*/
+}
+.btn_prev,
+.btn_next {
+position: absolute;
+top: 50%;
+width: 48px;
+height: 48px;
+}
+.btn_prev {
+left: 15px;
+}
+.btn_next {
+right: 15px;
+}
+.btn_prev:hover,
+.btn_next:hover {
+opacity: 0.7;
+}
+.film_roll_pager {
+text-align: center;
+}
+.film_roll_pager a {
+display: inline-block;
+width: 150px;
+height: 93px;
+margin: 0 15px 0 0;
+}
+.film_roll_pager a:nth-child(1) {
+background: url(../images/mv1.jpg) no-repeat;
+}
+.film_roll_pager a:nth-child(2) {
+background: url(../images/mv2.jpg) no-repeat;
+}
+.film_roll_pager a:nth-child(3) {
+background: url(../images/mv3.jpg) no-repeat;
+}
+.film_roll_pager a:nth-child(4) {
+background: url(../images/mv4.jpg) no-repeat;
+}
+.film_roll_pager a:nth-child(5) {
+background: url(../images/img05.jpg) no-repeat;
+}
+.film_roll_pager a.active:nth-child(1),
+.film_roll_pager a.active:nth-child(2),
+.film_roll_pager a.active:nth-child(3),
+.film_roll_pager a.active:nth-child(4),
+.film_roll_pager a.active:nth-child(5) {
+opacity: 0.6;
+}
+.film_roll_pager span {
+display: none;
+}
+#film_roll_arrow {
+display: none;
+}
+
+/*▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+フィルムロールCSS
+==========================================*/
+
+
+
+/*==========================================
+jquery-CSS
+▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼*/
+/*▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+jquery-CSS
+==========================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+

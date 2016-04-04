@@ -26,7 +26,8 @@ public interface ProductDao {
 	public boolean update(@Param("id") Integer id,
 			@Param("name") String name,
 			@Param("sku") String sku,
-			@Param("image") String image);
+			@Param("image") String image,
+			@Param("richText") String richText);
 	
 	public List<Product> query(@Param("productType") Integer productType,
 			@Param("name") String name,@Param("sku") String sku,

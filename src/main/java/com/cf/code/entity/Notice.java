@@ -25,6 +25,8 @@ public class Notice {
 	private String title;
 	
 	private String content;
+	
+	private String richText;
 
 	public Integer getId() {
 		return id;
@@ -80,6 +82,14 @@ public class Notice {
 
 	public void setCreateTimeFormat(String createTimeFormat) {
 		this.createTimeFormat = createTimeFormat;
+	}
+
+	public String getRichText() {
+		return richText;
+	}
+
+	public void setRichText(String richText) {
+		this.richText = richText;
 	}
 	
 }

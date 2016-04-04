@@ -26,6 +26,8 @@ public class Product {
 	
 	private String image;
 
+	private String richText;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -80,6 +82,14 @@ public class Product {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getRichText() {
+		return richText;
+	}
+
+	public void setRichText(String richText) {
+		this.richText = richText;
 	}
 	
 }

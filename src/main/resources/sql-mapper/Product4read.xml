@@ -8,13 +8,14 @@
 		<result property="name" column="name" />
 		<result property="sku" column="sku" />
 		<result property="image" column="image" />
+		<result property="richText" column="rich_text" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 		<result property="createTimeFormat" column="create_time_format" />
 	</resultMap>
 	
 	<select id="find" resultMap="ProductResult">
-		SELECT id,product_type,name,sku,image,create_time,update_time
+		SELECT id,product_type,name,sku,image,rich_text,create_time,update_time
 		  FROM product
 		 WHERE id = #{id}
 	</select>

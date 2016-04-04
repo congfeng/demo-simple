@@ -30,7 +30,6 @@ import com.cf.code.common.StringUtil;
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.entity.Demo;
 import com.cf.code.entity.Profile;
-import com.cf.code.entity.enums.DemoType;
 import com.cf.code.service.DemoService;
 import com.cf.code.web.access.AccessVerifier;
 

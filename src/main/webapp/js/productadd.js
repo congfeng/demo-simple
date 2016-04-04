@@ -21,6 +21,25 @@ nsApp.controller('ProductAddController',function($scope,$routeParams) {
 		allowedFileExtensions: ["jpg", "gif", "png"]
     });
   
+  	var ue = UE.getEditor('richText',{
+    	//autoHeight: false,
+    	initialContent : '',
+        autoClearinitialContent : true,
+        catchRemoteImageEnable: true,
+        enableAutoSave: false,
+        elementPathEnabled: false,
+        emotionLocalization: true,
+    	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', '|', 
+    		'forecolor', 'backcolor', '|','insertorderedlist', 'insertunorderedlist', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink', '|', 
+            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', 'background', '|',
+            'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','preview','help','fullscreen'
+        ]],
+        labelMap: {
+			imageleft:'图片居左',imageright:'图片居右',imagecenter:'图片居中'
+        }
+    });
+    
 	var type = $routeParams.type;
 	$scope.type = type;
 	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];

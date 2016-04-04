@@ -6,19 +6,21 @@
 		<result property="id" column="id" />
 		<result property="noticeType" column="notice_type" />
 		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="richText" column="rich_text" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 		<result property="createTimeFormat" column="create_time_format" />
 	</resultMap>
 	
 	<select id="find" resultMap="NoticeResult">
-		SELECT id,notice_type,title,content,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+		SELECT id,notice_type,title,content,rich_text,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 		  FROM notice
 		 WHERE id = #{id}
 	</select>
 	
 	<select id="query" resultMap="NoticeResult" >
-       SELECT id,notice_type,title,content,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+       SELECT id,notice_type,title,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 	     FROM notice  
 		<include refid="query_where" />
 	    ORDER BY id ASC

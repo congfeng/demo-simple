@@ -4,16 +4,39 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 	$scope.id = id;
 	$scope.type = type;
 	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
+	var ue = UE.getEditor('richText',{
+    	//autoHeight: false,
+    	initialContent : '',
+        autoClearinitialContent : true,
+        catchRemoteImageEnable: true,
+        enableAutoSave: false,
+        elementPathEnabled: false,
+        emotionLocalization: true,
+    	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', '|', 
+    		'forecolor', 'backcolor', '|','insertorderedlist', 'insertunorderedlist', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink', '|', 
+            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', 'background', '|',
+            'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','preview','help','fullscreen'
+        ]],
+        labelMap: {
+			imageleft:'图片居左',imageright:'图片居右',imagecenter:'图片居中'
+        }
+    });
 	$.ajax({
 		url:'/product/find',
 		data:{'id':id},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){
-				return;
+				return ;
 			}
-			$('#name').val(data.name);
-			$('#sku').val(data.sku);
+			var product = data.product;
+			if(_.isEmpty(product)){
+				showAlert('商品不存在');
+				return ;
+			}
+			$('#name').val(product.name);
+			$('#sku').val(product.sku);
 			$("#image").fileinput({
 				language: "zh",
 				showCaption: false,
@@ -36,15 +59,26 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
         		overwriteInitial: true,
         		previewFileType: "image",
         		initialPreviewShowDelete: false,
-        		initialCaption: data.image,
-		        initialPreview: _.isEmpty(data.image)?[]:[
-		            "<img src='/picture/"+data.image+"' class='file-preview-image'>"
+        		initialCaption: product.image,
+		        initialPreview: _.isEmpty(product.image)?[]:[
+		            "<img src='"+data.UploadBasePath+product.image+"' class='file-preview-image'>"
 		        ]
 		    }).on('change', function() {
     			$('#imageChange').val(true);
-			}).on('fileclear', function(event, data) {
+			}).on('fileclear', function() {
 				$('#imageChange').val(true);
 			});
+			if(!_.isEmpty(product.richText)){
+				$.ajax({
+					url:data.UploadBasePath+product.richText,
+					//dataType:'json',
+					success:function(richText){
+						ue.ready(function(){
+							ue.setContent(richText);
+					    });
+					}
+				});
+			}
 		}
 	});
 	

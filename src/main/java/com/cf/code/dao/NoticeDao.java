@@ -21,9 +21,9 @@ public interface NoticeDao {
 
 	public void insert(Notice notice);
 	
-	public void delete(@Param("id") Integer id);
+	public boolean delete(@Param("id") Integer id);
 	
-	public void update(@Param("id") Integer id,@Param("title") String title,@Param("content") String content);
+	public boolean update(@Param("id") Integer id,@Param("title") String title,@Param("content") String content,@Param("richText") String richText);
 	
 	public List<Notice> query(@Param("noticeType") Integer noticeType,@Param("title") String title,
 			@Param("createTimeStart") Date createTimeStart,@Param("createTimeEnd") Date createTimeEnd,

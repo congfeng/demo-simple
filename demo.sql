@@ -26,7 +26,8 @@ CREATE TABLE product (
   product_type int(4) NOT NULL,
   name varchar(60) NOT NULL,
   sku varchar(60) DEFAULT NULL,
-  image varchar(60) DEFAULT NULL,
+  image varchar(100) DEFAULT NULL,
+  rich_text varchar(100) DEFAULT NULL,
   create_time TIMESTAMP NOT NULL,
   update_time TIMESTAMP DEFAULT NULL
 ) CHARSET=utf8;
@@ -37,6 +38,7 @@ CREATE TABLE notice (
   notice_type int(4) NOT NULL,
   title varchar(60) DEFAULT NULL,
   content varchar(1000) DEFAULT NULL,
+  rich_text varchar(100) DEFAULT NULL,
   create_time TIMESTAMP NOT NULL,
   update_time TIMESTAMP DEFAULT NULL
 ) CHARSET=utf8;

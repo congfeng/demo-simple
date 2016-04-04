@@ -1,3 +1,7 @@
+<script type="text/javascript" charset="utf-8" src="/resources/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/resources/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/resources/ueditor/lang/zh-cn/zh-cn.js"></script>
+
 <ul class="breadcrumb">
 	<li>公告管理</li>
 	<li>{{typeName}}</li>
@@ -24,6 +28,13 @@
 	    </div>
 	</div>
 	<div class="form-group">
-		<button class="btn btn-primary center-block noticeupdate-btn"><i class="icon-save"></i>保存</button>
+	    <label class="col-sm-2 control-label">自由编辑区域：</label>
+	    <div class="col-sm-10">
+	      <script id="richText" name="richText" type="text/plain" style="width:100%;height:150px;"></script>
+	    </div>
+	</div>
+	<div class="form-group" style="text-align:center;">
+		<a class="btn btn-primary" href="#/noticemanage?type={{type}}">取消</a>
+		<a class="btn btn-primary noticeupdate-btn">保存</a>
 	</div>
 </form>	

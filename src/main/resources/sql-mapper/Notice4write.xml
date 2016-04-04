@@ -3,8 +3,8 @@
 <mapper namespace="com.cf.code.dao.NoticeDao">
 	
 	<insert id="insert" parameterType="com.cf.code.entity.Notice">
-		INSERT INTO notice(notice_type,title,content,create_time)
-		VALUES (#{noticeType},#{title},#{content},now())
+		INSERT INTO notice(notice_type,title,content,rich_text,create_time)
+		VALUES (#{noticeType},#{title},#{content},#{richText},now())
 		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
 			select last_insert_id()
 		</selectKey>
@@ -14,6 +14,7 @@
 	    UPDATE notice SET update_time = now()
 		,title = #{title,jdbcType=VARCHAR}
 	    ,content = #{content,jdbcType=VARCHAR}
+	    ,rich_text = #{richText,jdbcType=VARCHAR}
 	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	

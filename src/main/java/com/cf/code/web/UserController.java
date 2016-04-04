@@ -3,9 +3,7 @@
  */
 package com.cf.code.web;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +11,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,54 +104,7 @@ public class UserController {
 			@RequestParam(required = false) String createTimeStartText,
     		@RequestParam(required = false) String createTimeEndText
 			) throws IOException{
-		if(StringUtil.isNullOrEmpty(username)){
-			username = null;
-		}
-		Date createTimeStart = null;
-		if(!StringUtil.isNullOrEmpty(createTimeStartText)){
-			createTimeStart = DateUtil.toParse(createTimeStartText);
-		}
-		Date createTimeEnd = null;
-		if(!StringUtil.isNullOrEmpty(createTimeEndText)){
-			createTimeEnd = DateUtil.toParse(createTimeEndText);
-		}
-		List<User> users = this.userDaoRead.query(username,createTimeStart,createTimeEnd,0, 100000); 
-		String filename = "user_list.xls";
-    	Workbook wb = new HSSFWorkbook();
-        Sheet s = wb.createSheet();
-        s.setColumnWidth(0, 4800);
-        s.setColumnWidth(1, 4800);
-        s.setColumnWidth(2, 4800);
-        s.setColumnWidth(3, 4800);
-        Row titleRow = s.createRow(0);
-        titleRow.createCell(0).setCellValue("ID");
-        titleRow.createCell(1).setCellValue("用户名");
-        titleRow.createCell(2).setCellValue("密码");
-        titleRow.createCell(3).setCellValue("创建时间");
-        for (int i = 0; i < users.size(); i++) {
-        	User user = users.get(i);
-            Row dataRow = s.createRow(i + 1);
-            dataRow.createCell(0).setCellValue(user.getId()+"");
-            dataRow.createCell(1).setCellValue(user.getUsername());
-            dataRow.createCell(2).setCellValue(user.getPassword());
-            dataRow.createCell(3).setCellValue(user.getCreateTimeFormat());
-        }
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        wb.write(bos);
-        bos.flush();
-        byte[] bs = bos.toByteArray();
-		OutputStream os = response.getOutputStream();
-		try {
-			response.reset();
-			response.setHeader("Content-Disposition", "attachment; filename="+filename);
-			response.setContentType("application/octet-stream; charset=utf-8");
-			os.write(bs);
-			os.flush();
-		} finally {
-			if (os != null) {
-				os.close();
-			}
-		}
-    }
+		
+	}
 	
 }

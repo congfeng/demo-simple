@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -19,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cf.code.common.DateUtil;
+import com.cf.code.common.FileUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
 import com.cf.code.dao.ProductDao;
@@ -44,8 +43,11 @@ public class ProductController {
 	@Resource(name = "productDaoRead")
 	ProductDao productDaoRead;
 	
-	@Resource(name = "pom.image.folder")
-	String ImageFolder;
+	@Resource(name = "pom.upload.folder")
+	String UploadFolder;
+	
+	@Resource(name = "pom.upload.path")
+	String UploadPath;
 	
 	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
@@ -81,15 +83,18 @@ public class ProductController {
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("products", products);   
 		model.addAttribute("pager", pager);
+		model.addAttribute("UploadBasePath", UploadPath+File.separator);
         return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"/find"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Product find(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
-		return this.productDaoRead.find(id);
+		model.addAttribute("product",this.productDaoRead.find(id));
+		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		return model;
     }
 	
 	@AccessVerifier
@@ -99,18 +104,16 @@ public class ProductController {
     		@RequestParam(required = true) Integer ptype,
     		@RequestParam(required = true) String name,
     		@RequestParam(required = false) String sku,
-    		@RequestParam(value = "image", required = false) Object imageObj) throws IllegalStateException, IOException {
-		String image = null;
-		if(imageObj instanceof MultipartFile){
-			MultipartFile imageFile = (MultipartFile)imageObj;
-			image = UUID.randomUUID().toString()+"."+getExtName(imageFile.getOriginalFilename());
-			imageFile.transferTo(new File(ImageFolder+image));
-		}
+    		@RequestParam(value = "image", required = false) Object imageObj,
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException {
+		String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
+		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
 		Product product = new Product();
 		product.setProductType(ptype);
 		product.setName(name);
 		product.setSku(sku);
 		product.setImage(image);
+		product.setRichText(richText);
 		this.productDao.insert(product);
     }
 	
@@ -120,11 +123,14 @@ public class ProductController {
 	public void delete(@RequestParam(required = false)Profile profile,HttpSession session,
     		@RequestParam(required = true) Integer id) throws IOException{
 		Product p = this.productDaoRead.find(id);
-		if(p == null){
+		if(!this.productDao.delete(id)){
 			return ;
 		}
-		if(this.productDao.delete(id)&&!StringUtil.isNullOrEmpty(p.getImage())){
-			FileUtils.forceDelete(new File(ImageFolder+p.getImage()));
+		if(!StringUtil.isNullOrEmpty(p.getImage())){
+			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getImage()));
+		}
+		if(!StringUtil.isNullOrEmpty(p.getRichText())){
+			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getRichText()));
 		}
     }
 	
@@ -136,26 +142,23 @@ public class ProductController {
     		@RequestParam(required = true) Boolean imageChange,
     		@RequestParam(required = false) String name,
     		@RequestParam(required = false) String sku,
-    		@RequestParam(value = "image", required = false) Object imageObj) throws IllegalStateException, IOException{
+    		@RequestParam(value = "image", required = false) Object imageObj,
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
 		Product p = this.productDaoRead.find(id);
+		boolean b = false;
 		if(imageChange){
-			String image = null;
-			if(imageObj instanceof MultipartFile){
-				MultipartFile imageFile = (MultipartFile)imageObj;
-				image = UUID.randomUUID().toString()+"."+getExtName(imageFile.getOriginalFilename());
-				imageFile.transferTo(new File(ImageFolder+image));
-			}
-			boolean b = this.productDao.update(id, name, sku, image);
+			String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
+			b = this.productDao.update(id, name, sku, image,richText);
 			if(b&&!StringUtil.isNullOrEmpty(p.getImage())){
-				FileUtils.forceDelete(new File(ImageFolder+p.getImage()));
+				FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getImage()));
 			}
 		}else{
-			this.productDao.update(id, name, sku, p.getImage());
+			b = this.productDao.update(id, name, sku, p.getImage(),richText);
 		}
-		
+		if(b&&!StringUtil.isNullOrEmpty(p.getRichText())){
+			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getRichText()));
+		}
     }
 	
-	private String getExtName(String fileName){
-		return fileName.substring(fileName.lastIndexOf(".")+1);
-	}
 }
