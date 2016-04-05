@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1459480564'); /* IE9*/
-  src: url('iconfont.eot?t=1459480564#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1459480564') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1459480564') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1459480564#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1459841175'); /* IE9*/
+  src: url('iconfont.eot?t=1459841175#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1459841175') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1459841175') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1459841175#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -24,8 +24,10 @@
 .icon-gengduo:before { content: "\e606"; }
 .icon-yuyin:before { content: "\e607"; }
 .icon-yuyin1:before { content: "\e608"; }
+.icon-yulan:before { content: "\e646"; }
 .icon-remenchanpin:before { content: "\e609"; }
 .icon-zinvjiaoyu:before { content: "\e60a"; }
+.icon-quxiao:before { content: "\e64a"; }
 .icon-fenxiang:before { content: "\e60b"; }
 .icon-dianying:before { content: "\e60c"; }
 .icon-zhoubianyou:before { content: "\e60d"; }
@@ -50,6 +52,7 @@
 .icon-liren:before { content: "\e61f"; }
 .icon-icon:before { content: "\e620"; }
 .icon-pinglun:before { content: "\e621"; }
+.icon-quxiao1:before { content: "\e647"; }
 .icon-daifukuan1:before { content: "\e622"; }
 .icon-banxing01:before { content: "\e623"; }
 .icon-alarm:before { content: "\e624"; }
@@ -57,6 +60,7 @@
 .icon-iconfaxian:before { content: "\e625"; }
 .icon-daiquanduihao:before { content: "\e626"; }
 .icon-xiajiantou:before { content: "\e643"; }
+.icon-iconyulan:before { content: "\e649"; }
 .icon-shanchu:before { content: "\e642"; }
 .icon-meishi:before { content: "\e627"; }
 .icon-daipingjia:before { content: "\e628"; }
@@ -64,6 +68,7 @@
 .icon-wode:before { content: "\e62a"; }
 .icon-shangpin:before { content: "\e645"; }
 .icon-appwaimai:before { content: "\e62b"; }
+.icon-baocun:before { content: "\e648"; }
 .icon-shouhou:before { content: "\e62c"; }
 .icon-dingwei:before { content: "\e62d"; }
 .icon-meishi01:before { content: "\e62e"; }

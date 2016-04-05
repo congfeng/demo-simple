@@ -16,7 +16,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
     		'forecolor', 'backcolor', '|','insertorderedlist', 'insertunorderedlist', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
             'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink', '|', 
             'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', '|',
-            'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','preview','help','fullscreen'
+            'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','help','fullscreen'
         ]],
         labelMap: {
 			imageleft:'图片居左',imageright:'图片居右',imagecenter:'图片居中'
@@ -113,6 +113,10 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 				window.location.href = "#/productmanage?type="+type;
             }
 		});
+	});
+	
+	$(".p-preview-btn").click(function(){
+		showAlert('功能建设中....');
 	});
 	
 }); 
