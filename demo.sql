@@ -51,8 +51,12 @@ CREATE TABLE msg (
   user_name varchar(100) DEFAULT NULL,
   user_email varchar(100) DEFAULT NULL,
   create_time TIMESTAMP NOT NULL,
-  update_time TIMESTAMP DEFAULT NULL
+  update_time TIMESTAMP DEFAULT NULL,
+  send_status int(4) NOT NULL,
+  reply_status int(4) NOT NULL
 ) CHARSET=utf8;
+CREATE INDEX msg_s_index ON msg(send_status);
+CREATE INDEX msg_r_index ON msg(reply_status);
 
 CREATE TABLE msg_receiver (
   id int(11) PRIMARY KEY AUTO_INCREMENT,

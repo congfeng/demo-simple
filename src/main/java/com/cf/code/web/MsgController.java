@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cf.code.common.DateUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
+import com.cf.code.core.exception.MsgSendException;
+import com.cf.code.core.net.EmailMsgSender;
+import com.cf.code.core.net.EmailMsgSender.EmailSendMsgType;
+import com.cf.code.core.net.EmailMsgSender.EmailTargetDataType;
 import com.cf.code.dao.MsgDao;
 import com.cf.code.dao.MsgReceiverDao;
 import com.cf.code.entity.Msg;
 import com.cf.code.entity.MsgReceiver;
 import com.cf.code.entity.Profile;
+import com.cf.code.service.MsgService;
 import com.cf.code.web.access.AccessVerifier;
 
 /**
@@ -47,6 +52,9 @@ public class MsgController {
 	@Resource(name = "msgReceiverDaoRead")
 	MsgReceiverDao msgReceiverDaoRead;
 	
+	@Resource(name = "msgService")
+	MsgService msgService;
+	
 	@AccessVerifier
 	@RequestMapping(value = {"/list"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
@@ -54,6 +62,8 @@ public class MsgController {
 			Model model,
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) Integer pageSize,
+			@RequestParam(required = false) Integer sendStatus,
+			@RequestParam(required = false) Integer replyStatus,
 			@RequestParam(required = false) String userName,
 			@RequestParam(required = false) String title,
 			@RequestParam(required = false) String createTimeStartText,
@@ -78,9 +88,9 @@ public class MsgController {
 		if(pageSize != null){
 			pager.setPageSize(pageSize);
 		}
-		int count = this.msgDaoRead.queryCount(title, userName, createTimeStart, createTimeEnd);
+		int count = this.msgDaoRead.queryCount(title, userName,sendStatus,replyStatus, createTimeStart, createTimeEnd);
 		pager.setCount(count);
-		List<Msg> msgs = this.msgDaoRead.query(title, userName, createTimeStart, createTimeEnd,
+		List<Msg> msgs = this.msgDaoRead.query(title, userName,sendStatus,replyStatus, createTimeStart, createTimeEnd,
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("msgs", msgs);   
 		model.addAttribute("pager", pager);
@@ -130,7 +140,7 @@ public class MsgController {
 	
 	@RequestMapping(value = {"/add"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public void add(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model add(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) String userName,
     		@RequestParam(required = true) String userEmail,
     		@RequestParam(required = false) String title,
@@ -140,42 +150,55 @@ public class MsgController {
 		msg.setUserEmail(userEmail);
 		msg.setTitle(title);
 		msg.setContent(content);
+		msg.setSendStatus(0);
+		msg.setReplyStatus(0);
 		this.msgDao.insert(msg);
-		//TODO 异步执行以下代码
-		List<MsgReceiver> msgreceivers = this.msgReceiverDaoRead.query(null, null, 0, 100);
-		for(MsgReceiver msgReceiver:msgreceivers){
-			//TODO 发送邮件	
-		}
+		msgService.sender(msg);
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"/receiver/add"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public void receiverAdd(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model receiverAdd(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) String address){
 		MsgReceiver msgReceiver = new MsgReceiver();
 		msgReceiver.setAddress(address);
 		this.msgReceiverDao.insert(msgReceiver);
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"/receiver/delete"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void receiverDelete(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model receiverDelete(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
 		this.msgReceiverDao.delete(id);
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"sender"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void sender(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model sender(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
 			@RequestParam(required = true) Integer id,
 			@RequestParam(required = false) String content) throws Exception{
 		Msg msg = this.msgDaoRead.find(id);
 		if(StringUtil.isNullOrEmpty(msg.getUserEmail())){
 			throw new Exception("用户邮箱为空");
 		}
-		//TODO 发送邮件
+		EmailMsgSender msgSender = new EmailMsgSender("channel_warning@126.com","12345679","用户信件");
+		try {
+			EmailTargetDataType emailtarget = new EmailTargetDataType(msg.getTitle()+"【回复】", msg.getUserEmail());
+			EmailSendMsgType emailMsg = new EmailSendMsgType(content);
+			msgSender.send(emailtarget, emailMsg);
+			this.msgDao.updateReplyStatus(id, 0, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.msgDao.updateReplyStatus(id, 0, 2);
+			throw new Exception("发送失败："+e.getMessage());
+		}
+		return model;
     }
+	
 }

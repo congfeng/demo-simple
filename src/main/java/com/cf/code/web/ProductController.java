@@ -104,7 +104,7 @@ public class ProductController {
 	@AccessVerifier
 	@RequestMapping(value = {"/add"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public void add(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model add(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer ptype,
     		@RequestParam(required = true) String name,
     		@RequestParam(required = false) String sku,
@@ -119,16 +119,17 @@ public class ProductController {
 		product.setImage(image);
 		product.setRichText(richText);
 		this.productDao.insert(product);
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"delete"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void delete(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model delete(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id) throws IOException{
 		Product p = this.productDaoRead.find(id);
 		if(!this.productDao.delete(id)){
-			return ;
+			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(p.getImage())){
 			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getImage()));
@@ -136,12 +137,13 @@ public class ProductController {
 		if(!StringUtil.isNullOrEmpty(p.getRichText())){
 			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
 		}
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"update"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void update(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model update(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id,
     		@RequestParam(required = true) Boolean imageChange,
     		@RequestParam(required = false) String name,
@@ -163,6 +165,7 @@ public class ProductController {
 		if(b&&!StringUtil.isNullOrEmpty(p.getRichText())){
 			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
 		}
+		return model;
     }
 	
 }

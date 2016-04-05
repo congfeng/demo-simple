@@ -27,6 +27,10 @@ public class Msg {
 	private String title;
 	
 	private String content;
+	
+	private Integer sendStatus;
+	
+	private Integer replyStatus;
 
 	public Integer getId() {
 		return id;
@@ -90,6 +94,22 @@ public class Msg {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+
+	public Integer getSendStatus() {
+		return sendStatus;
+	}
+
+	public void setSendStatus(Integer sendStatus) {
+		this.sendStatus = sendStatus;
+	}
+
+	public Integer getReplyStatus() {
+		return replyStatus;
+	}
+
+	public void setReplyStatus(Integer replyStatus) {
+		this.replyStatus = replyStatus;
 	}
 	
 }

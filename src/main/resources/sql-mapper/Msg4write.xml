@@ -3,11 +3,23 @@
 <mapper namespace="com.cf.code.dao.MsgDao">
 	
 	<insert id="insert" parameterType="com.cf.code.entity.Msg">
-		INSERT INTO msg(user_name,user_email,title,content,create_time)
-		VALUES (#{userName},#{userEmail},#{title},#{content},now())
+		INSERT INTO msg(user_name,user_email,title,content,send_status,reply_status,create_time)
+		VALUES (#{userName},#{userEmail},#{title},#{content},#{sendStatus},#{replyStatus},now())
 		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
 			select last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<update id="updateSendStatus">
+	   UPDATE msg
+		  SET update_time = now(),send_status = #{newSendStatus}
+		WHERE id = #{id} AND send_status = #{oldSendStatus}
+	</update>
+	
+	<update id="updateReplyStatus">
+	   UPDATE msg
+		  SET update_time = now(),reply_status = #{newReplyStatus}
+		WHERE id = #{id} AND reply_status = #{oldReplyStatus}
+	</update>
 	
 </mapper>

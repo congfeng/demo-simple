@@ -8,19 +8,21 @@
 		<result property="content" column="content" />
 		<result property="userName" column="user_name" />
 		<result property="userEmail" column="user_email" />
+		<result property="sendStatus" column="send_status" />
+		<result property="replyStatus" column="reply_status" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 		<result property="createTimeFormat" column="create_time_format" />
 	</resultMap>
 	
 	<select id="find" resultMap="MsgResult">
-		SELECT id,title,content,user_name,user_email,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+		SELECT id,title,content,user_name,user_email,send_status,reply_status,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 		  FROM msg
 		 WHERE id = #{id}
 	</select>
 	
 	<select id="query" resultMap="MsgResult" >
-       SELECT id,title,content,user_name,user_email,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+       SELECT id,title,content,user_name,user_email,send_status,reply_status,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
 	     FROM msg  
 		<include refid="query_where" />
 	    ORDER BY id ASC
@@ -35,6 +37,8 @@
 	
 	<sql id="query_where">
 		WHERE 1=1
+		<if test="sendStatus != null">AND send_status = #{sendStatus}</if>
+		<if test="replyStatus != null">AND reply_status = #{replyStatus}</if>
 	    <if test="title != null">AND title like CONCAT('%',#{title},'%')</if>
 	    <if test="userName != null">AND user_name like CONCAT('%',#{userName},'%')</if>
       	<if test="createTimeStart != null">AND create_time >= #{createTimeStart}</if>

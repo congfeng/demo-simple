@@ -100,7 +100,7 @@ public class NoticeController {
 	@AccessVerifier
 	@RequestMapping(value = {"/add"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public void add(@RequestParam(required = false)Profile profile,HttpSession session,
+    public Model add(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer ntype,
     		@RequestParam(required = true) String title,
     		@RequestParam(required = false) String content,
@@ -112,26 +112,28 @@ public class NoticeController {
 		notice.setContent(content);
 		notice.setRichText(richText);
 		this.noticeDao.insert(notice);
+		return model;
     }
 
 	@AccessVerifier
 	@RequestMapping(value = {"delete"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void delete(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model delete(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id) throws IOException{
 		Notice n = this.noticeDaoRead.find(id);
 		if(!this.noticeDao.delete(id)){
-			return ;
+			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(n.getRichText())){
 			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
 		}
+		return model;
     }
 	
 	@AccessVerifier
 	@RequestMapping(value = {"update"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public void update(@RequestParam(required = false)Profile profile,HttpSession session,
+	public Model update(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id,
     		@RequestParam(required = false) String title,
     		@RequestParam(required = false) String content,
@@ -142,6 +144,7 @@ public class NoticeController {
 		if(b&&!StringUtil.isNullOrEmpty(n.getRichText())){
 			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
 		}
+		return model;
     }
 	
 }

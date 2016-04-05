@@ -2,7 +2,7 @@ $(function(){
 	$(".wpcf7-submit").click(function(){
 		if(_.isEmpty($("#userName").val())){
 			layer.open({
-				content : '用户不能为空',
+				content : '用户名不能为空',
 				btn : [ '确定' ]
 			});
 			return;
