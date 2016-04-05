@@ -59,5 +59,25 @@
 		<property name="mapperInterface" value="com.cf.code.dao.NoticeDao" />
 		<property name="sqlSessionFactory" ref="WriteSqlSessionFactory" />
 	</bean>
+	
+	<bean id="msgDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.MsgDao" />
+		<property name="sqlSessionFactory" ref="ReadSqlSessionFactory" />
+	</bean>
+	
+	<bean id="msgDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.MsgDao" />
+		<property name="sqlSessionFactory" ref="WriteSqlSessionFactory" />
+	</bean>
+	
+	<bean id="msgReceiverDaoRead" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.MsgReceiverDao" />
+		<property name="sqlSessionFactory" ref="ReadSqlSessionFactory" />
+	</bean>
+	
+	<bean id="msgReceiverDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.cf.code.dao.MsgReceiverDao" />
+		<property name="sqlSessionFactory" ref="WriteSqlSessionFactory" />
+	</bean>
 		
 </beans>

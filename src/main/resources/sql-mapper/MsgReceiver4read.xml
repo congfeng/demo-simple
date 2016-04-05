@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cf.code.dao.MsgReceiverDao">
+	
+	<resultMap id="MsgReceiverResult" type="com.cf.code.entity.MsgReceiver">
+		<result property="id" column="id" />
+		<result property="address" column="address" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTimeFormat" column="create_time_format" />
+	</resultMap>
+	
+	<select id="find" resultMap="MsgReceiverResult">
+		SELECT id,address,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+		  FROM msg_receiver
+		 WHERE id = #{id}
+	</select>
+	
+	<select id="query" resultMap="MsgReceiverResult" >
+       SELECT id,address,create_time,update_time,FORMATDATETIME(create_time,'yyyy-MM-dd HH:mm:ss') as create_time_format
+	     FROM msg_receiver  
+		<include refid="query_where" />
+	    ORDER BY id ASC
+	    LIMIT #{start},#{size}
+  </select>
+  
+  <select id="queryCount" resultType="int">
+	   SELECT COUNT(1)
+	     FROM msg_receiver  
+	    <include refid="query_where" /> 
+  </select>
+	
+	<sql id="query_where">
+		WHERE 1=1
+      	<if test="createTimeStart != null">AND create_time >= #{createTimeStart}</if>
+      	<if test="createTimeEnd != null">AND create_time &lt;= #{createTimeEnd}</if>
+  </sql>
+	
+</mapper>

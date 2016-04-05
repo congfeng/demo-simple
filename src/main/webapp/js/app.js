@@ -10,6 +10,11 @@ nsApp.config(['$routeProvider',function ($routeProvider) {
         .when('/noticemanage', {templateUrl: 'pages/noticemanage.html',controller: 'NoticeManageController'})
         .when('/noticeadd', {templateUrl: 'pages/noticeadd.html',controller: 'NoticeAddController'})
         .when('/noticeupdate', {templateUrl: 'pages/noticeupdate.html',controller: 'NoticeUpdateController'})
+        .when('/msgreceiver', {templateUrl: 'pages/msgreceiver.html',controller: 'MsgReceiverController'})
+        .when('/msgreceiveradd', {templateUrl: 'pages/msgreceiveradd.html',controller: 'MsgReceiverAddController'})
+        .when('/msglist', {templateUrl: 'pages/msglist.html',controller: 'MsgListController'})
+        .when('/msgdetail', {templateUrl: 'pages/msgdetail.html',controller: 'MsgDetailController'})
+        .when('/msgsender', {templateUrl: 'pages/msgsender.html',controller: 'MsgSenderController'})
 		.otherwise({redirectTo: '/welcome'})
 		;  
 }]);

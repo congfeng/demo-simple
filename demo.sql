@@ -44,6 +44,23 @@ CREATE TABLE notice (
 ) CHARSET=utf8;
 CREATE INDEX n_t_index ON notice(notice_type);
 
+CREATE TABLE msg (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  title varchar(60) DEFAULT NULL,
+  content varchar(1000) DEFAULT NULL,
+  user_name varchar(100) DEFAULT NULL,
+  user_email varchar(100) DEFAULT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL
+) CHARSET=utf8;
+
+CREATE TABLE msg_receiver (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  address varchar(100) NOT NULL,
+  create_time TIMESTAMP NOT NULL,
+  update_time TIMESTAMP DEFAULT NULL
+) CHARSET=utf8;
+
 INSERT INTO `user` VALUES ('1', 'admin', 'admin', now());
 INSERT INTO `menu` VALUES ('1', '1', 'product-menu');
 INSERT INTO `menu` VALUES ('2', '1', 'product-type1');

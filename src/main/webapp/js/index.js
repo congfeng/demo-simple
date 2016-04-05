@@ -40,6 +40,17 @@ $(function(){
 					$("#notice-type3").hide();
 				}
 			}
+			if($.inArray("msg-menu",menus) == -1){
+				$("#msg-menu-header").hide();
+				$("#msg-menu").hide();
+			}else{
+				if($.inArray("msg-receiver",menus) == -1){
+					$("#msg-receiver").hide();
+				}
+				if($.inArray("msg-list",menus) == -1){
+					$("#msg-list").hide();
+				}
+			}
 			$('body').show();
 		}
 	});

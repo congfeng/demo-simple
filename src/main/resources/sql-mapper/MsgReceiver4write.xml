@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cf.code.dao.MsgReceiverDao">
+	
+	<insert id="insert" parameterType="com.cf.code.entity.MsgReceiver">
+		INSERT INTO msg_receiver(address,create_time)
+		VALUES (#{address},now())
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER" statementType="STATEMENT">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM msg_receiver WHERE id = #{id}
+	</delete>
+	
+</mapper>
