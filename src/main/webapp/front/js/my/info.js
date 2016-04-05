@@ -7,9 +7,13 @@ $(function(){
 	if(_.isEmpty(type)){
 		type = '';
 	}
+	var title = getQueryString('title');
+	if(_.isEmpty(title)){
+		title = '';
+	}
 	$.ajax({
 		url:'/notice/list',
-		data:{'pageNo':pageNo,pageSize:5,'ntype':type},
+		data:{'pageNo':pageNo,pageSize:5,'ntype':type,'title':title},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){

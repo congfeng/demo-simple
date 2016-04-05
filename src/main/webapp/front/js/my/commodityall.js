@@ -4,16 +4,23 @@ $(function(){
 		pageNo = 1;
 	}
 	var type = getQueryString('type');
+	if(_.isEmpty(type)){
+		type = '';
+	}
+	var name = getQueryString('name');
+	if(_.isEmpty(name)){
+		name = '';
+	}
 	$.ajax({
 		url:'/product/list',
-		data:{'pageNo':pageNo,pageSize:9,'ptype':type},
+		data:{'pageNo':pageNo,pageSize:9,'ptype':type,'name':name},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){
 				return;
 			}
-			if(data.products ==""){
-				$("#blog_cont").html("无商品数据");
+			if(data.products == ""){
+				$("#blog_cont").html("<div class='archive-header'><div class='archive-title'>"+"无商品数据"+"<br/></div></div>");
 				return;
 			}
 			var table_datas = "";

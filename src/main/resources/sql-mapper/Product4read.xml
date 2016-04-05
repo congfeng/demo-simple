@@ -37,7 +37,7 @@
 	<sql id="query_where">
 		WHERE 1=1
 	    <if test="productType != null">AND product_type = #{productType}</if>
-	    <if test="name != null">AND name = #{name}</if>
+	    <if test="name != null">AND name like CONCAT('%',#{name},'%')</if>
 	    <if test="sku != null">AND sku = #{sku}</if>
       	<if test="createTimeStart != null">AND create_time >= #{createTimeStart}</if>
       	<if test="createTimeEnd != null">AND create_time &lt;= #{createTimeEnd}</if>

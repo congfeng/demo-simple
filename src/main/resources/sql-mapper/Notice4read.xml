@@ -36,7 +36,7 @@
 	<sql id="query_where">
 		WHERE 1=1
 	    <if test="noticeType != null">AND notice_type = #{noticeType}</if>
-	    <if test="title != null">AND title = #{title}</if>
+	    <if test="title != null">AND title like CONCAT('%',#{title},'%')</if>
       	<if test="createTimeStart != null">AND create_time >= #{createTimeStart}</if>
       	<if test="createTimeEnd != null">AND create_time &lt;= #{createTimeEnd}</if>
   </sql>
