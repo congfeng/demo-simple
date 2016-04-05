@@ -15,7 +15,7 @@ nsApp.controller('NoticeUpdateController',function($scope,$routeParams) {
     	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', '|', 
     		'forecolor', 'backcolor', '|','insertorderedlist', 'insertunorderedlist', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
             'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink', '|', 
-            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', 'background', '|',
+            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', '|',
             'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','preview','help','fullscreen'
         ]],
         labelMap: {
@@ -37,15 +37,29 @@ nsApp.controller('NoticeUpdateController',function($scope,$routeParams) {
 			}
 			$('#title').val(notice.title);
 			$('#content').val(notice.content);
-			$.ajax({
-				url:data.UploadBasePath+notice.richText,
-				//dataType:'json',
-				success:function(richText){
-					ue.ready(function(){
-						ue.setContent(richText);
-				    });
+			if(!_.isEmpty(notice.richText)){
+				if(_.startsWith(data.UploadBasePath),'http'){
+					$.ajax({
+						url:'/demo/crossdomain/convert',
+						data:{'remoteUrl':data.UploadBasePath+notice.richText},
+						success:function(richText){
+							ue.ready(function(){
+								ue.setContent(richText);
+						    });
+						}
+					});	
+				}else{
+					$.ajax({
+						url:data.UploadBasePath+notice.richText,
+						//dataType:'json',
+						success:function(richText){
+							ue.ready(function(){
+								ue.setContent(richText);
+						    });
+						}
+					});
 				}
-			});
+			}
 		}
 	});
 	$(".noticeupdate-btn").click(function(){

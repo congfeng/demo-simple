@@ -29,8 +29,8 @@ public class FileUtil {
 		}
 		MultipartFile file = (MultipartFile)fileObj;
 		String fileName = UUID.randomUUID()+"."+getExtName(file.getOriginalFilename());
-		String filePath = File.separator+prefix+File.separator+DateUtil.format(new Date(),"yyyy"+File.separator+"MM"+File.separator+"dd")+File.separator;
-		File fileDirs = new File(uploadFolder+filePath);
+		String filePath = prefix+"/"+DateUtil.format(new Date(),"yyyy"+"/"+"MM"+"/"+"dd");
+		File fileDirs = new File(uploadFolder+"/"+filePath);
 		if(!fileDirs.exists()){
 			if(!fileDirs.mkdirs()){
 				throw new IOException("创建目录失败"+filePath);
@@ -40,7 +40,7 @@ public class FileUtil {
 			throw new IOException("文件目录权限不足"+filePath);
 		}
 		file.transferTo(new File(fileDirs,fileName));
-		return filePath+fileName;
+		return filePath+"/"+fileName;
 	}
 	
 	public static String uploadScrawl(Object fileData,String uploadFolder,String prefix) throws IllegalStateException, IOException{
@@ -48,8 +48,8 @@ public class FileUtil {
 			return null;
 		}
 		String fileName = UUID.randomUUID()+".jpg";
-		String filePath = File.separator+prefix+File.separator+DateUtil.format(new Date(),"yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator);
-		File fileDirs = new File(uploadFolder+filePath);
+		String filePath = prefix+"/"+DateUtil.format(new Date(),"yyyy"+"/"+"MM"+"/"+"dd");
+		File fileDirs = new File(uploadFolder+"/"+filePath);
 		if(!fileDirs.exists()){
 			if(!fileDirs.mkdirs()){
 				throw new IOException("创建目录失败"+filePath);
@@ -59,7 +59,7 @@ public class FileUtil {
 			throw new IOException("文件目录权限不足"+filePath);
 		}
 		FileUtils.writeByteArrayToFile(new File(fileDirs,fileName), Base64.decodeBase64(fileData.toString()));
-		return filePath+fileName;
+		return filePath+"/"+fileName;
 	}
 	
 	public static String uploadRichText(Object fileData,String uploadFolder,String prefix) throws IllegalStateException, IOException{
@@ -67,8 +67,8 @@ public class FileUtil {
 			return null;
 		}
 		String fileName = UUID.randomUUID()+".html";
-		String filePath = File.separator+prefix+File.separator+DateUtil.format(new Date(),"yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator);
-		File fileDirs = new File(uploadFolder+filePath);
+		String filePath = prefix+"/"+DateUtil.format(new Date(),"yyyy"+"/"+"MM"+"/"+"dd");
+		File fileDirs = new File(uploadFolder+"/"+filePath);
 		if(!fileDirs.exists()){
 			if(!fileDirs.mkdirs()){
 				throw new IOException("创建目录失败"+filePath);
@@ -78,7 +78,7 @@ public class FileUtil {
 			throw new IOException("文件目录权限不足"+filePath);
 		}
 		FileUtils.writeStringToFile(new File(fileDirs,fileName), fileData.toString());
-		return filePath+fileName;
+		return filePath+"/"+fileName;
 	}
 	
 }

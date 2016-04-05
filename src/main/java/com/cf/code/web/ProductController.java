@@ -87,7 +87,7 @@ public class ProductController {
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("products", products);   
 		model.addAttribute("pager", pager);
-		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		model.addAttribute("UploadBasePath", UploadPath);
         return model;
     }
 	
@@ -97,7 +97,7 @@ public class ProductController {
     public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
 		model.addAttribute("product",this.productDaoRead.find(id));
-		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		model.addAttribute("UploadBasePath", UploadPath);
 		return model;
     }
 	
@@ -131,10 +131,10 @@ public class ProductController {
 			return ;
 		}
 		if(!StringUtil.isNullOrEmpty(p.getImage())){
-			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getImage()));
+			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getImage()));
 		}
 		if(!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getRichText()));
+			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
 		}
     }
 	
@@ -155,13 +155,13 @@ public class ProductController {
 			String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
 			b = this.productDao.update(id, name, sku, image,richText);
 			if(b&&!StringUtil.isNullOrEmpty(p.getImage())){
-				FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getImage()));
+				FileUtils.forceDelete(new File(UploadFolder+"/"+p.getImage()));
 			}
 		}else{
 			b = this.productDao.update(id, name, sku, p.getImage(),richText);
 		}
 		if(b&&!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+File.separator+p.getRichText()));
+			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
 		}
     }
 	

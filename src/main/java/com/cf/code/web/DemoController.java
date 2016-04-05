@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
@@ -28,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cf.code.common.DateUtil;
 import com.cf.code.common.StringUtil;
 import com.cf.code.core.exception.BusinessException;
+import com.cf.code.core.exception.MsgSendException;
+import com.cf.code.core.net.HttpPostMsgSender;
 import com.cf.code.entity.Demo;
 import com.cf.code.entity.Profile;
 import com.cf.code.service.DemoService;
@@ -138,6 +141,14 @@ public class DemoController {
 		log.info(file);
 		log.info(sign);
         return model;
+    }
+	
+	@RequestMapping(value = {"/crossdomain/convert"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public String crossdomainConvert(Model model,HttpServletRequest request,
+    		@RequestParam(value = "remoteUrl", required = true) String remoteUrl) throws MsgSendException{
+		HttpPostMsgSender sender = new HttpPostMsgSender();
+        return sender.send(remoteUrl, null);
     }
 	
 }

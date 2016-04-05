@@ -3,9 +3,10 @@ $(function(){
 	if(_.isEmpty(pageNo)){
 		pageNo = 1;
 	}
+	var type = getQueryString('type');
 	$.ajax({
 		url:'/product/list',
-		data:{'pageNo':pageNo,pageSize:9,'ptype':null},
+		data:{'pageNo':pageNo,pageSize:9,'ptype':type},
 		dataType:'json',
 		success:function(data){
 			if(data&&data.s == 0){
@@ -20,7 +21,7 @@ $(function(){
 				table_datas += "<article class='commodity-blog_box'><div class='commodityall-blog'>"
 					+"<div class='commodityall-box'>"
 					+"<a href='commodity_pt.html?id="+product.id+"'>"
-					+_.isEmpty(product.image)?(""):("<img src='"+data.UploadBasePath+product.image+"' width='150' height='150' class='attachment-’full’ size-’full’ colorbox-185  wp-post-image'/>")
+					+(_.isEmpty(product.image)?(""):("<img src='"+data.UploadBasePath+product.image+"' width='150' height='150' class='attachment-’full’ size-’full’ colorbox-185  wp-post-image'/>"))
 					+"</a></div>"
 					+"<h3>"+product.name+"</h3>"
 					+"</div></article>";

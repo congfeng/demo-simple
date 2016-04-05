@@ -83,7 +83,7 @@ public class NoticeController {
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("notices", notices);   
 		model.addAttribute("pager", pager);
-		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		model.addAttribute("UploadBasePath", UploadPath);
         return model;
     }
 	
@@ -93,7 +93,7 @@ public class NoticeController {
     public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
 		model.addAttribute("notice",this.noticeDaoRead.find(id));
-		model.addAttribute("UploadBasePath", UploadPath+File.separator);
+		model.addAttribute("UploadBasePath", UploadPath);
 		return model;
     }
 	
@@ -124,7 +124,7 @@ public class NoticeController {
 			return ;
 		}
 		if(!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+File.separator+n.getRichText()));
+			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
 		}
     }
 	
@@ -140,7 +140,7 @@ public class NoticeController {
 		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
 		boolean b = this.noticeDao.update(id, title, content, richText);
 		if(b&&!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+File.separator+n.getRichText()));
+			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
 		}
     }
 	

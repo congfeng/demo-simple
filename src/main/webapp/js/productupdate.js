@@ -15,7 +15,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
     	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', '|', 
     		'forecolor', 'backcolor', '|','insertorderedlist', 'insertunorderedlist', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
             'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink', '|', 
-            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', 'background', '|',
+            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'emotion', 'scrawl', 'insertvideo', '|',
             'horizontal', 'spechars', '|','inserttable', 'deletetable', 'mergecells','|','template','|','preview','help','fullscreen'
         ]],
         labelMap: {
@@ -69,15 +69,27 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 				$('#imageChange').val(true);
 			});
 			if(!_.isEmpty(product.richText)){
-				$.ajax({
-					url:data.UploadBasePath+product.richText,
-					//dataType:'json',
-					success:function(richText){
-						ue.ready(function(){
-							ue.setContent(richText);
-					    });
-					}
-				});
+				if(_.startsWith(data.UploadBasePath),'http'){
+					$.ajax({
+						url:'/demo/crossdomain/convert',
+						data:{'remoteUrl':data.UploadBasePath+product.richText},
+						success:function(richText){
+							ue.ready(function(){
+								ue.setContent(richText);
+						    });
+						}
+					});
+				}else{
+					$.ajax({
+						url:data.UploadBasePath+product.richText,
+						//dataType:'json',
+						success:function(richText){
+							ue.ready(function(){
+								ue.setContent(richText);
+						    });
+						}
+					});
+				}
 			}
 		}
 	});

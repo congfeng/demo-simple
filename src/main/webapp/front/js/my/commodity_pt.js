@@ -13,14 +13,25 @@ $(function(){
 			$('.productimage').attr('src',data.UploadBasePath+product.image);
 			$('.productrichtext').html('');
 			if(!_.isEmpty(product.richText)){
-				$.ajax({
-					url:data.UploadBasePath+product.richText,
-					//dataType:'json',
-					success:function(richText){
-						$('.productrichtext').html(richText);
-						uParse('.productrichtext', {rootPath: '/resources/ueditor/'});
-					}
-				});
+				if(_.startsWith(data.UploadBasePath),'http'){
+					$.ajax({
+						url:'/demo/crossdomain/convert',
+						data:{'remoteUrl':data.UploadBasePath+product.richText},
+						success:function(richText){
+							$('.productrichtext').html(richText);
+							uParse('.productrichtext', {rootPath: '/resources/ueditor/'});
+						}
+					});
+				}else{
+					$.ajax({
+						url:data.UploadBasePath+product.richText,
+						//dataType:'json',
+						success:function(richText){
+							$('.productrichtext').html(richText);
+							uParse('.productrichtext', {rootPath: '/resources/ueditor/'});
+						}
+					});
+				}
 			}			
 		}
 	});
