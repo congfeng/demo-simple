@@ -64,6 +64,5 @@ public class Profile implements Serializable{
 	public void setMenus(List<String> menus) {
 		this.menus = menus;
 	}
-
 		
 }

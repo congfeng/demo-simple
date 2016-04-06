@@ -1,5 +1,9 @@
+Messenger.options = {
+    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+    theme: 'air'
+}
 $(function(){
-
+	var im4socketio;
 	$.ajax({
 		url:'/profile',
 		dataType:'json',
@@ -7,8 +11,9 @@ $(function(){
 			if(data&&data.s == 0){
 				return;
 			}
-			$("#username-text").text(data.name);
-			var menus = data.menus;
+			var profile = data.profile;
+			$("#username-text").text(profile.name);
+			var menus = profile.menus;
 			if($.inArray("product-menu",menus) == -1){
 				$("#product-menu-header").hide();
 				$("#product-menu").hide();
@@ -51,7 +56,20 @@ $(function(){
 					$("#msg-list").hide();
 				}
 			}
+			$('.msg-count-info').text(''+data.msgCount);
 			$('body').show();
+			im4socketio = io.connect(data.imAddress);
+		    im4socketio.on('mychatevent', function(msg) {
+		    	$('.msg-count-info').text(''+msg.msgCount);
+		    	if(msg.isAdd){
+		    		Messenger().post({
+						hideAfter: 3,
+						maxMessages: 5,
+						showCloseButton: true,
+						message: "您有新消息，请注意查收"
+					});
+		    	}
+		    });
 		}
 	});
 
@@ -100,4 +118,5 @@ $(function(){
 			}
 		})
 	});
+	
 })

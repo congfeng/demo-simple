@@ -28,6 +28,7 @@ import com.cf.code.dao.MsgReceiverDao;
 import com.cf.code.entity.Msg;
 import com.cf.code.entity.MsgReceiver;
 import com.cf.code.entity.Profile;
+import com.cf.code.service.ImService;
 import com.cf.code.service.MsgService;
 import com.cf.code.web.access.AccessVerifier;
 
@@ -54,6 +55,9 @@ public class MsgController {
 	
 	@Resource(name = "msgService")
 	MsgService msgService;
+	
+	@Resource(name = "imService")
+	ImService imService;
 	
 	@AccessVerifier
 	@RequestMapping(value = {"/list"}, method = { RequestMethod.GET,RequestMethod.POST})
@@ -154,6 +158,7 @@ public class MsgController {
 		msg.setReplyStatus(0);
 		this.msgDao.insert(msg);
 		msgService.sender(msg);
+		imService.pushMsgCount(true);
 		return model;
     }
 	
@@ -193,7 +198,9 @@ public class MsgController {
 			EmailTargetDataType emailtarget = new EmailTargetDataType(msg.getTitle()+"【回复】", msg.getUserEmail());
 			EmailSendMsgType emailMsg = new EmailSendMsgType(content,true);
 			msgSender.send(emailtarget, emailMsg);
-			this.msgDao.updateReplyStatus(id, 0, 1);
+			if(this.msgDao.updateReplyStatus(id, 0, 1)){
+				imService.pushMsgCount(false);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.msgDao.updateReplyStatus(id, 0, 2);

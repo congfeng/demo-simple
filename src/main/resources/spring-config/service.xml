@@ -18,4 +18,12 @@
 		<constructor-arg value="${pom.upload.path}"/>
 	</bean>
 	
+	<bean id="pom.im.host" class="java.lang.String">
+		<constructor-arg value="${pom.im.host}"/>
+	</bean>
+	
+	<bean id="pom.im.port" class="java.lang.Integer">
+		<constructor-arg value="${pom.im.port}"/>
+	</bean>
+	
 </beans>

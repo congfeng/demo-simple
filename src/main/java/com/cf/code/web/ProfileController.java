@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.dao.MenuDao;
+import com.cf.code.dao.MsgDao;
 import com.cf.code.dao.UserDao;
 import com.cf.code.entity.Profile;
 import com.cf.code.entity.User;
+import com.cf.code.service.ImService;
 import com.cf.code.web.access.AccessVerifier;
 
 /**
@@ -36,6 +38,18 @@ public class ProfileController {
 	
 	@Resource(name = "menuDaoRead")
 	MenuDao menuDaoRead;
+	
+	@Resource(name = "msgDaoRead")
+	MsgDao msgDaoRead;
+	
+	@Resource(name = "imService")
+	ImService imService;
+	
+	@Resource(name = "pom.im.host")
+	String ImHost;
+	
+	@Resource(name = "pom.im.port")
+	Integer ImPort;
 	
 	@RequestMapping(value = {"login"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
@@ -67,8 +81,12 @@ public class ProfileController {
 	@AccessVerifier
 	@RequestMapping(value = {""}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Profile init(@RequestParam(required = false)Profile profile,HttpSession session) {
-        return profile;
+    public Model init(@RequestParam(required = false)Profile profile,HttpSession session,Model model) {
+		int msgCount = this.msgDaoRead.queryCount(null, null, null, 0, null, null);
+		model.addAttribute("profile",profile);
+		model.addAttribute("imAddress","http://"+ImHost+":"+ImPort);
+		model.addAttribute("msgCount",msgCount);
+        return model;
     }
 	
 }
