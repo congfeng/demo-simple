@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cf.code.core.exception.MsgSendException;
 import com.cf.code.core.net.EmailMsgSender;
 import com.cf.code.core.net.EmailMsgSender.EmailSendMsgType;
 import com.cf.code.core.net.EmailMsgSender.EmailTargetDataType;
@@ -46,8 +45,9 @@ public class MsgServiceImpl implements MsgService{
 		Integer sendStatus = 0;
 		try {
 			for(MsgReceiver msgReceiver:msgreceivers){
+				String content = msg.getContent().replaceAll("\r\n|\r|\n", "<br>").replaceAll(" ", "&nbsp;");
 				EmailTargetDataType emailtarget = new EmailTargetDataType(msg.getTitle(), msgReceiver.getAddress());
-				EmailSendMsgType emailMsg = new EmailSendMsgType(msg.getContent());
+				EmailSendMsgType emailMsg = new EmailSendMsgType(content,true);
 				msgSender.send(emailtarget, emailMsg);
 			}
 			sendStatus = 1;

@@ -15,7 +15,7 @@ nsApp.controller('MsgReceiverAddController',function($scope,$routeParams) {
 				if(data&&data.s == 0){
 					return;
 				}
-				showAlert('发送成功');
+				showAlert('添加成功');
 				window.location.href = "#/msgreceiver";
 			}
 		});

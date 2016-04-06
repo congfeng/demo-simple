@@ -11,9 +11,10 @@ nsApp.controller('MsgDetailController',function($scope,$routeParams) {
 			}
 			var msg = data.msg;
 			$('#userName').text(msg.userName);
+			$('#userEmail').text(msg.userEmail);
 			$('#title').text(msg.title);
 			$('#createTime').text(msg.createTimeFormat);
-			$('#content').text(msg.content);
+			$('#content').val(msg.content);
 		}
 	});
 }); 

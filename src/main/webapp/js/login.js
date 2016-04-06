@@ -1,3 +1,4 @@
+var is_login_tip = false;
 $(function(){
 	
 	if(window.localStorage.remember == 'checked'){
@@ -29,7 +30,14 @@ $(function(){
 				if(data&&data.s == 0){
 					layer.open({
 						content : data.m,
-						btn : [ '确定' ]
+						btn : [ '确定' ],
+						success:function(){
+							is_login_tip = true;
+						},
+						yes:function(i){
+							layer.close(i);
+							is_login_tip = false;
+						}
 					});
 					return;
 				}
@@ -46,7 +54,7 @@ $(function(){
 		})
 	})
 	$(window).keydown(function (e) { 
-		if (e.which == 13) { 
+		if (e.which == 13 &&!is_login_tip) { 
 			$("#login-button").click();
 		} 
 	})

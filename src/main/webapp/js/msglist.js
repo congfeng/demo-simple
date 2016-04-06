@@ -24,6 +24,8 @@ nsApp.controller('MsgListController',function($scope,$routeParams) {
 						+"<td>"+msg.title+"</td>"
 						+"<td>"+msg.userName+"</td>"
 						+"<td>"+msg.createTimeFormat+"</td>"
+						+"<td>"+(['未接收','已接收','接收失败'][msg.sendStatus])+"</td>"
+						+"<td>"+(['未回复','已回复','回复失败'][msg.replyStatus])+"</td>"
 						+"<td><a class='msgdetail-btn' data-msgid='"+msg.id+"'><i style='font-size:30px;' class='iconfont'>&#xe646;</i></a></td>"
 				        +"</tr>";
 				});

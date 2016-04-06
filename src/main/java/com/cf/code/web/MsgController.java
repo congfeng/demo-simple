@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cf.code.common.DateUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
-import com.cf.code.core.exception.MsgSendException;
+import com.cf.code.core.exception.BusinessException;
 import com.cf.code.core.net.EmailMsgSender;
 import com.cf.code.core.net.EmailMsgSender.EmailSendMsgType;
 import com.cf.code.core.net.EmailMsgSender.EmailTargetDataType;
@@ -182,21 +182,22 @@ public class MsgController {
 	@ResponseBody
 	public Model sender(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
 			@RequestParam(required = true) Integer id,
-			@RequestParam(required = false) String content) throws Exception{
+			@RequestParam(required = true) String content) throws Exception{
 		Msg msg = this.msgDaoRead.find(id);
 		if(StringUtil.isNullOrEmpty(msg.getUserEmail())){
-			throw new Exception("用户邮箱为空");
+			throw new BusinessException("用户邮箱为空");
 		}
+		content = content.replaceAll("\r\n|\r|\n", "<br>").replaceAll(" ", "&nbsp;");
 		EmailMsgSender msgSender = new EmailMsgSender("channel_warning@126.com","12345679","用户信件");
 		try {
 			EmailTargetDataType emailtarget = new EmailTargetDataType(msg.getTitle()+"【回复】", msg.getUserEmail());
-			EmailSendMsgType emailMsg = new EmailSendMsgType(content);
+			EmailSendMsgType emailMsg = new EmailSendMsgType(content,true);
 			msgSender.send(emailtarget, emailMsg);
 			this.msgDao.updateReplyStatus(id, 0, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.msgDao.updateReplyStatus(id, 0, 2);
-			throw new Exception("发送失败："+e.getMessage());
+			throw new BusinessException("发送失败："+e.getMessage());
 		}
 		return model;
     }

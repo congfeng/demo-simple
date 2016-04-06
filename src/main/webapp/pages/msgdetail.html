@@ -5,15 +5,15 @@
 </ul>
 <form class="form-horizontal well" method="post">	
 	<div class="form-group">
-	    <label class="col-sm-2 control-label">标题：</label>
-	    <div class="col-sm-10">
-	    	<span id="title" class="form-control"></span>
-	    </div>
-	</div>
-	<div class="form-group">
 	    <label class="col-sm-2 control-label">投件人：</label>
 	    <div class="col-sm-10">
 	      <span id="userName" class="form-control"></span>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">投件人邮箱：</label>
+	    <div class="col-sm-10">
+	      <span id="userEmail" class="form-control"></span>
 	    </div>
 	</div>
 	<div class="form-group">
@@ -23,12 +23,19 @@
 	    </div>
 	</div>
 	<div class="form-group">
+	    <label class="col-sm-2 control-label">标题：</label>
+	    <div class="col-sm-10">
+	    	<span id="title" class="form-control"></span>
+	    </div>
+	</div>
+	<div class="form-group">
 	    <label class="col-sm-2 control-label">信件内容：</label>
 	    <div class="col-sm-10">
-	      <span id="content" class="form-control"></span>
+	      <textarea id="content" class="form-control" rows="5"></textarea>
 	    </div>
 	</div>
 	<div class="form-group" style="text-align:center;">
-		<a class="btn btn-primary" href="#/msgsender?id={{id}}"><i class="iconfont">&#xe64a;</i> 快速回复</a>
+		<a class="btn btn-primary" href="#/msglist"><i class="iconfont">&#xe64a;</i> 返回</a>
+		<a class="btn btn-primary" href="#/msgsender?id={{id}}"><i class="iconfont">&#xe628;</i> 快速回复</a>
 	</div>
 </form>	
