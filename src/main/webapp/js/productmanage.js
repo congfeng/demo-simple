@@ -26,7 +26,6 @@ nsApp.controller('ProductManageController',function($scope,$routeParams) {
 					table_datas += "<tr><td>"+(i+1)+"</td>"
 						+"<td><img width='50px;' height='50px;' onerror=\"this.style.display='none'\" src='"+data.UploadBasePath+product.image+"'></td>"
 						+"<td>"+product.name+"</td>"
-						+"<td>"+product.sku+"</td>"
 						+"<td><a class='productupdate-btn' data-productid='"+product.id+"'><i style='font-size:30px;' class='iconfont'>&#xe641;</i></a></td>"
 						+"<td><a class='productdelete-btn' data-productid='"+product.id+"'><i style='font-size:30px;' class='iconfont'>&#xe642;</i></a></td>"
 				        +"</tr>";
