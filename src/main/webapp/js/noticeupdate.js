@@ -38,7 +38,7 @@ nsApp.controller('NoticeUpdateController',function($scope,$routeParams) {
 			$('#title').val(notice.title);
 			$('#content').val(notice.content);
 			if(!_.isEmpty(notice.richText)){
-				if(_.startsWith(data.UploadBasePath),'http'){
+				if(_.startsWith(data.UploadBasePath,'http')){
 					$.ajax({
 						url:'/demo/crossdomain/convert',
 						data:{'remoteUrl':data.UploadBasePath+notice.richText},

@@ -861,3 +861,13 @@ margin-bottom:30px;
 #pg-51-1{margin:0 auto!important;}
 #tablepress-1,#tablepress-2{font-size:14px;}
 .column-1{width:150px;}
+
+.g_nav_title_image {
+	background-image:url('../images/background-title.jpg');
+	width:1000px;
+	height:120px;
+	text-align:center;
+	line-height:120px;
+	font-size:26px;
+	font-weight:bold;
+}

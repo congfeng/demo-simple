@@ -56,20 +56,22 @@ $(function(){
 					$("#msg-list").hide();
 				}
 			}
-			$('.msg-count-info').text(''+data.msgCount);
+			if(data.msgCount > 0){
+				$('.msg-count-info').text(''+data.msgCount);	
+			}
 			$('body').show();
 			im4socketio = io.connect(data.imAddress);
-		    im4socketio.on('mychatevent', function(msg) {
-		    	$('.msg-count-info').text(''+msg.msgCount);
-		    	if(msg.isAdd){
-		    		Messenger().post({
+			im4socketio.on('mychatevent', function(msg) {
+				$('.msg-count-info').text(''+(msg.msgCount>0?msg.msgCount:''));
+				if(msg.isAdd){
+					Messenger().post({
 						hideAfter: 3,
 						maxMessages: 5,
 						showCloseButton: true,
 						message: "您有新消息，请注意查收"
 					});
-		    	}
-		    });
+				}
+			});
 		}
 	});
 

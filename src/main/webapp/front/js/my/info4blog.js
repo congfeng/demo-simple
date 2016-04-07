@@ -13,7 +13,7 @@ $(function(){
 			$('.blog_entry > time').text(notice.createTimeFormat.substring(0,10));
 			$('.blog_text').html('');
 			if(!_.isEmpty(notice.richText)){
-				if(_.startsWith(data.UploadBasePath),'http'){
+				if(_.startsWith(data.UploadBasePath,'http')){
 					$.ajax({
 						url:'/demo/crossdomain/convert',
 						data:{'remoteUrl':data.UploadBasePath+notice.richText},

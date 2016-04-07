@@ -40,7 +40,7 @@ $(function(){
 				$('#article_'+noticeId+' >header>h1>a').text(notice.title);
 				$('#article_'+noticeId+' >header>h1>span').text(notice.createTimeFormat.substring(0,10));
 				if(!_.isEmpty(notice.richText)){
-					if(_.startsWith(data.UploadBasePath),'http'){
+					if(_.startsWith(data.UploadBasePath,'http')){
 						$.ajax({
 							url:'/demo/crossdomain/convert',
 							data:{'remoteUrl':data.UploadBasePath+notice.richText},

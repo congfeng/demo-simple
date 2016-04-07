@@ -8,20 +8,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap-3.3.4/css/bootstrap.min.css">
+    <link href="/resources/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/css/fileinput.min.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/sco.js/1.1.0/css/scojs.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="resources/iconfont/iconfont.css">
+    <link href="/css/theme.css" type="text/css" rel="stylesheet">
+    <link href="/resources/iconfont/iconfont.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/messenger/1.4.2/css/messenger.min.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/messenger/1.4.2/css/messenger-theme-air.min.css" rel="stylesheet">
     
-    <script src="resources/jquery/jquery-1.12.0.min.js" type="text/javascript"></script>
-    <script src="resources/jquery/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    <script src="resources/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-	<script src="resources/angularjs/angular.min.js"></script>  
-   	<script src="resources/angularjs/angular-route.min.js"></script>
-	<script src="resources/layer/layer.js" type="text/javascript"></script>  
+    <script src="http://cdn.bootcss.com/jquery/1.12.0/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script src="/resources/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+   	<script src="http://cdn.bootcss.com/angular.js/1.2.15/angular.min.js"></script>
+   	<script src="http://cdn.bootcss.com/angular.js/1.2.15/angular-route.min.js"></script>
 	<script src="http://cdn.bootcss.com/lodash.js/4.6.1/lodash.min.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput.min.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput_locale_zh.min.js"></script>
@@ -30,20 +29,21 @@
 	<script src="http://cdn.bootcss.com/sco.js/1.1.0/js/sco.confirm.min.js"></script>
 	<script src="http://cdn.bootcss.com/socket.io/1.4.5/socket.io.min.js"></script>
 	<script src="http://cdn.bootcss.com/messenger/1.4.2/js/messenger.min.js"></script>
+	<script src="/resources/layer/layer.js" type="text/javascript"></script> 
 	
-   	<script src="js/common.js"></script>  
-   	<script src="js/app.js"></script>
-   	<script src="js/productmanage.js"></script>
-   	<script src="js/productadd.js"></script>
-   	<script src="js/productupdate.js"></script>
-   	<script src="js/noticemanage.js"></script>
-   	<script src="js/noticeadd.js"></script>
-   	<script src="js/noticeupdate.js"></script>
-   	<script src="js/msgreceiver.js"></script>
-   	<script src="js/msgreceiveradd.js"></script>
-   	<script src="js/msglist.js"></script>
-   	<script src="js/msgdetail.js"></script>
-   	<script src="js/msgsender.js"></script>
+   	<script src="/js/common.js"></script>  
+   	<script src="/js/app.js"></script>
+   	<script src="/js/productmanage.js"></script>
+   	<script src="/js/productadd.js"></script>
+   	<script src="/js/productupdate.js"></script>
+   	<script src="/js/noticemanage.js"></script>
+   	<script src="/js/noticeadd.js"></script>
+   	<script src="/js/noticeupdate.js"></script>
+   	<script src="/js/msgreceiver.js"></script>
+   	<script src="/js/msgreceiveradd.js"></script>
+   	<script src="/js/msglist.js"></script>
+   	<script src="/js/msgdetail.js"></script>
+   	<script src="/js/msgsender.js"></script>
 		
     <!-- Demo page code -->
     
@@ -122,7 +122,7 @@
 		           	<li id="notice-type2"><a href="#/noticemanage?type=2">分类2</a></li>
 		           	<li id="notice-type3"><a href="#/noticemanage?type=3">分类3</a></li>
 		     	</ul>
-		     	<div id="msg-menu-header" class="nav-header" data-toggle="collapse" data-target="#msg-menu"><i class='iconfont'>&#xe615;</i>&nbsp;&nbsp;信件管理<span class="label label-info msg-count-info">+10</span></div>
+		     	<div id="msg-menu-header" class="nav-header" data-toggle="collapse" data-target="#msg-menu"><i class='iconfont'>&#xe615;</i>&nbsp;&nbsp;信件管理<span class="label label-info msg-count-info"></span></div>
             	<ul id="msg-menu" class="nav nav-list collapse in">
               		<li id="msg-receiver"><a href="#/msgreceiver">邮箱设置</a></li>
 		           	<li id="msg-list"><a href="#/msglist">收件箱</a></li>

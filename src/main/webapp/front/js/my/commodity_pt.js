@@ -13,7 +13,7 @@ $(function(){
 			$('.productimage').attr('src',data.UploadBasePath+product.image);
 			$('.productrichtext').html('');
 			if(!_.isEmpty(product.richText)){
-				if(_.startsWith(data.UploadBasePath),'http'){
+				if(_.startsWith(data.UploadBasePath,'http')){
 					$.ajax({
 						url:'/demo/crossdomain/convert',
 						data:{'remoteUrl':data.UploadBasePath+product.richText},

@@ -18,7 +18,7 @@ nsApp.controller('ProductAddController',function($scope,$routeParams) {
 		resizePreference: 'height',
 		resizeImage:true,
 		allowedFileTypes: ["image"],
-		allowedFileExtensions: ["jpg", "gif", "png"]
+		allowedFileExtensions: ["jpg","jpeg", "gif", "png" , "bmp"]
     });
   
   	var ue = UE.getEditor('richText',{

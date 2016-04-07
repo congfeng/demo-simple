@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.cf.code.dao.MsgDao;
@@ -24,6 +26,8 @@ import com.corundumstudio.socketio.SocketIOServer;
 @Service("imService")
 public class ImServiceImpl implements ImService{
 
+	private static Logger log = LogManager.getLogger(ImServiceImpl.class);
+	
 	@Resource(name = "msgDaoRead")
 	MsgDao msgDaoRead;
 	
@@ -41,7 +45,7 @@ public class ImServiceImpl implements ImService{
         config.setHostname(ImHost);
         config.setPort(ImPort);
         server = new SocketIOServer(config);
-		server.startAsync();
+		server.start();
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -51,6 +55,7 @@ public class ImServiceImpl implements ImService{
 				server.stop();
 			}
 		}));
+		log.info("im启动成功");
 	}
 	
 	@PreDestroy
@@ -59,6 +64,7 @@ public class ImServiceImpl implements ImService{
 			return ;
 		}
 		server.stop();
+		log.info("im关闭成功");
 	}
 
 	@Override

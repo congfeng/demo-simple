@@ -55,7 +55,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 				resizePreference: 'height',
 				resizeImage:true,
         		allowedFileTypes: ["image"],
-        		allowedFileExtensions: ["jpg", "gif", "png"],
+        		allowedFileExtensions: ["jpg","jpeg", "gif", "png" , "bmp"],
         		overwriteInitial: true,
         		previewFileType: "image",
         		initialPreviewShowDelete: false,
@@ -69,7 +69,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 				$('#imageChange').val(true);
 			});
 			if(!_.isEmpty(product.richText)){
-				if(_.startsWith(data.UploadBasePath),'http'){
+				if(_.startsWith(data.UploadBasePath,'http')){
 					$.ajax({
 						url:'/demo/crossdomain/convert',
 						data:{'remoteUrl':data.UploadBasePath+product.richText},
