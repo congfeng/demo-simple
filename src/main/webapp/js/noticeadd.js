@@ -53,7 +53,7 @@ nsApp.controller('NoticeAddController',function($scope,$routeParams) {
 			success:function(l,i){
 				var previewJQdom = $($($(l[0]).find('iframe')[0]).contents().get(0));
 				$(previewJQdom.find('#title')[0]).text($('#title').val());
-				$(previewJQdom.find('#createTime')[0]).text(_.now());
+				$(previewJQdom.find('#createTime')[0]).text(dateFormat(new Date(),"yyyy-MM-dd hh:mm:ss"));
 				$(previewJQdom.find('#richtext')[0]).html(ue.getContent());
 				layer.iframeAuto(i);
 			}
