@@ -1,26 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        
-        <script src="/resources/ueditor1_4_3_2/dialogs/internal.js" type="text/javascript"></script>
-        <script src="/resources/ueditor1_4_3_2/ueditor.parse.min.js" type="text/javascript" charset="utf-8"></script>
-        
-        <title></title>
-    </head>
-    <body>
-    	aaaaaaaaaaaaaaaaaaaa
-        <div id="preview"></div>
-        bbbbbbbbbbbbbbbbbbbbbbbbb
-    </body>
-    <script>
-        document.getElementById('preview').innerHTML = editor.getContent();
-        uParse('#preview',{
-            rootPath : '/resources/ueditor1_4_3_2/'
-        })
-        dialog.oncancel = function(){
-            document.getElementById('preview').innerHTML = '';
-        }
-    </script>
-</html>
+<script src="http://cdn.bootcss.com/jquery/1.12.0/jquery.min.js" type="text/javascript"></script>
+<script src="/resources/ueditor1_4_3_2/ueditor.parse.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/preview.js" type="text/javascript"></script>
+<script>
+    
+</script>
+<style type="text/css">
+	
+</style>
+<div style="width:600px;max-height:500px;padding:35px 50px;overflow:auto;">
+	<h1 id="productName" style="font-size:20px;color:#410000;font-weight:bold;">肌ごころせっけん</h1>
+	<hr>
+	<div style="width:100%;overflow:hidden;">
+		<div style="float:left;width:50%;">
+			<p><img src="http://localhost:8080/upload/product/image/2016/04/04/cce3a96f-1634-46f6-a48a-e5caeb6a5bf8.jpg" width="220" height="220"></p>
+		</div>
+		<div style="float:left;width:2%;">
+			&nbsp;
+		</div>
+		<div style="float:left;width:48%;font-size:15px;color:#410000;font-weight:bold;">
+			<p>&nbsp;</p>
+			<p>販売価格</p>
+			<p>2,100円(税込)</p>
+			<p><a href="javascript:alert('跳转自营销售电商平台');" target="_blank"><img src="/front/images/r_basketBtn.png" width="205" height="50"></a></p>
+		</div>		
+	</div>
+	<div>
+		<h3 style="font-size:18px;color:#410000;font-weight:bold;margin-bottom:0;padding-bottom:0;">■商品詳細</h3>
+		<div id="richtext">
+			
+		</div>	
+	</div>
+</div>
