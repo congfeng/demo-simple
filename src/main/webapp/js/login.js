@@ -11,14 +11,28 @@ $(function(){
 		if($("#username").val() == ""){
 			layer.open({
 				content : '用户名不能为空',
-				btn : [ '确定' ]
+				btn : [ '确定' ],
+				success:function(){
+					is_login_tip = true;
+				},
+				yes:function(i){
+					layer.close(i);
+					is_login_tip = false;
+				}
 			});
 			return;
 		}
 		if($("#password").val() == ""){
 			layer.open({
 				content : '密码不能为空',
-				btn : [ '确定' ]
+				btn : [ '确定' ],
+				success:function(){
+					is_login_tip = true;
+				},
+				yes:function(i){
+					layer.close(i);
+					is_login_tip = false;
+				}
 			});
 			return;
 		}
@@ -54,8 +68,13 @@ $(function(){
 		})
 	})
 	$(window).keydown(function (e) { 
-		if (e.which == 13 &&!is_login_tip) { 
-			$("#login-button").click();
+		if (e.which == 13) { 
+			if(is_login_tip){
+				layer.closeAll();
+				is_login_tip = false;
+			}else{
+				$("#login-button").click();
+			}
 		} 
 	})
 })
