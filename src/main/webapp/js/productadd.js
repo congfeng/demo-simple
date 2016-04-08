@@ -69,12 +69,11 @@ nsApp.controller('ProductAddController',function($scope,$routeParams) {
 		//showAlert('功能建设中....');
 		layer.open({
 			type: 2,
-			shadeClose: true,
-			title: ['商品详情预览', 'font-size:18px;color:green;'],
 			offset:'10px',
 			area: '716px',
-			content:['/pages/preview.html','no'],
-			maxHeight:'500px',
+			shadeClose: true,
+			title: ['商品详情预览', 'font-size:18px;color:green;'],
+			content:['/pages/preview2product.html','no'],
 			success:function(l,i){
 				var previewJQdom = $($($(l[0]).find('iframe')[0]).contents().get(0));
 				$(previewJQdom.find('#productName')[0]).text($('#name').val());
