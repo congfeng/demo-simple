@@ -46,7 +46,7 @@ $(function(){
 							data:{'remoteUrl':data.UploadBasePath+notice.richText},
 							success:function(richText){
 								$('#article_'+noticeId+' >.blog_text').html(richText);
-								uParse('.blog_text', {rootPath: '/resources/ueditor/'});
+								uParse('.blog_text', {rootPath: '/resources/ueditor1_4_3_2/'});
 							}
 						});
 					}else{
@@ -55,13 +55,13 @@ $(function(){
 							//dataType:'json',
 							success:function(richText){
 								$('#article_'+noticeId+' >.blog_text').html(richText);
-								uParse('.blog_text', {rootPath: '/resources/ueditor/'});
+								uParse('.blog_text', {rootPath: '/resources/ueditor1_4_3_2/'});
 							}
 						});
 					}
 				}
 			});
-			uParse('.blog_text', {rootPath: '/resources/ueditor/'});
+			uParse('.blog_text', {rootPath: '/resources/ueditor1_4_3_2/'});
 			var pagination = "<div class='wp-pagenavi'><span class='pages'>"+data.pager.pageNo+" / "+data.pager.maxPageNo+"</span>";
 			if(!data.pager.firstPage){
 				pagination += "<a class='previouspostslink' rel='prev' href='info.html?type="+type+"&pageNo="+(data.pager.pageNo-1)+"'>«</a>";

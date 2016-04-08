@@ -19,7 +19,7 @@ $(function(){
 						data:{'remoteUrl':data.UploadBasePath+product.richText},
 						success:function(richText){
 							$('.productrichtext').html(richText);
-							uParse('.productrichtext', {rootPath: '/resources/ueditor/'});
+							uParse('.productrichtext', {rootPath: '/resources/ueditor1_4_3_2/'});
 						}
 					});
 				}else{
@@ -28,7 +28,7 @@ $(function(){
 						//dataType:'json',
 						success:function(richText){
 							$('.productrichtext').html(richText);
-							uParse('.productrichtext', {rootPath: '/resources/ueditor/'});
+							uParse('.productrichtext', {rootPath: '/resources/ueditor1_4_3_2/'});
 						}
 					});
 				}
