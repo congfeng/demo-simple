@@ -172,12 +172,11 @@ min-height:720px;
 
 }
 /*margin*/
-.background01,#sec03 dl,.backgroundlp01{margin:0 auto;}
+.background01,#sec03 dl{margin:0 auto;}
 /*text-align*/
 #sec02 h2,#sec02 h3,#sec03 h2,#sec04 h2,#sec04 h3,#sec05 h2,#sec05 p,
 #seclp01 h2,#seclp02 h2,
-.nutrition01 h3,.nutrition02 h3,.nutrition03 h3,.nutrition04 h3,.nutrition05 h3,
-.seclp03-box01 h2,.seclp03-box04 h2,.seclp03-box04 ul li,.backgroundlp04 h2,.seclp03-box05 h6,.seclp04-sec h2{
+.seclp03-box01 h2,.seclp03-box04 h2,.seclp03-box04 ul li,.seclp04-sec h2{
 text-align:center;
 }
 .left-box{float:left;}
@@ -706,12 +705,7 @@ margin-bottom:30px;
 	margin:80px auto 0;
 	overflow:hidden;
 }
-.backgroundlp01{
-	width:1000px;
-	height:480px;
-	margin:30px auto 0;
-	background-image:url("../images/background-lp-01.png");
-}
+
 .seclp-box01{margin:60px 0 0 20px;}
 .seclp-box01 p{
 	width:350px;
@@ -724,42 +718,15 @@ margin-bottom:30px;
 	margin:80px auto 0;
 	overflow:hidden;
 }
-.backgroundlp02{
-	width:1000px;
-	height:910px;
-	margin:30px auto 0;
-	background-image:url("../images/background-lp-02.png");
-}
-.nutrition01 p,.nutrition02 p,.nutrition03 p,.nutrition04 p,.nutrition05 p,
-.seclp03-box01 p,.seclp03-box03 p,.seclp03-box04 ul li,.seclp03-box05 h6,.seclp03-box06 p,.seclp04-box01 p,.annotation02 h6{
+
+.seclp03-box01 p,.seclp03-box03 p,.seclp03-box04 ul li,.seclp03-box06 p,.seclp04-box01 p,.annotation02 h6{
 	font-size:18px;
 	font-weight:normal;
 	line-height:1.8;
 	font-family: ヒラギノ角ゴシック Pro, '游ゴシック体' , 'Yu Gothic', YuGothic, 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif; 
 }
-.nutrition01{width:200px;margin:105px 0 0 100px;}
-.nutrition01 h3{margin-bottom:10px;}
-.nutrition01 em{margin-left:30px;}
-.nutrition02{width:240px;margin:50px 0 0 355px;}
-.nutrition02 h3{margin-bottom:20px;}
-.nutrition02 em{margin-left:60px;}
-.nutrition03{width:220px;margin:50px 0 0 65px;clear:both;}
-.nutrition03 h3{margin-bottom:20px;}
-.nutrition03 em{margin:0 0 0 50px;}
-.nutrition04{width:200px;margin:-10px 0 0 455px;}
-.nutrition04 h3{margin-bottom:10px;}
-.nutrition04 em{margin:0 0 0 30px;}
-.nutrition05{width:240px;margin:40px 0 0 20px;}
-.nutrition05 h3{margin-bottom:20px;}
-.nutrition05 em{margin:0 0 0 60px;}
-.annotation{margin:100px 0 0 90px;}
 
-.backgroundlp03{
-	width:1000px;
-	height:1400px;
-	margin:30px auto 0;
-	background-image:url("../images/background-lp-03-1.png");
-}
+.annotation{margin:100px 0 0 90px;}
 
 .seclp03-box01{
 	width:440px;
@@ -783,38 +750,10 @@ margin-bottom:30px;
 .seclp03-box04 ul{margin:30px 0 0 70px;}
 .seclp03-box04 ul li{text-decoration:underline;font-weight:normal;}
 .seclp03-box04 ul li:hover{color:#a77;}
-.commodity-list01{background:url("../images/photo-lp-01.png") no-repeat bottom;}
-.commodity-list02{background:url("../images/photo-lp-02.png") no-repeat bottom;}
-.commodity-list03{background:url("../images/photo-lp-03.png") no-repeat bottom;}
-.commodity-list04{background:url("../images/photo-lp-04.png") no-repeat bottom;}
-.commodity-list05{background:url("../images/photo-lp-05.png") no-repeat bottom;}
-.commodity-list06{background:url("../images/photo-lp-06.png") no-repeat bottom;}
 
-.backgroundlp04{
-	width:876px;
-	height:422px;
-	margin:30px auto 0;
-	overflow:hidden;
-	background-image:url("../images/background-lp-03-2.png");
-}
-.backgroundlp04 h2{margin:30px 0 60px 0;}
-.seclp03-box05{
-	width:185px;
-	height:250px;
-	margin:0 65px 0 120px;
-	background:url("../images/voice.jpg") no-repeat top;
-}
-.seclp03-box05 h6{margin-top:210px;}
 .seclp03-box06{width:410px;}
 .seclp03-box06 h3{margin-bottom:10px;}
 
-.backgroundlp05{
-	width:1000px;
-	height:480px;
-	margin:80px auto 0;
-	overflow:hidden;
-	background:url("../images/background-lp-04.png") no-repeat bottom;
-}
 .seclp04-box01{margin:-65px 0 0 385px;}
 .seclp04-box01 h2{margin:0px 0 30px 150px;}
 .seclp04-box01 p,.link-drink{font-size:16px;}
@@ -823,33 +762,7 @@ margin-bottom:30px;
 .link-drink a{text-decoration:underline;}
 
 .seclp04-sec{margin:40px auto 0;}
-.nutrition06,.nutrition07,.nutrition08,.nutrition09,.nutrition10,.nutrition11,.nutrition12{
-	width:200px;
-	height:170px;
-	margin:50px 20px 0px 20px;
-}
-.nutrition06 h3,.nutrition07 h3,.nutrition08 h3,.nutrition09 h3,.nutrition10 h3,.nutrition11 h3,.nutrition12 h3,
-.nutrition06 p,.nutrition07 p,.nutrition08 p,.nutrition09 p,.nutrition10 p,.nutrition11 p,.nutrition12 p,
-.nutrition06 p span,.nutrition07 p span,.nutrition08 p span,.nutrition09 p span,.nutrition10 p span,.nutrition11 p span,.nutrition12 p span{
-	color:#ff516e;
-	text-align:center;
-}
-.nutrition06 h3,.nutrition07 h3,.nutrition08 h3,.nutrition09 h3,.nutrition10 h3,.nutrition11 h3,.nutrition12 h3{
-	margin:30px 0 10px 0;
-}
-.nutrition06 p,.nutrition07 p,.nutrition08 p,.nutrition09 p,.nutrition10 p,.nutrition11 p,.nutrition12 p{
-	font-size:24px;
-}
-.nutrition06 p span,.nutrition07 p span,.nutrition08 p span,.nutrition09 p span,.nutrition10 p span,.nutrition11 p span,.nutrition12 p span{
-	font-size:30px;
-}
-.nutrition06{background:url("../images/background-lp-05.png") no-repeat center;}
-.nutrition07{background:url("../images/background-lp-11.png") no-repeat center;}
-.nutrition08{background:url("../images/background-lp-06.png") no-repeat center;}
-.nutrition09{background:url("../images/background-lp-7.png") no-repeat center;}
-.nutrition10{background:url("../images/background-lp-08.png") no-repeat center;}
-.nutrition11{background:url("../images/background-lp-09.png") no-repeat center;}
-.nutrition12{background:url("../images/background-lp-10.png") no-repeat center;}
+
 .annotation02{margin:20px 45px 20px 0px;}
 .annotation02 h6{font-size:14px;}
 
