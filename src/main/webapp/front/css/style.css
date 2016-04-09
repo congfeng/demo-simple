@@ -4,9 +4,7 @@ Theme Name: JetB_press-8
 Author: Jet-B
 Author URI: http://jetb.co.jp/
 */
-/*==================================================
-リセット
-==================================================*/
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 margin: 0;
 padding: 0;
@@ -35,7 +33,7 @@ padding:0;
 .cf:after { clear: both; }
 
 
-#tinymce{/*投稿記事編集の背景*/
+#tinymce{
 background:#fff;
 min-width: 100%;
 color:#000;
@@ -47,13 +45,6 @@ color:#000;
 .aligncenter {display: block; margin-right: auto; margin-left: auto;}
 
 
-/*==================================================
-フォント設定
-==================================================*/
-
-/*==================================================
-全体
-==================================================*/
 body{
 min-width:1000px;
 transition:0.6s;
@@ -89,9 +80,6 @@ a img:hover{opacity:0.7;}
 
 blockquote{margin: 10px;}
 
-/*==================================================
-hr 設定
-==================================================*/
 hr {
     display:block;
     width:100%;
@@ -101,9 +89,6 @@ hr {
 }
 
 
-/*==================================================
-ヘッダー
-==================================================*/
 #upper{
 width:100%;
 height:auto;
@@ -122,10 +107,7 @@ float:left;
 width:420px;
 }
 
-/*==================================================
-メインビジュアル(metaslider, film_roll等の大枠)
-==================================================*/
-#main-visual{/*このIDで囲みましょう*/
+#main-visual{
 width:100%;
 height:auto;
 margin:-110px 0 0 0;
@@ -136,9 +118,7 @@ overflow:hidden;
 .visual-box img{
 	width:100%;
 }
-/*==================================================
-グローバルメニュー
-==================================================*/
+
 #g_nav{
 width:980px;
 margin:0 auto;
@@ -156,17 +136,15 @@ padding:0px 18px 9px;
 display:inline;
 }
 .current{border-bottom:3px solid #410000;}
-.fixed{/*メニュー固定*/
+.fixed{
 position: fixed;
 top: 0px;
 width: 100%;
 z-index: 100;
 }
 
-/*==================================================
-共通
-==================================================*/
-#wrapper{/*大枠*/
+
+#wrapper{
 width:100%;
 min-height:720px;
 
@@ -315,11 +293,9 @@ INDEX
 font-size:20px;
 line-height: 1.8;
 }
-/*==================================================
-ニュース
-==================================================*/
-#news_area{/*ニュース*/
-width:630px;/*ニュースコンテンツの大きさ*/
+
+#news_area{
+width:630px;
 height:auto;
 margin:10px auto;
 padding:0px;
@@ -359,13 +335,8 @@ text-align:left;
 font-size:12px;
 }
 
-/*#news_area ol a{color:#4a3f2b;}
-#news_area ol a:hover{color:#7d1b04;}*/
 
-/*==================================================
-ブログ(archive,single)
-==================================================*/
-#blog_area{/*ブログの枠(外)*/
+#blog_area{
 width:960px;
 height:auto;
 
@@ -377,7 +348,7 @@ width:960px;
 
 margin:0px auto;
 }
-#blog_cont{/*ブログの枠(内)*/
+#blog_cont{
 width:700px;
 height:auto;
 float:right;
@@ -391,21 +362,21 @@ margin-bottom:50px;
 border:1px solid #ccc;
 
 }
-.blog_entry{/*ブログと検索結果のタイトルと日付*/
+.blog_entry{
 width:100%;
 height:auto;
 margin:0px auto; 
 }
-.blog_entry h1{/*ブログと検索結果タイトル*/
+.blog_entry h1{
 font-size:20px;
 text-align:left;
 }
-.blog_entry span{/*ブログ日付*/
+.blog_entry span{
 padding-top:8px;
 font-size:14px;
 float:right;
 }
-.blog_text{/*投稿記事*/
+.blog_text{
 width:100%;
 height:auto;
 margin:0px auto; 
@@ -430,7 +401,7 @@ border:1px solid #ccc;
 	height:180px;
 	margin:10px;
 }
-.archive-header{/*アーカイブタイトル*/
+.archive-header{
 width:100%;
 height:auto;
 overflow:hidden;
@@ -439,16 +410,12 @@ font-size:34px;
 }
 
 
-
-
-.wp-pagenavi{/*ブログナビゲーション*/
+.wp-pagenavi{
 padding:10px 0px;
 text-align:center;
 }
 
 
-
-/*単一記事ナビゲーション*/
 .nav-previous{float:left;}
 .nav-next{float:right;}
 .nav-previous a, .nav-next a{
@@ -464,7 +431,6 @@ border-bottom:1px solid #aa9b77;
 }
 
 
-/*コメントゾーン*/
 .comment{
 width:100%;
 height:auto;
@@ -529,9 +495,7 @@ height:30px;
 	position:relative;top:40px;
 }
 
-/*==================================================
-サイド
-==================================================*/
+
 #side_bar{
 width:200px;
 height:auto;
@@ -558,9 +522,7 @@ margin:20px 0 0 0;
 	font-size:22px;
 }
 
-/*==================================================
-フッター
-==================================================*/
+
 footer{
 width:100%;
 height:60px;
@@ -583,9 +545,6 @@ overflow:hidden;
 
 
 
-/*==================================================
-メールフォーム(#mailformで囲む)
-==================================================*/
 #mailform_box{
 height:auto;
 padding:20px;
@@ -656,9 +615,6 @@ text-align:center;
 	padding:10px;
 }
 
-/*===================================
-検索フォーム
-===================================*/
 
 #searchform2{
 width:200px;
@@ -681,9 +637,6 @@ border: 1px solid #000;
 }  
 
 
-/*===================================
-固定ページ
-===================================*/
 #page_area{
 width:1000px;
 overflow:hidden;
@@ -695,12 +648,6 @@ text-align:center;
 margin-bottom:30px;
 }
 
-
-
-
-/*-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-▼-
-各ページ
-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-▲-*/
 #seclp01{
 	margin:80px auto 0;
 	overflow:hidden;
