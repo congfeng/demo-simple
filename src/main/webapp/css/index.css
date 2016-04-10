@@ -1,10 +1,12 @@
 body{
 	background-color : #F6F6F6;
 }
-.blank_split{
-	left: 0;
+.blank_box{
+	left:0;
 	width: 100%;
-	height:10px;
+	display:block;
+	background:#FFFFFF;
+	border-bottom:1px solid #F6F6F6;
 }
 .maintab {
 	position: absolute;
