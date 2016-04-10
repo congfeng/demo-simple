@@ -3,7 +3,6 @@
  */
 package com.cf.code.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,7 +102,7 @@ public class NoticeController {
     		@RequestParam(required = true) Integer ntype,
     		@RequestParam(required = true) String title,
     		@RequestParam(required = false) String content,
-    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
 		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
 		Notice notice = new Notice();
 		notice.setNoticeType(ntype);
@@ -125,7 +123,7 @@ public class NoticeController {
 			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
+			FileUtil.deleteFile(UploadFolder+"/"+n.getRichText());
 		}
 		return model;
     }
@@ -137,12 +135,12 @@ public class NoticeController {
     		@RequestParam(required = true) Integer id,
     		@RequestParam(required = false) String title,
     		@RequestParam(required = false) String content,
-    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
 		Notice n = this.noticeDaoRead.find(id);
 		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
 		boolean b = this.noticeDao.update(id, title, content, richText);
 		if(b&&!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+"/"+n.getRichText()));
+			FileUtil.deleteFile(UploadFolder+"/"+n.getRichText());
 		}
 		return model;
     }

@@ -3,7 +3,6 @@
  */
 package com.cf.code.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,7 +107,7 @@ public class ProductController {
     		@RequestParam(required = true) String name,
     		@RequestParam(required = false) String sku,
     		@RequestParam(value = "image", required = false) Object imageObj,
-    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException {
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException {
 		String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
 		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
 		Product product = new Product();
@@ -132,10 +130,10 @@ public class ProductController {
 			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(p.getImage())){
-			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getImage()));
+			FileUtil.deleteFile(UploadFolder+"/"+p.getImage());
 		}
 		if(!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
+			FileUtil.deleteFile(UploadFolder+"/"+p.getRichText());
 		}
 		return model;
     }
@@ -149,7 +147,7 @@ public class ProductController {
     		@RequestParam(required = false) String name,
     		@RequestParam(required = false) String sku,
     		@RequestParam(value = "image", required = false) Object imageObj,
-    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IllegalStateException, IOException{
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
 		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
 		Product p = this.productDaoRead.find(id);
 		boolean b = false;
@@ -157,13 +155,13 @@ public class ProductController {
 			String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
 			b = this.productDao.update(id, name, sku, image,richText);
 			if(b&&!StringUtil.isNullOrEmpty(p.getImage())){
-				FileUtils.forceDelete(new File(UploadFolder+"/"+p.getImage()));
+				FileUtil.deleteFile(UploadFolder+"/"+p.getImage());
 			}
 		}else{
 			b = this.productDao.update(id, name, sku, p.getImage(),richText);
 		}
 		if(b&&!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtils.forceDelete(new File(UploadFolder+"/"+p.getRichText()));
+			FileUtil.deleteFile(UploadFolder+"/"+p.getRichText());
 		}
 		return model;
     }

@@ -152,14 +152,14 @@ public class UeditorController{
     			".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"});/* 列出的文件类型 */
     }
 	
-    private void uploadimage(Model model,HttpServletRequest request,Object fileObj) throws IllegalStateException, IOException {
+    private void uploadimage(Model model,HttpServletRequest request,Object fileObj) throws IOException {
 		String image = FileUtil.upload(fileObj, UploadFolder, "image");
     	model.addAttribute("url",UploadPath+image);
 		model.addAttribute("title",image);
 		model.addAttribute("original",image);    
 	}
     
-    private void uploadscrawl(Model model,HttpServletRequest request,Object fileObj) throws IllegalStateException, IOException {
+    private void uploadscrawl(Model model,HttpServletRequest request,Object fileObj) throws IOException {
 		String scrawl = FileUtil.uploadScrawl(fileObj, UploadFolder, "scrawl");
 		model.addAttribute("url",UploadPath+scrawl);
 		model.addAttribute("title",scrawl);
@@ -183,7 +183,7 @@ public class UeditorController{
     	model.addAttribute("list",list);
     }
     
-    private void uploadvideo(Model model,HttpServletRequest request,Object fileObj) throws IllegalStateException, IOException {
+    private void uploadvideo(Model model,HttpServletRequest request,Object fileObj) throws IOException {
 		String video = FileUtil.upload(fileObj, UploadFolder, "video");
 		model.addAttribute("url",UploadPath+video);
 		model.addAttribute("title",video);

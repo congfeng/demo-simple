@@ -23,13 +23,8 @@ $(function(){
 						}
 					});
 				}else{
-					$.ajax({
-						url:data.UploadBasePath+product.richText,
-						//dataType:'json',
-						success:function(richText){
-							$('.productrichtext').html(richText);
-							uParse('.productrichtext', {rootPath: '/resources/ueditor1_4_3_2/'});
-						}
+					$('.productrichtext').load(data.UploadBasePath+product.richText,function(){
+						uParse('.productrichtext', {rootPath: '/resources/ueditor1_4_3_2/'});
 					});
 				}
 			}			

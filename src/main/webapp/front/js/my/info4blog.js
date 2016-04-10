@@ -23,13 +23,8 @@ $(function(){
 						}
 					});
 				}else{
-					$.ajax({
-						url:data.UploadBasePath+notice.richText,
-						//dataType:'json',
-						success:function(richText){
-							$('.blog_text').html(richText);
-							uParse('.blog_text', {rootPath: '/resources/ueditor1_4_3_2/'});
-						}
+					$('.blog_text').load(data.UploadBasePath+notice.richText,function(){
+						uParse('.blog_text', {rootPath: '/resources/ueditor1_4_3_2/'});
 					});
 				}
 			}			
