@@ -49,10 +49,13 @@ body{
 }
 
 .main_content .box{
-	padding:10px;
+	overflow:hidden;
 	background:#FFFFFF;
+}
+
+.main_content .box_nav{
 	border-bottom:1px solid #F6F6F6;
 	min-height:26px;
 	line-height:26px;
+	padding:10px;
 }
-

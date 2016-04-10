@@ -1,0 +1,13 @@
+.nav_icon{
+    text-align: center;
+	width: 30px;
+	height: 30px;
+	line-height:30px;
+	border-radius: 50%;
+	background: #777;
+	float:left;
+}
+.nav_icon > i {
+	font-size: 20px;
+	color:#FFFFFF;
+}
