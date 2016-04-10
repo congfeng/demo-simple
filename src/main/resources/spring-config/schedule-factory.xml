@@ -28,6 +28,7 @@
 	</bean>
 	
 	<!-- 定时任务主配置 -->
+	<!--  
 	<bean id="nsScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" scope="singleton" lazy-init="false"> 
 		<property name="applicationContextSchedulerContextKey" value="ApplicationContextKey" />
 		<property name="dataSource" ref="Quartz-DataSource" />
@@ -62,5 +63,6 @@
 			</list>
 		</property>
 	</bean>
+	-->
 
 </beans>

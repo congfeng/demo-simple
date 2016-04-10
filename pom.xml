@@ -137,11 +137,16 @@
 		<dependency>
 		    <groupId>org.springframework.session</groupId>
 		    <artifactId>spring-session-data-redis</artifactId>
+		    <!--  
 		    <version>1.1.0.RELEASE</version>
+		    -->
+		    <version>1.0.2.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>redis.clients</groupId>
 		    <artifactId>jedis</artifactId>
+		    <version>2.5.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.corundumstudio.socketio</groupId>
@@ -194,9 +199,11 @@
 				<version>8.0.0.M2</version>
 				<configuration>
 					<webApp>${basedir}/target/${project.build.finalName}.war</webApp>
+					<!--  
 					<webAppConfig>
 						<defaultsDescriptor>${basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
 					</webAppConfig>
+					-->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<webDefaultXml>${basedir}/src/main/resources/webdefault.xml</webDefaultXml>
 					<connectors>
