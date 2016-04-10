@@ -1,28 +1,26 @@
-var cur_tab;
+var cur_tab_id;
+var main_content = {};
 $(function(){
 	$('.maintab div').click(function(){
-		if(cur_tab == this.id){
+		if(cur_tab_id == this.id){
 			return ;
 		}
-		cur_tab = this.id;
+		cur_tab_id = this.id;
 		$('.maintab div i,span').css('color','#333');
 		$(this.querySelectorAll('i,span')).css('color','#00CC99');
-		window.location.href='#/'+this.id;
+		var cur_tab = $(this);
+		var main_page = cur_tab.data('page');
+		var main_cb = cur_tab.data('cb');
+		$('.main').load(main_page,function(){
+			eval(main_cb)();
+			var main_content_y = 0;
+			if(!_.isEmpty(main_content[cur_tab_id])){
+				main_content_y = main_content[cur_tab_id].y;
+			}
+			main_content[cur_tab_id] = new IScroll('.main_content', {mouseWheel: true});
+			main_content[cur_tab_id].scrollBy(0,main_content_y);
+		});
 	});
 })
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
-var myApp = angular.module('myApp',['ngRoute']);  
-myApp.config(['$routeProvider',function ($routeProvider) {  
-    $routeProvider  
-        .when('/tab1', {templateUrl: 'tab1.html',controller: 'DefaultController'})
-        .when('/tab2', {templateUrl: 'tab2.html',controller: 'DefaultController'})  
-        .when('/tab3', {templateUrl: 'tab3.html',controller: 'DefaultController'})  
-        .when('/tab4', {templateUrl: 'tab4.html',controller: 'DefaultController'})    
-		.otherwise({redirectTo: '/welcome'})
-		;  
-}]);
-
-myApp.controller('DefaultController',function($scope,$routeParams) {  
-	//$scope.id = $routeParams.id;
-});

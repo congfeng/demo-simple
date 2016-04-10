@@ -1,12 +1,6 @@
-var myScroll_tab1;
-$(function(){
-	var y = 0;
-	if(!_.isEmpty(myScroll_tab1)){
-		y = myScroll_tab1.y;
-	}
-	myScroll_tab1 = new IScroll('.main_tab1', {mouseWheel: true});
-	myScroll_tab1.scrollBy(0,y);
-	new IScroll('.main_nav_tab1', { 
+var tab1_fn = function(){
+	console.log('tab1_fn');
+	new IScroll('.main_content_nav', { 
 		mouseWheel:true,
 		//bounce:false,
 		momentum: false,
@@ -25,4 +19,4 @@ $(function(){
 			$('.dotty2').css('background','#06c1ae');
 		}
 	});
-})
+}
