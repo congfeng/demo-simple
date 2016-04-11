@@ -122,17 +122,10 @@ INSERT INTO PUBLIC.PRODUCT(ID, PRODUCT_TYPE, NAME, SKU, IMAGE, RICH_TEXT, CREATE
 (33, 1, STRINGDECODE('\u59dc\u9ec4\u529b\u91cf/ 10\u672c'), '', NULL, NULL, now(), now()),
 (34, 1, STRINGDECODE('\u8461\u8404\u7cd6\u80fa'), '', 'product/image/2016/04/04/d3741605-167b-45a0-827e-60d910ed83e8.jpg', NULL, now(), now()),
 (35, 1, STRINGDECODE('\u84dd\u8393\u80fd30 / 5'), '', 'product/image/2016/04/04/10a4ba77-5aff-40b1-a735-68d0587cd1d1.jpg', NULL, now(), now());
-INSERT INTO PUBLIC.PRODUCT(ID, PRODUCT_TYPE, NAME, SKU, IMAGE, RICH_TEXT, CREATE_TIME, UPDATE_TIME) VALUES
-(36, 2, STRINGDECODE('\u6d4b\u8bd5\u5546\u54c1'), '', 'product/image/2016/04/07/bda73383-2e27-4f49-8789-3d2246e91cc2.bmp', NULL, now(), NULL);
 
 INSERT INTO PUBLIC.NOTICE(ID, NOTICE_TYPE, TITLE, CONTENT, RICH_TEXT, CREATE_TIME, UPDATE_TIME) VALUES
 (1, 1, STRINGDECODE('4\u6708\u7684\u4e34\u65f6\u4f11\u4e1a\u65e5'), '', 'richText/2016/04/09/4ae225d9-097c-44a6-a832-dd34d3c6ba92.html', now(), now()),
 (2, 1, STRINGDECODE('\u9752\u6c41\u4f18\u60e0\u52b5'), '', 'richText/2016/04/09/10a6f304-3fd9-4cb8-bdda-b59fe97fb4e4.html', now(), now()),
 (3, 1, STRINGDECODE('\u30d3\u30d3\u30c3\u30c8\u80f6\u539f\u86cb\u767d'), '', 'richText/2016/04/09/1601d716-3e56-48dd-a7be-699824419de1.html', now(), now()),
-(4, 1, STRINGDECODE('3\u65b0\u95fb3\u65b0\u95fb3\u65b0\u95fb3\u65b0\u95fb3\u65b0\u95fb3'), '', 'richText/2016/04/09/524a170c-07f1-4e72-aacd-92f081a7f32b.html', now(), now()),
-(5, 1, STRINGDECODE('\u65b0\u95fb2'), '', 'richText/2016/04/09/f023e3e1-6651-4c98-941e-11c47cac3d50.html', now(), now()),
-(8, 1, STRINGDECODE('\u7684\u9876\u9876\u9876\u9876\u9876'), '', 'richText/2016/04/04/0d666ad3-4066-4ceb-b90c-40fe90e14cbe.html', now(), NULL),
-(9, 1, '1', '', 'richText/2016/04/07/babacdf1-ca3f-43c1-a0dc-c6f3b692677f.html', now(), now()),
-(10, 1, 'dddx', '', 'richText/2016/04/07/7d174a5a-104a-4d3c-943d-825c1e34fea8.html', now(), now()),
-(11, 1, STRINGDECODE('\u660e\u5929\u653e\u5047'), '', 'richText/2016/04/07/776c6a43-9fbc-41a8-9f2c-b27dc6697b5b.html', now(), NULL);
-
+(4, 1, STRINGDECODE('\u901a\u544a\uff08\u6a21\u677f\uff09'), '', 'richText/2016/04/09/9a70beff-30f2-45c5-9a95-601e0e2a7f7b.html', now(), now()),
+(5, 1, STRINGDECODE('\u660e\u5929\u653e\u5047\uff08\u6d82\u9e26\uff09'), '', 'richText/2016/04/09/02385ded-9cfc-43a9-a149-e895852cc089.html', now(), now());
