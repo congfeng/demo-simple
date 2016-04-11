@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -153,15 +154,15 @@ public class UeditorController{
     }
 	
     private void uploadimage(Model model,HttpServletRequest request,Object fileObj) throws IOException {
-		String image = FileUtil.upload(fileObj, UploadFolder, "image");
-    	model.addAttribute("url",UploadPath+image);
+		String image = FileUtil.upload(fileObj, getUploadFolder(request.getSession()), "image");
+    	model.addAttribute("url",getUploadPath()+image);
 		model.addAttribute("title",image);
 		model.addAttribute("original",image);    
 	}
     
     private void uploadscrawl(Model model,HttpServletRequest request,Object fileObj) throws IOException {
-		String scrawl = FileUtil.uploadScrawl(fileObj, UploadFolder, "scrawl");
-		model.addAttribute("url",UploadPath+scrawl);
+		String scrawl = FileUtil.uploadScrawl(fileObj, getUploadFolder(request.getSession()), "scrawl");
+		model.addAttribute("url",getUploadPath()+scrawl);
 		model.addAttribute("title",scrawl);
 		model.addAttribute("original",scrawl);
     }
@@ -184,8 +185,8 @@ public class UeditorController{
     }
     
     private void uploadvideo(Model model,HttpServletRequest request,Object fileObj) throws IOException {
-		String video = FileUtil.upload(fileObj, UploadFolder, "video");
-		model.addAttribute("url",UploadPath+video);
+		String video = FileUtil.upload(fileObj, getUploadFolder(request.getSession()), "video");
+		model.addAttribute("url",getUploadPath()+video);
 		model.addAttribute("title",video);
 		model.addAttribute("original",video);
     }
@@ -215,4 +216,19 @@ public class UeditorController{
     private void listfile(Model model,HttpServletRequest request) {
 		
     }
+    
+    private String getUploadFolder(HttpSession session){
+		if(!StringUtil.isNullOrEmpty(UploadFolder)){
+			return UploadFolder;
+		}
+		return session.getServletContext().getRealPath("/")+"upload";
+	}
+	
+	private String getUploadPath(){
+		if(!StringUtil.isNullOrEmpty(UploadPath)){
+			return UploadPath;
+		}
+		return "/upload/";
+	}
+	
 }

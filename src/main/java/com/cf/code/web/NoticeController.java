@@ -81,7 +81,7 @@ public class NoticeController {
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("notices", notices);   
 		model.addAttribute("pager", pager);
-		model.addAttribute("UploadBasePath", UploadPath);
+		model.addAttribute("UploadBasePath", getUploadPath());
         return model;
     }
 	
@@ -91,7 +91,7 @@ public class NoticeController {
     public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
 		model.addAttribute("notice",this.noticeDaoRead.find(id));
-		model.addAttribute("UploadBasePath", UploadPath);
+		model.addAttribute("UploadBasePath", getUploadPath());
 		return model;
     }
 	
@@ -103,7 +103,7 @@ public class NoticeController {
     		@RequestParam(required = true) String title,
     		@RequestParam(required = false) String content,
     		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
-		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
+		String richText = FileUtil.uploadRichText(richTextObj, getUploadFolder(session), "richText");
 		Notice notice = new Notice();
 		notice.setNoticeType(ntype);
 		notice.setTitle(title);
@@ -123,7 +123,7 @@ public class NoticeController {
 			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtil.deleteFile(UploadFolder+"/"+n.getRichText());
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+n.getRichText());
 		}
 		return model;
     }
@@ -137,12 +137,26 @@ public class NoticeController {
     		@RequestParam(required = false) String content,
     		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
 		Notice n = this.noticeDaoRead.find(id);
-		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "richText");
+		String richText = FileUtil.uploadRichText(richTextObj, getUploadFolder(session), "richText");
 		boolean b = this.noticeDao.update(id, title, content, richText);
 		if(b&&!StringUtil.isNullOrEmpty(n.getRichText())){
-			FileUtil.deleteFile(UploadFolder+"/"+n.getRichText());
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+n.getRichText());
 		}
 		return model;
     }
+	
+	private String getUploadFolder(HttpSession session){
+		if(!StringUtil.isNullOrEmpty(UploadFolder)){
+			return UploadFolder;
+		}
+		return session.getServletContext().getRealPath("/")+"upload";
+	}
+	
+	private String getUploadPath(){
+		if(!StringUtil.isNullOrEmpty(UploadPath)){
+			return UploadPath;
+		}
+		return "/upload/";
+	}
 	
 }

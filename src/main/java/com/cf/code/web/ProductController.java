@@ -85,7 +85,7 @@ public class ProductController {
 				pager.getStartIndex(), pager.getPageSize()); 
 		model.addAttribute("products", products);   
 		model.addAttribute("pager", pager);
-		model.addAttribute("UploadBasePath", UploadPath);
+		model.addAttribute("UploadBasePath", getUploadPath());
         return model;
     }
 	
@@ -95,7 +95,7 @@ public class ProductController {
     public Model find(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
     		@RequestParam(required = true) Integer id){
 		model.addAttribute("product",this.productDaoRead.find(id));
-		model.addAttribute("UploadBasePath", UploadPath);
+		model.addAttribute("UploadBasePath", getUploadPath());
 		return model;
     }
 	
@@ -108,8 +108,8 @@ public class ProductController {
     		@RequestParam(required = false) String sku,
     		@RequestParam(value = "image", required = false) Object imageObj,
     		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException {
-		String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
-		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
+		String image = FileUtil.upload(imageObj, getUploadFolder(session), "product/image");
+		String richText = FileUtil.uploadRichText(richTextObj, getUploadFolder(session), "product/richText");
 		Product product = new Product();
 		product.setProductType(ptype);
 		product.setName(name);
@@ -130,10 +130,10 @@ public class ProductController {
 			return model;
 		}
 		if(!StringUtil.isNullOrEmpty(p.getImage())){
-			FileUtil.deleteFile(UploadFolder+"/"+p.getImage());
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getImage());
 		}
 		if(!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtil.deleteFile(UploadFolder+"/"+p.getRichText());
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getRichText());
 		}
 		return model;
     }
@@ -148,22 +148,36 @@ public class ProductController {
     		@RequestParam(required = false) String sku,
     		@RequestParam(value = "image", required = false) Object imageObj,
     		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException{
-		String richText = FileUtil.uploadRichText(richTextObj, UploadFolder, "product/richText");
+		String richText = FileUtil.uploadRichText(richTextObj, getUploadFolder(session), "product/richText");
 		Product p = this.productDaoRead.find(id);
 		boolean b = false;
 		if(imageChange){
-			String image = FileUtil.upload(imageObj, UploadFolder, "product/image");
+			String image = FileUtil.upload(imageObj, getUploadFolder(session), "product/image");
 			b = this.productDao.update(id, name, sku, image,richText);
 			if(b&&!StringUtil.isNullOrEmpty(p.getImage())){
-				FileUtil.deleteFile(UploadFolder+"/"+p.getImage());
+				FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getImage());
 			}
 		}else{
 			b = this.productDao.update(id, name, sku, p.getImage(),richText);
 		}
 		if(b&&!StringUtil.isNullOrEmpty(p.getRichText())){
-			FileUtil.deleteFile(UploadFolder+"/"+p.getRichText());
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getRichText());
 		}
 		return model;
     }
+	
+	private String getUploadFolder(HttpSession session){
+		if(!StringUtil.isNullOrEmpty(UploadFolder)){
+			return UploadFolder;
+		}
+		return session.getServletContext().getRealPath("/")+"upload";
+	}
+	
+	private String getUploadPath(){
+		if(!StringUtil.isNullOrEmpty(UploadPath)){
+			return UploadPath;
+		}
+		return "/upload/";
+	}
 	
 }
