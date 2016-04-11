@@ -37,7 +37,9 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 			}
 			$('#name').val(product.name);
 			$('#sku').val(product.sku);
-			$('#qrcode').attr('src',data.UploadBasePath+product.qrcode);
+			if(!_.isEmpty(product.qrcode)){
+				$('#qrcode').attr('src',data.UploadBasePath+product.qrcode);
+			}
 			$("#image").fileinput({
 				language: "zh",
 				showCaption: false,
