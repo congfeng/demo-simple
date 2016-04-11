@@ -139,6 +139,19 @@ public class ProductController {
     }
 	
 	@AccessVerifier
+	@RequestMapping(value = {"/qrcode"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+    public Model qrcode(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
+    		@RequestParam(required = true) Integer id) throws Exception {
+		String url = "";
+		String qrcode = FileUtil.uploadQrcode(url, getUploadFolder(session), "product/qrcode");
+//		this.productDao.updateQrcode(id,qrcode);
+		model.addAttribute("qrcode", qrcode);
+		model.addAttribute("UploadBasePath", getUploadPath());
+		return model;
+    }
+	
+	@AccessVerifier
 	@RequestMapping(value = {"update"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Model update(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
