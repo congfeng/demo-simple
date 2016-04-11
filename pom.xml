@@ -108,11 +108,6 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		<dependency>
-		 	<groupId>org.quartz-scheduler</groupId>
-		 	<artifactId>quartz</artifactId>
-		 	<version>1.8.5</version>
-		</dependency>
 		<!-- database -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
