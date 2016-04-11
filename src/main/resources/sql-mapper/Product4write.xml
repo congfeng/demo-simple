@@ -20,6 +20,12 @@
 	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	
+	<update id="updateQrcode">
+	    UPDATE product 
+	    	SET qrcode = #{qrcode,jdbcType=VARCHAR}
+	    WHERE id = #{id,jdbcType=INTEGER}
+	</update>
+	
 	<delete id="delete">
 		DELETE FROM product WHERE id = #{id}
 	</delete>

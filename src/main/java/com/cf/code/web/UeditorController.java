@@ -221,7 +221,7 @@ public class UeditorController{
 		if(!StringUtil.isNullOrEmpty(UploadFolder)){
 			return UploadFolder;
 		}
-		return session.getServletContext().getRealPath("/")+"upload";
+		return session.getServletContext().getRealPath("/")+"/upload";
 	}
 	
 	private String getUploadPath(){

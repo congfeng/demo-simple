@@ -9,7 +9,7 @@ $(function(){
 				return ;
 			}
 			var product = data.product;
-			$('.blog_entry > h1').text(product.name);
+			$('.productname').text(product.name);
 			$('.productimage').attr('src',data.UploadBasePath+product.image);
 			$('.productrichtext').html('');
 			if(!_.isEmpty(product.richText)){

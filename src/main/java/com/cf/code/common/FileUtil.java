@@ -86,7 +86,7 @@ public class FileUtil {
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();  
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);  
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); 
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(url,BarcodeFormat.QR_CODE, 350, 350,hints);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(url,BarcodeFormat.QR_CODE, 200, 200,hints);
         MatrixToImageWriter.writeToPath(bitMatrix, "png", path);// 输出图像  
 		return filePath+"/"+fileName;
 	}

@@ -28,6 +28,7 @@ CREATE TABLE product (
   sku varchar(60) DEFAULT NULL,
   image varchar(100) DEFAULT NULL,
   rich_text varchar(100) DEFAULT NULL,
+  qrcode varchar(100) DEFAULT NULL,
   create_time TIMESTAMP NOT NULL,
   update_time TIMESTAMP DEFAULT NULL
 ) CHARSET=utf8;

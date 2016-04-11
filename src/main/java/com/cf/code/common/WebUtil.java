@@ -242,4 +242,7 @@ public class WebUtil {
         return false; 
     }
     
+    public static String getWebRoot(HttpServletRequest request) {
+		return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	}
 }

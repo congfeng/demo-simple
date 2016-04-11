@@ -31,9 +31,8 @@ public class ZxingTest {
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();  
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);  
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); 
-        BitMatrix bitMatrix = new MultiFormatWriter().encode("http://www.baidu.com",BarcodeFormat.QR_CODE, 350, 350,hints);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode("http://192.168.30.155:8005/front/productinfo.html?id=1",BarcodeFormat.QR_CODE, 150, 150,hints);
         MatrixToImageWriter.writeToPath(bitMatrix, "png", path);// 输出图像  
-        
 	}
 	
 }

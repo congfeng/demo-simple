@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.cf.code.common.DateUtil;
 import com.cf.code.common.FileUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
+import com.cf.code.common.WebUtil;
 import com.cf.code.dao.ProductDao;
 import com.cf.code.entity.Product;
 import com.cf.code.entity.Profile;
@@ -102,12 +104,13 @@ public class ProductController {
 	@AccessVerifier
 	@RequestMapping(value = {"/add"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Model add(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
+    public Model add(@RequestParam(required = false)Profile profile,HttpSession session,
+    		HttpServletRequest request,Model model,
     		@RequestParam(required = true) Integer ptype,
     		@RequestParam(required = true) String name,
     		@RequestParam(required = false) String sku,
     		@RequestParam(value = "image", required = false) Object imageObj,
-    		@RequestParam(value = "richText", required = false) Object richTextObj) throws IOException {
+    		@RequestParam(value = "richText", required = false) Object richTextObj) throws Exception {
 		String image = FileUtil.upload(imageObj, getUploadFolder(session), "product/image");
 		String richText = FileUtil.uploadRichText(richTextObj, getUploadFolder(session), "product/richText");
 		Product product = new Product();
@@ -117,6 +120,9 @@ public class ProductController {
 		product.setImage(image);
 		product.setRichText(richText);
 		this.productDao.insert(product);
+		String url = WebUtil.getWebRoot(request)+"/front/productinfo.html?id="+product.getId();
+		String qrcode = FileUtil.uploadQrcode(url, getUploadFolder(session), "product/qrcode");
+		this.productDao.updateQrcode(product.getId(), qrcode);
 		return model;
     }
 	
@@ -135,17 +141,25 @@ public class ProductController {
 		if(!StringUtil.isNullOrEmpty(p.getRichText())){
 			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getRichText());
 		}
+		if(!StringUtil.isNullOrEmpty(p.getQrcode())){
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getQrcode());
+		}
 		return model;
     }
 	
 	@AccessVerifier
-	@RequestMapping(value = {"/qrcode"}, method = { RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = {"/updateQrcode"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-    public Model qrcode(@RequestParam(required = false)Profile profile,HttpSession session,Model model,
+    public Model updateQrcode(@RequestParam(required = false)Profile profile,HttpSession session,
+    		HttpServletRequest request,Model model,
     		@RequestParam(required = true) Integer id) throws Exception {
-		String url = "";
-		String qrcode = FileUtil.uploadQrcode(url, getUploadFolder(session), "product/qrcode");
-//		this.productDao.updateQrcode(id,qrcode);
+		Product p = this.productDaoRead.find(id);
+		String url = WebUtil.getWebRoot(request)+"/front/productinfo.html?id="+id;
+		String qrcode = FileUtil.uploadQrcode(url, getUploadFolder(session), "product/rqcode");
+		this.productDao.updateQrcode(id,qrcode);
+		if(!StringUtil.isNullOrEmpty(p.getQrcode())){
+			FileUtil.deleteFile(getUploadFolder(session)+"/"+p.getQrcode());
+		}
 		model.addAttribute("qrcode", qrcode);
 		model.addAttribute("UploadBasePath", getUploadPath());
 		return model;
@@ -183,7 +197,7 @@ public class ProductController {
 		if(!StringUtil.isNullOrEmpty(UploadFolder)){
 			return UploadFolder;
 		}
-		return session.getServletContext().getRealPath("/")+"upload";
+		return session.getServletContext().getRealPath("")+"/upload";
 	}
 	
 	private String getUploadPath(){

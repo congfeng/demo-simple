@@ -37,6 +37,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 			}
 			$('#name').val(product.name);
 			$('#sku').val(product.sku);
+			$('#qrcode').attr('src',data.UploadBasePath+product.qrcode);
 			$("#image").fileinput({
 				language: "zh",
 				showCaption: false,
@@ -112,6 +113,21 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 				showAlert('保存成功');
 				window.location.href = "#/productmanage?type="+type;
             }
+		});
+	});
+	
+	$(".p-qrcode-btn").click(function(){
+		$.ajax({
+			url:'/product/updateQrcode',
+			data:{'id':id},
+			dataType:'json',
+			success:function(data){
+				if(data&&data.s == 0){
+					return ;
+				}
+				showAlert('生成二维码成功');
+				$('#qrcode').attr('src',data.UploadBasePath+data.qrcode);
+			}
 		});
 	});
 	

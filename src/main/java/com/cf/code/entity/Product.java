@@ -28,6 +28,8 @@ public class Product {
 
 	private String richText;
 	
+	private String qrcode;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -90,6 +92,14 @@ public class Product {
 
 	public void setRichText(String richText) {
 		this.richText = richText;
+	}
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 	
 }

@@ -29,6 +29,9 @@ public interface ProductDao {
 			@Param("image") String image,
 			@Param("richText") String richText);
 	
+	public void updateQrcode(@Param("id") Integer id,@Param("qrcode") String qrcode);
+	
+	
 	public List<Product> query(@Param("productType") Integer productType,
 			@Param("name") String name,@Param("sku") String sku,
 			@Param("createTimeStart") Date createTimeStart,@Param("createTimeEnd") Date createTimeEnd,

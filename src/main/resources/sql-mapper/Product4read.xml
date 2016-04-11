@@ -9,19 +9,20 @@
 		<result property="sku" column="sku" />
 		<result property="image" column="image" />
 		<result property="richText" column="rich_text" />
+		<result property="qrcode" column="qrcode" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 		<result property="createTimeFormat" column="create_time_format" />
 	</resultMap>
 	
 	<select id="find" resultMap="ProductResult">
-		SELECT id,product_type,name,sku,image,rich_text,create_time,update_time
+		SELECT id,product_type,name,sku,image,rich_text,qrcode,create_time,update_time
 		  FROM product
 		 WHERE id = #{id}
 	</select>
 	
 	<select id="query" resultMap="ProductResult" >
-       SELECT id,product_type,name,sku,image,create_time,update_time
+       SELECT id,product_type,name,sku,image,qrcode,create_time,update_time
 	     FROM product  
 		<include refid="query_where" />
 	    ORDER BY id ASC
