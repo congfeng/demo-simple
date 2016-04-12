@@ -4,6 +4,11 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 	$scope.id = id;
 	$scope.type = type;
 	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
+	var pageNo = $routeParams.pageNo;
+	if(_.isEmpty(pageNo)){
+		pageNo = 1;
+	}
+	$scope.pageNo = pageNo;
 	var ue = UE.getEditor('richText',{
     	//autoHeight: false,
     	initialContent : '',
@@ -113,7 +118,7 @@ nsApp.controller('ProductUpdateController',function($scope,$routeParams) {
 					return;
 				}
 				showAlert('保存成功');
-				window.location.href = "#/productmanage?type="+type;
+				window.location.href = "#/productmanage?type="+type+"&pageNo="+pageNo;
             }
 		});
 	});

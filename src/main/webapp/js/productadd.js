@@ -1,5 +1,14 @@
 nsApp.controller('ProductAddController',function($scope,$routeParams) {
 	
+	var type = $routeParams.type;
+	$scope.type = type;
+	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
+	var pageNo = $routeParams.pageNo;
+	if(_.isEmpty(pageNo)){
+		pageNo = 1;
+	}
+	$scope.pageNo = pageNo;
+	
 	$("#image").fileinput({
 		language: "zh",
 		showCaption: false,
@@ -39,10 +48,6 @@ nsApp.controller('ProductAddController',function($scope,$routeParams) {
 			imageleft:'图片居左',imageright:'图片居右',imagecenter:'图片居中'
         }
     });
-    
-	var type = $routeParams.type;
-	$scope.type = type;
-	$scope.typeName = ['品类1','品类2','品类3','品类4'][type-1];
 	
 	$(".productadd-btn").click(function(){
 		if(_.isEmpty($("#name").val())){
@@ -60,7 +65,7 @@ nsApp.controller('ProductAddController',function($scope,$routeParams) {
 					return;
 				}
 				showAlert('保存成功');
-				window.location.href = "#/productmanage?type="+type;
+				window.location.href = "#/productmanage?type="+type+"&pageNo="+pageNo;
             }
 		});
 	});
