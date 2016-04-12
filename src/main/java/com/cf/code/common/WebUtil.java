@@ -6,13 +6,9 @@ package com.cf.code.common;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -152,52 +148,6 @@ public class WebUtil {
         }
 		return ip;
     }
-    
-    public static String getResponseCharset(String contentType) {
-		String charset = Constant.Charset;
-		if (!StringUtil.isNullOrEmpty(contentType)) {
-			String[] params = contentType.split(";");
-			for (String param : params) {
-				param = param.trim();
-				if (param.startsWith("charset")) {
-					String[] pair = param.split("=", 2);
-					if (pair.length == 2) {
-						if (!StringUtil.isNullOrEmpty(pair[1])) {
-							charset = pair[1].trim();
-						}
-					}
-					break;
-				}
-			}
-		}
-		return charset;
-	}
-    
-    public static String buildQuery(Map<String, String> params) {
-		if (params == null || params.isEmpty()) {
-			return null;
-		}
-		StringBuilder query = new StringBuilder();
-		Set<Entry<String, String>> entries = params.entrySet();
-		boolean hasParam = false;
-		try {
-			for (Entry<String, String> entry : entries) {
-				String name = entry.getKey();
-				String value = entry.getValue();
-				if (!StringUtil.isNullOrEmpty(value)) {
-					if (hasParam) {
-						query.append("&");
-					} else {
-						hasParam = true;
-					}
-					query.append(name).append("=").append(URLEncoder.encode(value, Constant.Charset));
-				}
-			}
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("编码不支持："+Constant.Charset);
-		}
-		return query.toString();
-	}
     
     public static Map<String, String> splitUrlQuery(HttpServletRequest request) {
     	String query = request.getQueryString();

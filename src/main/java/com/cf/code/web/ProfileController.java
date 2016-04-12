@@ -3,9 +3,6 @@
  */
 package com.cf.code.web;
 
-import java.util.List;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -15,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cf.code.core.exception.BusinessException;
-import com.cf.code.dao.MenuDao;
-import com.cf.code.dao.UserDao;
 import com.cf.code.entity.Profile;
-import com.cf.code.entity.User;
 import com.cf.code.web.access.AccessVerifier;
 
 /**
@@ -31,29 +24,13 @@ import com.cf.code.web.access.AccessVerifier;
 @RequestMapping("/profile")
 public class ProfileController {
 	
-	@Resource(name = "userDaoRead")
-	UserDao userDaoRead;
-	
-	@Resource(name = "menuDaoRead")
-	MenuDao menuDaoRead;
 	
 	@RequestMapping(value = {"login"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
     public Profile login(Model model,HttpSession session,
 			@RequestParam(required = true) String username,
-			@RequestParam(required = true) String password) throws BusinessException{
-		User user = userDaoRead.find(username);
-		if(user == null){
-			throw new BusinessException("用户不存在");
-		}
-		if(!user.getPassword().equals(password)){
-			throw new BusinessException("用户或密码错误");
-		}
-		List<String> menus = menuDaoRead.query(user.getId());
-		if(menus.isEmpty()){
-			throw new BusinessException("用户无访问权限");
-		}
-		Profile profile = new Profile(session.getId(), user.getId(), user.getUsername(),menus);
+			@RequestParam(required = true) String password){
+		Profile profile = new Profile(session.getId(), null, null,null);
 		session.setAttribute("profile", profile);
         return profile;
     }
