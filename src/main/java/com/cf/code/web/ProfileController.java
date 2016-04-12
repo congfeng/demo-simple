@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cf.code.core.MyContextLoader;
 import com.cf.code.core.exception.BusinessException;
 import com.cf.code.dao.MenuDao;
 import com.cf.code.dao.MsgDao;
@@ -44,12 +45,6 @@ public class ProfileController {
 	
 	@Resource(name = "imService")
 	ImService imService;
-	
-	@Resource(name = "pom.im.host")
-	String ImHost;
-	
-	@Resource(name = "pom.im.port")
-	Integer ImPort;
 	
 	@RequestMapping(value = {"login"}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
@@ -84,7 +79,7 @@ public class ProfileController {
     public Model init(@RequestParam(required = false)Profile profile,HttpSession session,Model model) {
 		int msgCount = this.msgDaoRead.queryCount(null, null, null, 0, null, null);
 		model.addAttribute("profile",profile);
-		model.addAttribute("imAddress","http://"+ImHost+":"+ImPort);
+		model.addAttribute("imAddress",MyContextLoader.getImAddress());
 		model.addAttribute("msgCount",msgCount);
         return model;
     }

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.cf.code.common.FileUtil;
 import com.cf.code.common.StringUtil;
+import com.cf.code.core.MyContextLoader;
 
 /**
  * @author congfeng
@@ -35,12 +35,6 @@ import com.cf.code.common.StringUtil;
 public class UeditorController{
 	
 	private static Logger log = LogManager.getLogger(UeditorController.class);
-	
-	@Resource(name = "pom.upload.folder")
-	String UploadFolder;
-	
-	@Resource(name = "pom.upload.path")
-	String UploadPath;
 	
 	@RequestMapping(value = {""}, method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
@@ -218,15 +212,15 @@ public class UeditorController{
     }
     
     private String getUploadFolder(HttpSession session){
-		if(!StringUtil.isNullOrEmpty(UploadFolder)){
-			return UploadFolder;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadFolder)){
+			return MyContextLoader.uploadFolder;
 		}
 		return session.getServletContext().getRealPath("/")+"/upload";
 	}
 	
 	private String getUploadPath(){
-		if(!StringUtil.isNullOrEmpty(UploadPath)){
-			return UploadPath;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadPath)){
+			return MyContextLoader.uploadPath;
 		}
 		return "/upload/";
 	}

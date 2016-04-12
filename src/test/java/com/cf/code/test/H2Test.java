@@ -3,38 +3,46 @@ package com.cf.code.test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.cf.code.common.DateUtil;
+import org.h2.api.ErrorCode;
+import org.h2.tools.Server;
 
 public class H2Test {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
+		try {
+			Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "8088" ).start();
+		} catch (SQLException e) {
+			if(e.getErrorCode() == ErrorCode.EXCEPTION_OPENING_PORT_2){
+				System.out.println("h2 server tcp 端口已占用，可能已经启动");
+			}else{
+				
+			}
+		}
+		try {
+			Server.createWebServer("-webAllowOthers","-webPort","8082").start();
+		} catch (SQLException e) {
+			
+		}
+//		testQuery();
+		System.out.println("d");
+//		server.stop();
+	}
+
+	private static void testQuery() throws Exception{
 		Class.forName("org.h2.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:h2:E:/workspace/jisheng_workspace/_resources/h2/mydb", "root", "root");
+		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost:8088/~/mydb;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;MODE=MYSQL;AUTO_RECONNECT=TRUE;PAGE_SIZE=512;", "root", "root");
 		Statement stmt = conn.createStatement();
-//		stmt.executeUpdate("DROP TABLE myuser");
-//		StringBuilder create_sql = new StringBuilder();
-//		create_sql.append("CREATE TABLE myuser ( ");
-//		create_sql.append(" id int(11) PRIMARY KEY AUTO_INCREMENT,");
-//		create_sql.append(" create_time TIMESTAMP NOT NULL,");
-//		create_sql.append(" name varchar(60) NOT NULL,");
-//		create_sql.append(" password varchar(60) DEFAULT NULL");
-//		create_sql.append(");");
-//		stmt.executeUpdate(create_sql.toString());
-//		stmt.executeUpdate("CREATE INDEX myuser_index ON myuser(create_time,name);");
-		stmt.executeUpdate("INSERT INTO myuser(create_time,name,password) VALUES(now(),'丛峰1','123');");
-		stmt.executeUpdate("INSERT INTO myuser(create_time,name,password) VALUES(now(),'丛峰2',null);");
-		ResultSet rs = stmt.executeQuery("SELECT id,name,password,create_time,FORMATDATETIME(create_time,'yyyy-MM-dd hh:mm:ss') AS show_time FROM myuser order by create_time desc");   
+		ResultSet rs = stmt.executeQuery("SELECT id,name FROM product order by create_time desc");   
 		while(rs.next()) {   
 			System.out.println(
 					rs.getInt("id")+","+
-					rs.getString("password")+",---------"+
-					rs.getString("show_time")+",---------"+
-					DateUtil.format(rs.getTimestamp("create_time"), "yyyy-MM-dd HH:mm:ss")
+					rs.getString("name")+",---------"
 					);
 		}
 		conn.close();
 	}
-
+	
 }

@@ -21,6 +21,7 @@ import com.cf.code.common.DateUtil;
 import com.cf.code.common.FileUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
+import com.cf.code.core.MyContextLoader;
 import com.cf.code.dao.NoticeDao;
 import com.cf.code.entity.Notice;
 import com.cf.code.entity.Profile;
@@ -40,12 +41,6 @@ public class NoticeController {
 	
 	@Resource(name = "noticeDaoRead")
 	NoticeDao noticeDaoRead;
-	
-	@Resource(name = "pom.upload.folder")
-	String UploadFolder;
-	
-	@Resource(name = "pom.upload.path")
-	String UploadPath;
 
 //	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
@@ -146,15 +141,15 @@ public class NoticeController {
     }
 	
 	private String getUploadFolder(HttpSession session){
-		if(!StringUtil.isNullOrEmpty(UploadFolder)){
-			return UploadFolder;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadFolder)){
+			return MyContextLoader.uploadFolder;
 		}
 		return session.getServletContext().getRealPath("/")+"/upload";
 	}
 	
 	private String getUploadPath(){
-		if(!StringUtil.isNullOrEmpty(UploadPath)){
-			return UploadPath;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadPath)){
+			return MyContextLoader.uploadPath;
 		}
 		return "/upload/";
 	}

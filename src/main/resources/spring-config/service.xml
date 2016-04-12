@@ -10,20 +10,11 @@
 	<!-- 扫描文件（自动将service层注入） -->
 	<context:component-scan base-package="com.cf.code.service.**" />
 	
-	<bean id="pom.upload.folder" class="java.lang.String">
-		<constructor-arg value="${pom.upload.folder}"/>
-	</bean>
-	
-	<bean id="pom.upload.path" class="java.lang.String">
-		<constructor-arg value="${pom.upload.path}"/>
-	</bean>
-	
-	<bean id="pom.im.host" class="java.lang.String">
-		<constructor-arg value="${pom.im.host}"/>
-	</bean>
-	
-	<bean id="pom.im.port" class="java.lang.Integer">
-		<constructor-arg value="${pom.im.port}"/>
-	</bean>
+	<bean id="MyContextLoader" class="com.cf.code.core.MyContextLoader" scope="singleton"  init-method="init"  destroy-method="destroy">
+		<property name="uploadFolder" value="${pom.upload.folder}"/>
+		<property name="uploadPath" value="${pom.upload.path}"/>
+		<property name="imHost" value="${pom.im.host}"/>
+		<property name="imPort" value="${pom.im.port}"/>
+	</bean> 
 	
 </beans>

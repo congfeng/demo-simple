@@ -23,6 +23,7 @@ import com.cf.code.common.FileUtil;
 import com.cf.code.common.Pager;
 import com.cf.code.common.StringUtil;
 import com.cf.code.common.WebUtil;
+import com.cf.code.core.MyContextLoader;
 import com.cf.code.dao.ProductDao;
 import com.cf.code.entity.Product;
 import com.cf.code.entity.Profile;
@@ -42,12 +43,6 @@ public class ProductController {
 	
 	@Resource(name = "productDaoRead")
 	ProductDao productDaoRead;
-	
-	@Resource(name = "pom.upload.folder")
-	String UploadFolder;
-	
-	@Resource(name = "pom.upload.path")
-	String UploadPath;
 	
 //	@AccessVerifier
 	@RequestMapping(value = {"list"}, method = { RequestMethod.GET,RequestMethod.POST})
@@ -194,15 +189,15 @@ public class ProductController {
     }
 	
 	private String getUploadFolder(HttpSession session){
-		if(!StringUtil.isNullOrEmpty(UploadFolder)){
-			return UploadFolder;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadFolder)){
+			return MyContextLoader.uploadFolder;
 		}
-		return session.getServletContext().getRealPath("")+"/upload";
+		return session.getServletContext().getRealPath("/")+"/upload";
 	}
 	
 	private String getUploadPath(){
-		if(!StringUtil.isNullOrEmpty(UploadPath)){
-			return UploadPath;
+		if(!StringUtil.isNullOrEmpty(MyContextLoader.uploadPath)){
+			return MyContextLoader.uploadPath;
 		}
 		return "/upload/";
 	}
