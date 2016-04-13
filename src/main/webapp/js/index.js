@@ -21,6 +21,7 @@ $(function(){
 			main_content[cur_tab_id].scrollBy(0,main_content_y);
 		});
 	});
+	$('.maintab #tab1').click();
 })
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 

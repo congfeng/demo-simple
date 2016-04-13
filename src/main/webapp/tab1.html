@@ -82,13 +82,81 @@
 		font-size: 25px;
 		color:#FFFFFF;
 	}
-	.conent1_tab1 div{
-		text-align: center;
+	
+	.box .info{
+		vertical-align:top;
+		width:85px;
+		text-align:left;
+		display:inline-block;
 	}
 	
+	.info strong{
+		display:block;
+		margin:14px 0;
+		font-size:15px;
+	}
+	
+	.info small{
+		font-size:12px;
+	}
+	
+	.box .imgbox{
+		display:block;
+		height:88px;
+	}
+	
+	.list_box{
+		padding:10px 8px 10px 0;
+		border-bottom:1px solid #ddd8ce;
+		overflow:hidden;
+	}
+	
+	.dealcard-nobooking_box{
+		z-index:1;
+		position:absolute;
+		overflow:hidden;
+		font-size:14px;
+		width:80px;
+		height:40px;
+		left:-10px;
+		color:#fff;
+		text-align:center;
+		padding-top:5px;
+	}
+	.dealcard-nobooking{
+		background:#06c1ae;
+		-webkit-transform:rotateZ(-45deg);
+		display:inline-block;
+	}
+	.price{
+		padding-top:25px;
+	}
+	.price .strong{
+		font-size:18px;
+		color:#06c1ae;
+	}
+	.price .tag{
+		border:1px solid #f90;
+		border-radius:5px;
+		color:#f90;
+		font-size:12px;
+	}
+	.price .line-right{
+		float:right;
+		padding-right:100px;
+		font-size:12px;
+	}
 </style>
-<div class="main_content"><div>
 
+<div class='main_header' style="height:60px;background: #06c1ae;color:#fff;">
+	<span>北京</span>
+	<i class="iconfont">&#xe60e;</i>
+	<i class="iconfont" style="float:right;font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&#xe624;&nbsp;&nbsp;</i>
+	<i class="iconfont" style="float:right;font-size:25px;">&#xe620;</i>
+</div>
+
+<div class="main_content" style="top:60px;"><div>
+	
 	<div class="box main_content_nav"><div>
 		<div class="main_content_nav_1">
 			<div class="nav_item">
@@ -162,50 +230,98 @@
 		</div>		
 	</div>
 	<div style="height:10px;"></div>
-	<div class="box conent1_tab1">
-		<div style="float:left;width:30%;height:245px;border-right:1px solid #ddd8ce;box-sizing:border-box;">
-			<p><strong>我们约吧</strong></p>
-			<p><small>恋人家人好朋友</small></p>
-			<img style="width:50%" src="http://p0.meituan.net/mmc/fe4d2e89827aa829e12e2557ded363a112289.png">
+	<div class="box" style="height:160px;text-align:center;">
+		<div style="float:left;width:34%;height:100%;border-right:1px solid #ddd8ce;box-sizing:border-box;">
+			<span class="info">
+				<strong style="color:#55a40f;">我们约吧</strong>
+				<small>恋人家人好朋友</small>
+			</span>
+			<span class="imgbox">
+				<img style="height:100%" src="http://p0.meituan.net/mmc/fe4d2e89827aa829e12e2557ded363a112289.png">
+			</span>
 		</div>
-		<div style="float:right;width:70%;">
-			<div style="width:100%;height:50%;border-bottom:1px solid #ddd8ce;">
-				<span style="display:inline-block;text-align:right;vertical-align:top;">
-					<br><br><br>
-                    <strong>低价超值</strong><br>
+		<div style="float:right;width:66%;">
+			<div style="width:100%;height:80px;border-bottom:1px solid #ddd8ce;">
+				<span class="info" style="display:inline-block;">
+                    <strong style="color:#ff3f0d;">低价超值</strong>
 	                <small>十元惠生活</small>
 	            </span>
-	          	<img style="display:inline-block;" src="http://p0.meituan.net/mmc/a06d0c5c0a972e784345b2d648b034ec9710.jpg">   
+	            <span class="imgbox" style="display:inline-block;">
+					<img style="height:65px;" src="http://p0.meituan.net/mmc/a06d0c5c0a972e784345b2d648b034ec9710.jpg">
+				</span>
 			</div>
 			<div style="width:100%;height:50%;">
 				<div style="float:left;width:50%;border-right:1px solid #ddd8ce;box-sizing:border-box;">
-					<span style="display:inline-block;text-align:right;vertical-align:top;">
-						<br><br><br>
-	                    <strong>低价超值</strong><br>
-		                <small>十元惠生活</small>
+					<span class="info">
+	                    <strong style="margin:5px 0 4px 0;color:#f742a0;">工作简餐</strong>
+		                <small>实惠方便选择多</small>
 		            </span>
-		          	<img style="display:inline-block;" src="http://p0.meituan.net/mmc/a06d0c5c0a972e784345b2d648b034ec9710.jpg">    
+		            <span class="imgbox">
+						<img style="height:40px;" src="http://p1.meituan.net/mmc/726b30f162d1ea39a5077af83cec620811475.png">
+					</span>
 				</div>
-				<div style="float:right;width:49%;">
-					<span style="display:inline-block;text-align:right;vertical-align:top;">
-						<br><br><br>
-	                    <strong>低价超值</strong><br>
-		                <small>十元惠生活</small>
+				<div style="float:right;width:50%;">
+					<span class="info">
+	                    <strong style="margin:5px 0 4px 0;color:#ff8601;">名店抢购</strong>
+		                <small>距离结束</small>
+		                <span style="display:block;margin-top:6px;" id="countdowner"></span>
 		            </span>
-		          	<img style="display:inline-block;" src="http://p0.meituan.net/mmc/a06d0c5c0a972e784345b2d648b034ec9710.jpg">   
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
 	<div style="height:10px;"></div>
-	<div class="box" style="height:160px;">	
-		aaaaddddddddd
+	
+	<div class="box" style="padding-left:10px;">	
+		<div class="list_box">
+			<span style="font-size:18px;">猜你喜欢</span>	 
+		</div>
+		<div class="list_box">
+			<div style="float:left">
+				<div class="dealcard-nobooking_box">
+					<span class="dealcard-nobooking">免预约</span>	
+				</div>
+				<span class="imgbox">
+					<img style="height:100%;" src="http://p1.meituan.net/200.0/deal/4373919ea31c05ec71de90596e937aa054465.jpg@126_0_388_388a%7C267h_267w_2e_100q">
+				</span>
+			</div>
+			<div style="width:100%;padding-left:100px;">
+				<span class="info" style="width:100%">
+                    <strong style="margin:5px 0 4px 0;">吉野家</strong>
+	                <small>[142店通用]红烧小丸子饭（小）+乌龙茶1份</small>
+	            </span>
+	            <div class="price">
+		            <span class="strong">10元</span>
+		          	<span class="tag">1元抢</span>
+			 		<span class="line-right">已售45072</span>
+		        </div>
+			</div>
+		</div>
+		<div class="list_box">
+			<div style="float:left">
+				<div class="dealcard-nobooking_box">
+					<span class="dealcard-nobooking">免预约</span>	
+				</div>
+				<span class="imgbox">
+					<img style="height:100%;" src="http://p0.meituan.net/200.0/deal/4a4313549bf95771154f6bcc3833518d24011.jpg">
+				</span>
+			</div>
+			<div style="width:100%;padding-left:100px;">
+				<span class="info" style="width:100%">
+                    <strong style="margin:5px 0 4px 0;">呷哺呷哺</strong>
+	                <small>[274店通用]100元代金券1张，可叠加</small>
+	            </span>
+	            <div class="price">
+		            <span class="strong">70元</span>
+		          	<span class="tag">立减18</span>
+			 		<span class="line-right">已售10000</span>
+		        </div>
+			</div>
+		</div>
+	</div>
+	<div class="box" style="text-align:center;height:60px;line-height:60px;">
+		<a href="#" style="color:#06c1ae;">查看全部团购</a>
 	</div>
 	<div style="height:10px;"></div>
-	<div class="box" style="height:366px;">	
-		ddddddddd
-	</div>
-	<div style="height:10px;"></div>
-
 </div></div>

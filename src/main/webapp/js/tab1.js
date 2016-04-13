@@ -19,4 +19,8 @@ var tab1_fn = function(){
 			$('.dotty2').css('background','#06c1ae');
 		}
 	});
+	$('#countdowner').scojs_countdown({
+		until: _.round(_.now()/1000)+36000,
+		strings: {h: '<span>:</span>', m: '<span>:</span>', s: ''}
+	});
 }

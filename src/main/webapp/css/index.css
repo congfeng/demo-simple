@@ -32,7 +32,7 @@ body{
 .main_header {
 	z-index: 2;
 	left: 0;
-	background: #CD235C;
+	background: #F0F0F0;
 	height:60px;
 	line-height:60px;
 	padding:0 10px;
@@ -51,6 +51,7 @@ body{
 .main_content .box{
 	overflow:hidden;
 	background:#FFFFFF;
+	border:1px solid #ddd8ce;
 }
 
 .main_content .box_nav{
