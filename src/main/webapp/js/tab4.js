@@ -1,3 +1,3 @@
-var tab4_fn = function(){
-	console.log('tab4_fn');
+default_cb_fn = function(){
+	console.log('tab4');
 }
