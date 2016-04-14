@@ -1,20 +1,29 @@
 .box_contacts{
-	width:100%;
-	height:2.9rem;
-	padding:.5rem .8rem;
-	border-bottom:.1rem solid #E0E0E0;
 	background:#FFFFFF;
+	padding:0 1rem;
 }
 
-.box_chat .portrait{
+.box_contacts .box_contacts_inner{
+	height:2.2rem;
+	padding:.5rem 0;
+	border-bottom:.1rem solid #E0E0E0;
+}
+
+.box_contacts_inner .portrait{
 	float:left;
 	height:100%;
 }
 
-.box_chat .nick{
-	display:block;
+.box_contacts_inner .nick{
 	vertical-align:top;
 	font-size:1rem;
 	font-weight:500;
+	line-height:2.2rem;
+	padding-left: 1rem;
+}
+
+.contacts_nav_num{
+	font-size: .8rem;
+	padding-left: 1rem;
 	line-height:1.5rem;
 }
