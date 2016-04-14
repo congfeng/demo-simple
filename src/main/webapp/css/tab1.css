@@ -1,0 +1,41 @@
+.box_chat{
+	width:100%;
+	height:2.9rem;
+	padding:.5rem .8rem;
+	border-bottom:.1rem solid #E0E0E0;
+	background:#FFFFFF;
+}
+
+.box_chat .portrait{
+	float:left;
+	height:100%;
+}
+
+.box_chat .left_msg{
+	float:left;
+	padding-left: .8rem;
+}
+
+.box_chat .right_msg{
+	float:right;
+	padding-right:1.6rem;
+}
+
+.box_chat .nick{
+	display:block;
+	vertical-align:top;
+	font-size:1rem;
+	font-weight:500;
+	line-height:1.5rem;
+}
+
+.box_chat .msgtip{
+	font-size:.8rem;
+	color:#ADADAD;
+}
+
+.box_chat .time{
+	font-size:.7rem;
+	color:#ADADAD;
+}
+

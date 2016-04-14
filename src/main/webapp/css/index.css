@@ -8,18 +8,22 @@ body{
 	font-size:16px;
 }
 
+.iconfont{
+	font-size:1rem;
+}
+
 .main_header {
 	position: fixed;
 	z-index: 2;
 	left: 0;
 	top: 0;
 	width: 100%;
-	height:3.5rem;
+	height:3rem;
 	background: #3C3C3C;
-	line-height:3.5rem;
+	line-height:3rem;
 }
 .main_header i,font{
-	font-size:1.3rem;
+	font-size:1rem;
 	color:#FFFFFF;
 }
 
@@ -29,37 +33,34 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 3.5rem;
+	height: 3.3rem;
 	background: #F6F6F6;
 }
+
 .main_tab > div {
 	float:left;
 	width:25%;
 	text-align: center;
 	color : #333;
+	padding:.4rem 0;
 }
+
 .main_tab > div > i{
 	display:block;
 	margin-top:.2rem;
-	font-size : 1.8rem;
+	font-size : 1.6rem;
+	line-height:1.2rem;
 }
+
 .main_tab > div > span{
-	font-size : 1rem;
+	font-size : .8rem;
 }
 
 .main {
 	z-index: 1;
-	margin: 3.5rem 0;
+	margin: 3rem 0 3.3rem 0;
 	left: 0;
 	width: 100%;
 	overflow: hidden;
 	position: auto;
-}
-
-.main .box{
-	
-}
-
-.main .box_nav{
-	
 }

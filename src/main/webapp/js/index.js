@@ -9,6 +9,7 @@ $(function(){
 		$('.main_tab div i,span').css('color','#333');
 		$(this.querySelectorAll('i,span')).css('color','#00CC99');
 		$('.main').load($(this).data('page'),function(){
+			$(this).focus();
 			default_cb_fn();
 		});
 	});
