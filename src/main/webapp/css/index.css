@@ -64,3 +64,34 @@ body{
 	overflow: hidden;
 	position: auto;
 }
+
+.box_nav{
+	background:#FFFFFF;
+	padding:0 1rem;
+}
+
+.box_nav .box_nav_inner{
+	height:2.2rem;
+	padding:.5rem 0;
+	border-bottom:.1rem solid #E0E0E0;
+}
+
+.box_nav_inner .nav_logo{
+	float:left;
+	height:100%;
+}
+
+.box_nav_inner .nav_title{
+	vertical-align:top;
+	font-size:1rem;
+	font-weight:500;
+	line-height:2.2rem;
+	padding-left: 1rem;
+}
+
+.box_nav_split{
+	height:1rem;
+	font-size: .8rem;
+	padding-left: 1rem;
+	line-height:1.5rem;
+}

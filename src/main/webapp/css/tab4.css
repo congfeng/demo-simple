@@ -1,0 +1,27 @@
+.box_my{
+	background:#FFFFFF;
+	padding:0 1rem;
+}
+
+.box_look .box_look_inner{
+	height:2.2rem;
+	padding:.5rem 0;
+	border-bottom:.1rem solid #E0E0E0;
+}
+
+.box_look_inner .look_logo{
+	float:left;
+	height:100%;
+}
+
+.box_look_inner .look_title{
+	vertical-align:top;
+	font-size:1rem;
+	font-weight:500;
+	line-height:2.2rem;
+	padding-left: 1rem;
+}
+
+.box_look_split{
+	height:1rem;
+}
