@@ -1,6 +1,7 @@
 var cur_tab_id;
 var default_cb_fn;
 $(function(){
+	FastClick.attach(document.body);
 	$('.main_tab div').click(function(){
 		if(cur_tab_id == this.id){
 			return ;
